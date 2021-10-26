@@ -9,22 +9,22 @@ import { Route, Switch, Router } from 'react-router-dom';
 // == Composant
 const App = () => (
   <div className="app">
-    <Router>
-      <Switch>
-        <Route exact to="/">
-          <Home />
-        </Route>
-        <Route exact to="/walls">
-          <Walls />
-        </Route>
-        <Route exact to="/wall">
-          <Wall />
-        </Route>
-        <Route exact to="/userprofile">
-          <UserProfile />
-        </Route>
-      </Switch>
-    </Router>
+    {/* <Router> */}
+    <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route exact path="/walls">
+        <Walls />
+      </Route>
+      <Route exact path="/wall">
+        <Wall />
+      </Route>
+      <Route exact path="/userprofile">
+        <UserProfile />
+      </Route>
+    </Switch>
+    {/* </Router> */}
   </div>
 );
 

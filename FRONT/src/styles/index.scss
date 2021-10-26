@@ -1,18 +1,12 @@
 @use 'reset';
 @use 'vars';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@400;700&family=Montserrat:ital,wght@0,200;0,300;0,500;0,600;1,200&display=swap');
 
 body {
-  font-family: sans-serif;
+  font-family: 'Montserrat Subrayada', sans-serif;
+  font-weight: 700;
 }
 
-/* 
-  // or you can import your own font
-  @font-face {
-    font-family: 'Roboto';
-    src: url('../assets/fonts/Roboto-Regular.ttf');
-  }
+// font-family: 'Montserrat', sans-serif;
 
-  body {
-    font-family: 'Roboto', sans-serif;
-  }
-*/

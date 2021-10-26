@@ -1,0 +1,22 @@
+# redemarrage du serveur omur
+sudo service postgresql restart
+
+# je déclare ma variable d'environnement PGUSER pour exécuter psql en tant que postgres
+export PGUSER=postgres
+
+# j'exécute
+psql -f $PWD/create_db.sql
+
+# je supprime la variable d'environnement
+unset PGUSER
+
+# je mets en place sqitch
+cd migrations
+sqitch init omur --engine pg
+sqitch add init -n "création de la structure de base"
+
+
+# je déploie en appelant mon script de déploiement
+bash sqitch_revert
+bash sqitch_deploy
+bash sqitch_verify

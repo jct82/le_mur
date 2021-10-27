@@ -14,7 +14,7 @@ const router = require("./app/router");
 app.use(router);
 
 // PORT configuration
-const PORT = process.env.PGPORT || 5432;
+const PORT = process.env.PGPORT || 3000;
 app.listen(PORT,()=>{
-    console.log(`Le serveur est lancé sur http://${PGHOST}:${PORT}`);
+    console.log(`Le serveur est lancé sur http://localhost:${PORT}`);
 });

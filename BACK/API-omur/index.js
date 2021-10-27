@@ -14,7 +14,7 @@ const router = require("./app/router");
 app.use(router);
 
 // PORT configuration
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PGPORT || 5432;
 app.listen(PORT,()=>{
-    console.log(`Les Aopoh écoutent vos incidents sur http://localhost:${PORT}`);
+    console.log(`Le serveur est lancé sur http://${PGHOST}:${PORT}`);
 });

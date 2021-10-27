@@ -1,14 +1,6 @@
 # pour se connecter au serveur distant AWS
 # ssh ubuntu@54.196.235.242
 
-# redemarrage du serveur omur
-sudo service postgresql restart
-
-# je déclare ma variable d'environnement PGUSER pour exécuter psql en tant que postgres
-export PGUSER=omur
-
-# je supprime la variable d'environnement
-unset PGUSER
 
 # je mets en place sqitch
 cd migrations

@@ -1,0 +1,8 @@
+# j'initialise les variables d'environnement
+export SQITCH_USERNAME=omur
+export SQITCH_PASSWORD=omur
+
+# je déploie
+sqitch revert db:pg:omur
+unset SQITCH_USERNAME
+unset SQITCH_PASSWORD

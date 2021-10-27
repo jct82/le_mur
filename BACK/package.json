@@ -1,0 +1,25 @@
+{
+  "name": "projet-01-le-mur",
+  "version": "1.0.0",
+  "description": "init",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Valhalla/projet-01-le-mur.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/O-clock-Valhalla/projet-01-le-mur/issues"
+  },
+  "homepage": "https://github.com/O-clock-Valhalla/projet-01-le-mur#readme"
+}

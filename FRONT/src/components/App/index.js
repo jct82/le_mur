@@ -5,12 +5,12 @@ import Wall from 'src/components/Wall';
 import UserProfile from 'src/components/UserProfile';
 import './styles.css';
 import { Route, Switch } from 'react-router-dom';
-import Fond from 'src/assets/img/fondLiege.jpg';
 import MainHeader from '../MainHeader';
 
 // == Composant
 const App = () => (
-  <div className="app" style={{ backgroundImage: `url('${Fond}')` }}>
+  // <div className="app" style={{ backgroundImage: `url('${Fond}')` }}>
+  <div className="app" style={{ backgroundImage: 'url(/fondLiege.jpg)' }}>
     <MainHeader />
     <Switch>
       <Route exact path="/">

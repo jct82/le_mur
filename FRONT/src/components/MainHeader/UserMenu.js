@@ -14,6 +14,9 @@ const UserMenu = () => {
         <div className="userMenu__userIcon">
           <img className="userMenu__userIcon__img" src={userIcon} alt="user icon" />
         </div>
+        <div className="userMenu__btnContainer">
+          <p className="userMenu__btnContainer__userName">julien politi</p>
+        </div>
       </div>
     </>
   );

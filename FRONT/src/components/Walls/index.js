@@ -1,5 +1,6 @@
 import './walls.scss';
 import Plus from 'src/assets/icons/plus-neg.png';
+import WallsCards from './WallsCards';
 
 const Walls = () => (
   <div className="projects">
@@ -10,8 +11,8 @@ const Walls = () => (
       <p>ajouter un mur</p>
       <img className="projects__addProjectBtn__plusIcon" src={Plus} alt="bouton ajouter un mur" />
     </div>
+    <WallsCards />
   </div>
-  // <ProjectList />
 );
 
 export default Walls;

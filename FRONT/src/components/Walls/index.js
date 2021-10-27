@@ -1,7 +1,9 @@
-const Walls = () => {
+import './walls.scss';
 
-  return (
-    <h1>page projets</h1>
-  )
-};
+const Walls = () => (
+  <div className="projects">
+  </div>
+  // <ProjectList />
+);
+
 export default Walls;

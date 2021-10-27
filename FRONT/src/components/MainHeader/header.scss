@@ -1,0 +1,43 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 0 1rem;
+
+  &__logo{
+    &__img{
+      width:90%;
+    } 
+  }
+}
+
+.userMenu{
+  &__userIcon{
+    position: absolute;
+    top:0px;
+    right:0px;
+    display: inline-block;
+    border-top: 80px solid rgb(255, 255, 255);
+    border-left: 80px solid transparent;
+    &__img{
+      position: absolute;
+      right:5px;
+      top:-70px;
+      width: 2rem;
+      transform : scale(1);
+      transition: 0.3s transform ease-in;
+    }
+    &__img:hover{
+      transform : scale(1.1);
+      transition: 0.3s transform ease-in;
+    }
+  }
+  transform: translate(0px,-40px);
+  transition: 0.3s transform ease-in;
+}
+
+
+.--open{
+  transform: translate(-130px,-40px);
+  transition: 0.3s transform ease-in;
+}

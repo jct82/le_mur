@@ -4,12 +4,14 @@ import Walls from 'src/components/Walls';
 import Wall from 'src/components/Wall';
 import UserProfile from 'src/components/UserProfile';
 import './styles.css';
-import { Route, Switch, Router } from 'react-router-dom';
+import { Route, Switch} from 'react-router-dom';
+import Fond from 'src/assets/img/fondLiege.jpg';
+import MainHeader from '../MainHeader';
 
 // == Composant
 const App = () => (
-  <div className="app">
-    {/* <Router> */}
+  <div className="app" style={{ backgroundImage: `url('${Fond}')` }}>
+    <MainHeader />
     <Switch>
       <Route exact path="/">
         <Home />
@@ -24,7 +26,6 @@ const App = () => (
         <UserProfile />
       </Route>
     </Switch>
-    {/* </Router> */}
   </div>
 );
 

@@ -5,7 +5,7 @@
 sudo service postgresql restart
 
 # je déclare ma variable d'environnement PGUSER pour exécuter psql en tant que postgres
-export PGUSER=postgres
+export PGUSER=omur
 
 # j'exécute
 psql -f $PWD/create_db.sql

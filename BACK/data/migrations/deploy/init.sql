@@ -6,7 +6,7 @@ BEGIN;
 CREATE DOMAIN pint AS int CHECK(VALUE > 0);
 
 -- on crée un domaine mail avec une regex pour vérifier que le texte correspond bien au format mail attendu
-CREATE DOMAIN mail AS text CHECK(VALUE ~ '.*@[a-z0-9\-]+(\.[a-z]{1,63})?\p{Ll}{1,3}');
+CREATE DOMAIN mail AS text CHECK(VALUE ~ '.*@[a-z0-9\-]+(\.[a-z]{1,63})?[[:alpha:]]{1,3}');
 
 -- on crèe nos tables
 CREATE TABLE wall (

@@ -1,4 +1,5 @@
 .header {
+  z-index:18;
   overflow: hidden;
   display: flex;
   justify-content: space-between;
@@ -16,7 +17,6 @@
 }
 
 .userMenu{
-  
   font-family: 'Montserrat', sans-serif;
   &__userIcon{
     cursor: pointer;

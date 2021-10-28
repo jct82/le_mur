@@ -45,13 +45,35 @@ const initialState = {
       description: 'Le collage est une technique de création artistique qui consiste à réaliser une création plastique par la combinaison d\'éléments de diverses natures : matériaux plus ou moins plats, comme la toile cirée imprimée, peinture ou dessin, extraits de journaux avec texte et photos, papier peint, documents, objets divers de faible relief, etc.. Lorsque le relief est en jeu il s\'agit alors d\'un assemblage.',
     },
   ],
+  wallCreation: {
+    title: '',
+    description: '',
+    photo: '',
+  },
 };
 
 const reducer = (state = initialState, action = {}) => {
+  console.log(action.picture);
   switch (action.type) {
     case 'GET_WALLS':
       return {
         ...state,
+      };
+    case 'STORE_WALL_PREVIEW_PICTURE':
+      return {
+        ...state,
+        wallCreation: {
+          ...state.wallCreation,
+          photo: action.picture,
+        },
+      };
+    case 'STORE_WALL_INPUT':
+      return {
+        ...state,
+        wallCreation: {
+          ...state.wallCreation,
+          [action.name]: action.value,
+        },
       };
     default:
       return state;

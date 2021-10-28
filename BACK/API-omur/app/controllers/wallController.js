@@ -18,9 +18,12 @@ const wallController = {
     addUser: async function (req, res, next){
 
         try {
-            
+            console.log(req.body);
+            const newUser = new User(req.body);
+            newUser.save();
+            res.json(newUser)
 
-            
+
         } catch (error) {
             console.error(error)
             if (error instanceof User.NoDataError) {

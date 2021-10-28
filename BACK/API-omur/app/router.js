@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-// import des controllers
+// import controllers
 const wallController = require('./controllers/wallController');
 
 
-// détail des incidents
+// user roads details 
 router.get('/user/register', wallController.listUsers);
+router.post('/user/register', wallController.addUser);
 
 
 

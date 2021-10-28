@@ -9,7 +9,6 @@ import MainHeader from '../MainHeader';
 
 // == Composant
 const App = () => (
-  // <div className="app" style={{ backgroundImage: `url('${Fond}')` }}>
   <div className="app" style={{ backgroundImage: 'url(/fondLiege.jpg)' }}>
     <MainHeader />
     <Switch>
@@ -26,6 +25,7 @@ const App = () => (
         <UserProfile />
       </Route>
     </Switch>
+    
   </div>
 );
 

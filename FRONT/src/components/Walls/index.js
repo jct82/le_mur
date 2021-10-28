@@ -1,7 +1,18 @@
-const Walls = () => {
+import './walls.scss';
+import Plus from 'src/assets/icons/plus-neg.png';
+import WallsCards from './WallsCards';
 
-  return (
-    <h1>page projets</h1>
-  )
-};
+const Walls = () => (
+  <div className="projects">
+    <div className="projects__title">
+      <p>Mes Projets</p>
+    </div>
+    <div className="projects__addProjectBtn">
+      <p>ajouter un mur</p>
+      <img className="projects__addProjectBtn__plusIcon" src={Plus} alt="bouton ajouter un mur" />
+    </div>
+    <WallsCards />
+  </div>
+);
+
 export default Walls;

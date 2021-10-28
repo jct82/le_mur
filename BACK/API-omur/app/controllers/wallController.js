@@ -1,20 +1,32 @@
 const datamapper = require('../datamapper');
+const User = require('../models/user');
 
 const wallController = {
-    test: async function (_, res){
+    listUsers: async function (req, res, next){
 
         try {
-
-        const result = await datamapper.getAllUsers();
-
-        console.log(result.rows);
-        res.json(result.rows)
-        }
-        catch (error) {
+            const users = await User.findAll();
+            res.json(users);
+        } catch (error) {
             console.error(error);
-       
+            if (error instanceof User.NoDataError) {
+                return res.status(404).json(error.message);
+            }
         }
-        // res.json(result.rows);
+    },
+
+    addUser: async function (req, res, next){
+
+        try {
+            
+
+            
+        } catch (error) {
+            console.error(error)
+            if (error instanceof User.NoDataError) {
+                return res.status(404).json(error.message)
+            }
+        }
     }
 }
 

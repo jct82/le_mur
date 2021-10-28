@@ -3,14 +3,19 @@ const datamapper = require('../datamapper');
 const wallController = {
     test: async function (_, res){
 
-        res.send('coucou')
-        // const result = await datamapper.getAllUsers();
+        try {
 
-        // console.log(result);
-        // res.json(result.rows)
+        const result = await datamapper.getAllUsers();
+
+        console.log(result.rows);
+        res.json(result.rows)
+        }
+        catch (error) {
+            console.error(error);
+       
         }
         // res.json(result.rows);
-    
-};
+    }
+}
 
 module.exports = wallController;

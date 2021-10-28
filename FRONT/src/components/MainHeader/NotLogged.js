@@ -1,15 +1,23 @@
+import { useDispatch } from 'react-redux';
+import { storeUSerInputValue } from '../../actions/users';
 import Input from '../inputForm/inputs';
 
-const NotLogged = () => (
-  <div className="userMenu__login">
-    {/* <p className="userMenu__login__formTitle">Connexion</p> */}
-    <form className="dark testInput">
-      <Input type="text" name="email" />
-      <Input type="password" name="password" />
-      <button type="submit">connexion</button>
-    </form>
+const NotLogged = () => {
+  const dispatch = useDispatch();
+  const handleChangeInput = (e) => {
+    const { value, name } = e.target;
+    dispatch(storeUSerInputValue(name, value));
+  };
+  return (
+    <div className="userMenu__login">
+      <form className="dark testInput">
+        <Input type="text" label="email" name="email" changeInput={handleChangeInput} />
+        <Input type="password" label="password" name="password" changeInput={handleChangeInput} />
+        <button type="submit">connexion</button>
+      </form>
 
-  </div>
-);
+    </div>
+  );
+};
 
 export default NotLogged;

@@ -61,7 +61,6 @@ module.exports = {
           },
         ],
       },
-
       // Fonts
       {
         test: /\.(woff2?|eot|ttf|otf)$/,
@@ -70,16 +69,17 @@ module.exports = {
           outputPath: 'fonts/',
         },
       },
-
       // Images
       {
         test: /\.(ico|gif|png|jpe?g|webp|svg)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: { outputPath: 'images/' },
-          },
-        ],
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          context: path.resolve(__dirname,"src/"),
+          publicPath: '',
+          outputPath: 'images/',
+          useRelativePaths: true,
+        },
       },
     ],
   },

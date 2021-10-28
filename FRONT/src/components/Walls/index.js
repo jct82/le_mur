@@ -5,7 +5,7 @@ import WallsCards from './WallsCards';
 const Walls = () => (
   <div className="projects">
     <div className="projects__title">
-      <p>Mes Projets</p>
+      <h1>Mes Projets</h1>
     </div>
     <div className="projects__addProjectBtn">
       <p>ajouter un mur</p>

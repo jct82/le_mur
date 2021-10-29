@@ -2,7 +2,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Input from "../inputForm/inputs";
 import Textarea from "../inputForm/textarea";
-import { updateDocName, postLink } from "src/actions/wall";
+import Select from "../inputForm/select";
+import FileInput from "../inputForm/file";
+import { updateDocName, postLink, deleteLink } from "src/actions/wall";
 
 import './style.scss';
 
@@ -27,11 +29,11 @@ const Wall = () => {
   }
 
   const addLink = () => {
-    dispatch(postLink(linkVal));
+    if (linkVal.trim().length) dispatch(postLink(linkVal));
   }
 
   const suppLink = (e) => {
-    console.log(e.target.previousElementSibling.textContent);
+    dispatch(deleteLink(e.target.previousElementSibling.textContent));
   }
 
   
@@ -46,9 +48,6 @@ const Wall = () => {
     );
   });
 
-  
-
-
   return (
     <div className="wall">
       <div className="sub-header">
@@ -61,10 +60,9 @@ const Wall = () => {
           <form>
             <Input type="text" label="Nom" name="name" value={nameVal} changeInput={inputChange}/>
             <Textarea name="description" label="Description" value={descVal} changeInput={inputChange}/>
-            {/* <select onChange={inputChange} name="type">
-              <option value="image">Image</option>
-              <option value="texte">Texte</option>
-            </select> */}
+            <Select  name="type" label="Type de document" value={typeVal} changeInput={inputChange} options={['image', 'texte']} />
+            {typeVal == 'image' && <FileInput label="charger une image" />}
+            {typeVal == 'texte' && <Textarea name="description" label="Description" value={descVal} changeInput={inputChange}/>}
             <div className="input-list">
               <div>
                 <div className="field">
@@ -74,6 +72,7 @@ const Wall = () => {
               </div>
               {linksListJSX}
             </div>
+            <input className="btn" type="submit" value="Valider"/>
           </form>
         </div>
         <div className="menu-bar">

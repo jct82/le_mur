@@ -1,4 +1,4 @@
-import { UPDATE_DOC_PROPS, POST_LINK  } from "src/actions/wall";
+import { UPDATE_DOC_PROPS, POST_LINK, DELETE_LINK  } from "src/actions/wall";
 
 const initialState = {
   id: 1,
@@ -21,11 +21,22 @@ const reducer = (state = initialState, action = {}) => {
       }
     case POST_LINK :{
       const allLinks = state.link;
-
       const newLinks = [
         ...allLinks,
         action.link,
       ];
+      return{
+        ...state,
+        link: newLinks,
+        currentLink: '',
+      }
+    }
+    case DELETE_LINK :{
+      const allLinks = state.link;
+      const newLinks = allLinks.filter((link) => {
+        return link != action.link
+      });
+      
       return{
         ...state,
         link: newLinks,

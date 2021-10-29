@@ -12,6 +12,10 @@ input, select, textarea, button{
   label{
     transform: scale(1) translate(15px, 27px) translateZ(0);
     transition:0.5s;
+    pointer-events:none;
+  }
+  select + label{
+    transition:0s;
   }
   input[type="text"]:focus + label,
   input[type="email"]:focus + label,
@@ -21,8 +25,11 @@ input, select, textarea, button{
     transform: scale(.8) translate(0px, 0px) translateZ(0);
   }
 
-  textarea:focus{
-    outline: none;
+  textarea{
+    height: 100px;
+    &:focus{
+      outline: none;
+    }
   }
 
   input[type="text"],
@@ -41,6 +48,17 @@ input, select, textarea, button{
     padding: 8px 16px;
     border:none;
     font-size: 16px;
+  }
+  select{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #000000;
+    padding: 8px 11px;  
+    background-color: #ffffff;
+    font-size: 16px;
+    &:focus{
+      outline: none;
+    }
   }
   .line{
     position: absolute;
@@ -77,21 +95,11 @@ input, select, textarea, button{
   }
 }
 
-select{
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid #000000;
-  padding: 8px 16px;  
-  background-color: #ffffff;;
-  &:focus{
-    outline: none;
-  }
-}
-
 .btn{
   height: 30px;
   padding: 0 8px;
   border: 1px solid #000000;
+  background-color: #ffffff;
   box-sizing: border-box;
 }
 
@@ -138,6 +146,7 @@ form.dark{
   select{
     border-bottom: 1px solid #ffffff;
     background-color: #000000;
+    margin-bottom: 20px;
   }
   .btn{
     background-color:#000000;
@@ -146,8 +155,29 @@ form.dark{
   }
 }
 
+input[type="file"]{
+  display: none;
+  & + .fake-file{
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 8px;
+    font-size:13px;
+    line-height: 28px;
+  }
+}
+
+.input-file-wrapper{
+  margin-bottom: 20px;
+  .file-name{
+    display: inline-block;
+    font-style:italic;
+    font-size: 14px;
+  }
+}
+
 .input-list > div{
   display: flex;
+  align-items:center;
   .field{
     flex-grow: 1;
   }
@@ -155,5 +185,6 @@ form.dark{
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: 30px;
+    margin-left: 15px;
   }
 }

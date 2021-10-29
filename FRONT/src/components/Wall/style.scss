@@ -24,6 +24,8 @@
       vertical-align: top;
     }
     .menu-bar{
+      position: relative;
+      z-index: 19;
       width: 60px;
       background: #ffffff;
       transform:translateX(0px);
@@ -55,7 +57,7 @@
     }
     .dashboard{
       position: absolute;
-      z-index: 2;
+      z-index: 20;
       top: 0;
       left: -350px;
       height: 100%;
@@ -69,6 +71,10 @@
         top: 10px;
         right: 15px;
         font-size: 30px;
+      }
+      input[type="submit"]{
+        float: right;
+        margin-top: 35px;;
       }
     }
     &.on{

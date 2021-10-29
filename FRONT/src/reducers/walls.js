@@ -53,7 +53,6 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action = {}) => {
-  console.log(action.picture);
   switch (action.type) {
     case 'GET_WALLS':
       return {

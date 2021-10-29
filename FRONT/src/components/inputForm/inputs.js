@@ -14,12 +14,7 @@ const Input = ({
   };
   return (
     <div className="input-wrapper">
-<<<<<<< HEAD
-      <input type={type} onBlur={focusOut} value={value} name={name} onChange={changeInput} />
-=======
       <input type={type} onBlur={focusOut} name={name} onChange={changeInput} value={value} />
->>>>>>> 6a90893a0a914847acdd44113609dee4af40679d
-      <label>{label}</label>
       <div className="line" />
     </div>
   );

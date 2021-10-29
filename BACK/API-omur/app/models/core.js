@@ -12,19 +12,19 @@ module.exports = class CoreModel {
 
     static NoDataError = NoDataError;
 
-    // hop, on factorise
+    // constructor factorisation 
     constructor(data) {
         for (const prop in data) {
             this[prop] = data[prop];
         }
     }
 
-    // méthode qui permettent d'aller directement à l'essentiel ;-)
-    // et qui évite d'importer le connecteur dans tous les models
+    
+    // method that avoid to import db connector in every models
     static async fetch(...args) {
         const { rows } = await db.query(...args);
         /*
-        équivalent à
+        this is like 
         const result = await db.query(query);
         const rows = result.rows;
         */
@@ -36,18 +36,18 @@ module.exports = class CoreModel {
         return rows;
     }
 
-    // si on sait déjà qu'on ne veut qu'un seul enregistrement
+    //same method but for just one line
     static async fetchOne(...args) {
-        // ça revient à appeler fetch, sauf qu'on récupère un seul objet
-        // au lieu d'un array d'objets
+        // we get just one object instead of array of objects
         return (await this.fetch(...args))[0];
     }
 
+    //static method to find one registration. available for all models
     static async findOne(id) {
         const data = this.fetchOne(`SELECT * FROM ${this.tableName} WHERE id = $1`, [id]);
         return await new this(data);
     }
-
+    //static method to find all registrations. available for all models
     static async findAll() {
         const data = await Core.fetch(`SELECT * FROM ${this.tableName};`);
         return data.map(d => new this(d));

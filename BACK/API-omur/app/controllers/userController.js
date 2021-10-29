@@ -1,7 +1,7 @@
 const datamapper = require('../datamapper');
 const User = require('../models/user');
 
-const wallController = {
+const userController = {
     listUsers: async function (req, res, next){
 
         try {

@@ -1,16 +1,15 @@
 const express = require('express');
-const cors = require('cors');
 const router = express.Router();
 
-app.use(cors());
+
 
 // import controllers
-const wallController = require('./controllers/wallController');
+const userController = require('./controllers/userController');
 
 
 // user roads details 
-router.get('/user/register', wallController.listUsers);
-router.post('/user/register', wallController.addUser);
+router.get('/user/register', userController.listUsers);
+router.post('/user/register', userController.addUser);
 
 
 

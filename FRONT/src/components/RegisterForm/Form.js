@@ -14,8 +14,7 @@ const Form = ({closeForm}) => {
     <>
       <div className="form-container">
         <div className="from-content-left">
-        <button onClick={() => closeForm (false)}> 
-        <i class="far fa-times-circle"></i></button>
+        <button onClick={() => closeForm (false)}></button>
         </div>
         {!isSubmitted ? (
           <FormSignup submitForm={submitForm} />) : (<FormSuccess />)

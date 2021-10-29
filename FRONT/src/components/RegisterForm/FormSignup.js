@@ -2,12 +2,32 @@
 import React from 'react';
 import useForm from './useForm';
 import infoValidate from './infoValidate';
+import { useDispatch, useSelector } from 'react-redux';
+import { storeUserRegisterInput, createUser } from '../../actions/users';
 
 const FormSignup = ({ submitForm }) => {
-  // reasearch the values from useForm
-  const { handleChange, values, handleSubmit, errors }
-    = useForm(submitForm, infoValidate);
+  // send actions to the reducer
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user)
 
+
+  // reasearch the values from useForm
+  /*const { handleChange, values, handleSubmit, errors }
+    = useForm(submitForm, infoValidate);
+*/
+
+  const handleChange = (event) => {
+    console.log(event.target.value)
+    console.log(event.target.name)
+    const inputName = event.target.name
+    const inputValue = event.target.value
+    dispatch(storeUserRegisterInput(inputName, inputValue))
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(createUser())
+  }
 
   return (
     <div className="form-content-right">
@@ -22,14 +42,13 @@ const FormSignup = ({ submitForm }) => {
           <input
             id="prénom"
             type="text"
-            name="prénom"
+            name="name"
             className="form-input"
             placeholder="Entrez votre Prénom"
-            value={values.prénom}
+            value={user.name}
             onChange={handleChange}
           />
 
-          {errors.prénom && <p>{errors.prénom}</p>}
         </div>
 
 
@@ -41,13 +60,13 @@ const FormSignup = ({ submitForm }) => {
           <input
             id="nom"
             type="text"
-            name="nom"
+            name="lastname"
             className="form-input"
             placeholder="Entrez votre Nom"
-            value={values.nom}
+            value={user.lastname}
             onChange={handleChange}
           />
-          {errors.nom && <p>{errors.nom}</p>}
+
         </div>
         <div className="form-inputs">
           <label htmlFor="Email"
@@ -60,10 +79,10 @@ const FormSignup = ({ submitForm }) => {
             name="email"
             className="form-input"
             placeholder="Entrez votre email"
-            value={values.email}
+            value={user.email}
             onChange={handleChange}
           />
-          {errors.email && <p>{errors.email}</p>}
+
         </div>
 
         <div className="form-inputs">
@@ -77,10 +96,10 @@ const FormSignup = ({ submitForm }) => {
             name="password"
             className="form-input"
             placeholder="Entrez votre mot de passe"
-            value={values.password}
+            value={user.password}
             onChange={handleChange}
           />
-          {errors.password && <p>{errors.password}</p>}
+
         </div>
 
         <div className="form-inputs">
@@ -94,10 +113,10 @@ const FormSignup = ({ submitForm }) => {
             name="password2"
             className="form-input"
             placeholder="Entrez votre mot de passe"
-            value={values.password2}
+            value={user.password2}
             onChange={handleChange}
           />
-          {errors.password2 && <p>{errors.password2}</p>}
+
         </div>
         <button className="from-input-btn" type="submit">
           <span className="submit.png"></span>Enregistrer

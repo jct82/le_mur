@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const authMiddleware = (store) => (next) => (action) => {
   const state = store.getState();
-  console.log(action);
   switch (action.type) {
     // case 'SUBMIT_USER_CREDENTIALS': {
     //   const config = {

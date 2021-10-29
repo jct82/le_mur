@@ -1,4 +1,5 @@
 import './wallForm.scss';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import closeIcon from 'src/assets/icons/cross-neg-white.png';
 import Input from 'src/components/inputForm/inputs';
@@ -7,6 +8,7 @@ import Textarea from '../inputForm/textarea';
 import { createWallAction, storeWallInputValue, storeWallPictureAction } from '../../actions/walls';
 
 const WallForm = ({ setFormOpen }) => {
+  const [picture, setPicture] = useState();
   const dispatch = useDispatch();
   const wallCreation = useSelector((state) => state.walls.wallCreation);
   const { title, description } = wallCreation;
@@ -18,15 +20,16 @@ const WallForm = ({ setFormOpen }) => {
     dispatch(storeWallInputValue(name, value));
   };
   const handleSubmitForm = (e) => {
-    e.prevent.default();
-    dispatch(createWallAction());
+    e.preventDefault();
+    dispatch(createWallAction(picture));
   };
   const handleChangePicture = (e) => {
-    dispatch(storeWallPictureAction(e.target.files[0]));
+    setPicture(e.target.files[0]);
+    // dispatch(storeWallPictureAction(e.target.files[0]));
   };
   return (
     <>
-      <form className="wallForm dark" type="submit" onClick={handleSubmitForm}>
+      <form className="wallForm dark" type="submit" onSubmit={handleSubmitForm}>
         <img className="wallForm__closeIcon" src={closeIcon} alt="fermeture de la modale" onClick={handleCloseModal} />
         <Input type="text" label="nom du projet" name="title" changeInput={handleChangeInput} value={title} />
         <Textarea label="description" name="description" changeInput={handleChangeInput} value={description} />

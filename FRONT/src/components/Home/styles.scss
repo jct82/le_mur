@@ -1,0 +1,124 @@
+@use 'src/styles/vars';
+
+
+
+.home {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  height: 100%;
+
+
+  .left_container {
+
+    position: relative;
+    width: 50%;
+    padding-left: 30px;
+    height: 100vh;
+    display: block;
+
+  }
+
+  .inner_container {
+    background-color: white;
+    height: 100vh;
+    padding: 50px 30px;
+  }
+
+  .right_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 50%;
+    height: 100vh;
+
+  }
+
+  /*
+.left_container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: space-between;
+  background-color: white;
+}
+
+
+.right_container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  background-color: black;
+
+  position: right;
+  float: right;
+}
+*/
+  .app_title {
+    font-size: 11vw;
+    text-align: left;
+  }
+
+  .page_title {
+    font-family: 'Lucida';
+    font-size: 1.4vw;
+    color: #ed9c4b;
+    padding-bottom: 3%;
+    padding-left: 6%;
+    text-align: left;
+  }
+
+  .triangle {
+    height: 0;
+    width: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 34px solid black;
+  }
+
+  /*.white-triangle {
+    justify-content: center;
+    align-items: center;
+    height: 0;
+    width: 0;
+    border-top: 31px solid transparent;
+    border-bottom: 28px solid transparent;
+    border-left: 48px solid white;
+  }
+  */
+
+  .app_resume {
+    font-size: 0.9vw;
+    color: #6b6b6b;
+    font-family: 'Lucida Console';
+    text-align: left;
+    line-height: 140%;
+  }
+
+  .citationTexte {
+    padding-top: 5%;
+    font-size: 1vw;
+    color: #414040;
+    font-family: 'Lucida';
+  }
+
+  .citation_author {
+    padding-top: 1.5%;
+    color: #6b6b6b;
+    font-size: 0.9vw;
+    font-family: 'Lucida Console';
+  }
+}
+
+
+.openFormBtn {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  background-color: black;
+  font: white;
+}

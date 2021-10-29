@@ -1,0 +1,88 @@
+@use 'src/styles/vars';
+
+.form-container {
+  margin: auto;
+  position: absolute;
+  top: calc(50% - 250px);
+  border-radius: 10px;
+  height: 500px;
+  display: grid;
+  background-color: black;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.form-content-left {
+  color: white;
+}
+// form 
+.form-content-right {
+
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form h1 {
+  font-size: 1.5rem;
+  text-align: start;
+  width: 80%;
+  margin-bottom: 1rem;
+  color:white;
+}
+
+.form-inputs {
+  margin-bottom: 0.5rem;
+  width: 80%;
+}
+
+.form-inputs p {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  color: #f00e0e;
+}
+
+.form-label {
+  display: inline-block;
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+  color: white;
+}
+.form-input {
+  display: block;
+  padding-left: 10px;
+  outline: none;
+  border-radius: 2px;
+  height: 20px;
+  width: 100%;
+  border: black;
+}
+
+// placeholder
+.form-input::placeholder {
+  border: black;
+  border-radius: 2px;
+  color: #595959;
+  font-size: 12px;
+}
+
+// target the catch erros phrase
+.form-inputs p {
+  display: block;
+  color : #ff0000;
+  font-size: 10px;
+
+}
+
+.form-button {
+  padding: 25%;
+}
+.openFormBtn {
+  color: white;
+  font-family: 'Montserrat Subrayada';
+  font-size: 1.3vw;
+}
+
+

@@ -15,6 +15,7 @@ const Input = ({
   return (
     <div className="input-wrapper">
       <input type={type} onBlur={focusOut} name={name} onChange={changeInput} value={value} />
+      <label>{label}</label>
       <div className="line" />
     </div>
   );

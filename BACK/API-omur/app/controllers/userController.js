@@ -33,4 +33,4 @@ const userController = {
     }
 }
 
-module.exports = wallController;
+module.exports = userController;

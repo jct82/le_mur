@@ -79,6 +79,14 @@
         color: white;
       }
     }
+    
+  }
+  &__submitBtn{
+    background-color: black;
+    &__img{
+      width: 30px;
+    }
+    border: none;
   }
   transform: translate(0px,0px);
   transition: 0.3s transform ease-in;

@@ -19,7 +19,7 @@ const Walls = () => {
         <img className="projects__addProjectBtn__plusIcon" src={Plus} alt="bouton ajouter un mur" />
       </div>
       {
-        isFormOpen && <WallForm />
+        isFormOpen && <WallForm setFormOpen={setFormOpen} />
       }
       <WallsCards />
     </div>

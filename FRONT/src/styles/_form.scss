@@ -89,10 +89,9 @@ select{
 }
 
 .btn{
-  height: 25px;
-  width: 50px;
-  padding: 0;
-  border: none;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid #000000;
   box-sizing: border-box;
 }
 
@@ -138,5 +137,22 @@ form.dark{
   select{
     border-bottom: 1px solid #ffffff;
     background-color: #000000;
+  }
+  .btn{
+    background-color:#000000;
+    color:#ffffff;
+    border: 1px solid #ffffff;
+  }
+}
+
+.input-list > div{
+  display: flex;
+  .field{
+    flex-grow: 1;
+  }
+  .btn{
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 30px;
   }
 }

@@ -1,5 +1,5 @@
 export const storeWallPictureAction = (picture) => (
-  { type: 'STORE_WALL_PREVIEW_PICTURE', picture: picture}
+  { type: 'STORE_WALL_PREVIEW_PICTURE', picture: picture }
 );
 
 export const storeWallInputValue = (name, value) => (

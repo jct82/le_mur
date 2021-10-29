@@ -5,8 +5,8 @@ import Input from '../inputForm/inputs';
 
 const NotLogged = () => {
   const dispatch = useDispatch();
-  const passwordInputValue = useSelector((state) => state.user.password);
-  const emailInputValue = useSelector((state) => state.user.email);
+  const passwordInputValue = useSelector((state) => state.user.credentials.password);
+  const emailInputValue = useSelector((state) => state.user.credentials.email);
   const handleChangeInput = (e) => {
     const { value, name } = e.target;
     dispatch(storeUSerInputValue(name, value));

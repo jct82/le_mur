@@ -6,6 +6,10 @@ const initialState = {
   lastname: '',
   role: '',
   logged: false,
+  credentials: {
+    email: '',
+    password: '',
+  },
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -13,7 +17,10 @@ const reducer = (state = initialState, action = {}) => {
     case 'STORE_USER_LOGIN_INPUT':
       return {
         ...state,
-        [action.name]: action.inputValue,
+        credentials: {
+          ...state.credentials,
+          [action.name]: action.inputValue,
+        },
       };
     case 'STORE_USER_REGISTER_INPUT':
       return {

@@ -3,7 +3,6 @@ import Home from 'src/components/Home';
 import Walls from 'src/components/Walls';
 import Wall from 'src/components/Wall';
 import UserProfile from 'src/components/UserProfile';
-import img from 'src/assets/icons/submit.png';
 import './styles.css';
 import { Route, Switch } from 'react-router-dom';
 import MainHeader from '../MainHeader';

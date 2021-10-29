@@ -1,0 +1,55 @@
+.wallForm{
+  position: fixed;
+  z-index:20;
+  padding:2rem 4rem;
+  margin: 0 auto;
+  width:500px;
+  max-width:80%;
+  top:20vh;
+  left:0;
+  right:0;
+  border:1px solid white;
+  animation-duration: 0.5s;
+  animation-name: moveUp;
+  
+  &__submitBtn{
+    background-color: black;
+    color: white;
+    border:none;
+    margin-top:1rem;
+    margin-bottom: 2rem;
+    padding:0.8rem;
+    border:1px solid white;
+  }
+  &__submitBtn:hover{
+    background-color: white;
+    color: black;
+  }
+  &__closeIcon{
+    margin: 1rem;
+    position: absolute;
+    top:0px;
+    right: 0px;
+    width:20px;
+  }
+}
+.greyBackground{
+  z-index:18;
+  position: fixed;
+  top:0px;
+  right:0px;
+  height: 100%;
+  width: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.8)
+}
+
+/*----------keyframes animation------------------*/
+@keyframes moveUp {
+  from {
+    top:25vh;
+  }
+
+  to {
+    top:20vh;
+  }
+}

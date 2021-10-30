@@ -34,7 +34,6 @@ const WallForm = ({ setFormOpen }) => {
     setPicture(e.target.files[0]);
   };
   const handleDeleteCoworker = (user) => {
-    console.log(user);
     dispatch(deleteCoworker(user));
   };
   return (

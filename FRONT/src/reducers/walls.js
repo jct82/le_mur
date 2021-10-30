@@ -48,7 +48,6 @@ const initialState = {
   wallCreation: {
     title: '',
     description: '',
-    photo: '',
   },
 };
 
@@ -58,14 +57,6 @@ const reducer = (state = initialState, action = {}) => {
     case 'GET_WALLS':
       return {
         ...state,
-      };
-    case 'STORE_WALL_PREVIEW_PICTURE':
-      return {
-        ...state,
-        wallCreation: {
-          ...state.wallCreation,
-          photo: action.picture,
-        },
       };
     case 'STORE_WALL_INPUT':
       return {

@@ -3,9 +3,9 @@
   z-index:20;
   padding:2rem 4rem;
   margin: 0 auto;
-  width:500px;
+  width:800px;
   max-width:80%;
-  top:20vh;
+  top:0;
   left:0;
   right:0;
   border:1px solid white;
@@ -50,6 +50,6 @@
   }
 
   to {
-    top:20vh;
+    top:0vh;
   }
 }

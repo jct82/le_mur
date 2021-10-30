@@ -1,12 +1,14 @@
 import userIcon from 'src/assets/icons/user-neg.png';
 import './header.scss';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Logged from './Logged';
 import NotLogged from './NotLogged';
 
 const UserMenu = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const isLogged = false;
+  const isLogged = useSelector((state) => state.user.logged);
+  // const isLogged = false;
 
   const handleToggleMenu = () => {
     setMenuOpen(!isMenuOpen);

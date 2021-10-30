@@ -9,3 +9,7 @@ export const storeUserRegisterInput = (inputName, inputValue) => (
 export const createUser = () => (
   { type: 'CREATE_USER' }
 );
+
+export const logUser = (userData) => (
+  { type: 'LOG_USER', userData: userData }
+);

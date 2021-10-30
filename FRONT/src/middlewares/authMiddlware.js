@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { logUser } from '../actions/users';
 
 const authMiddleware = (store) => (next) => (action) => {
   const state = store.getState();
@@ -39,13 +40,16 @@ const authMiddleware = (store) => (next) => (action) => {
       axios(config)
         .then((response) => {
           console.log(response.data);
+          if (response.status === 200)store.dispatch(logUser(response.data));
         })
         .catch((error) => {
           console.log(error);
-      });
+        });
+      next(action);
+      break;
     }
     default:
-next(action);
+      next(action);
   }
 };
 

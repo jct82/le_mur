@@ -5,6 +5,7 @@ const initialState = {
   name: '',
   lastname: '',
   role: '',
+  loggedUserName: '',
   logged: false,
   credentials: {
     email: '',
@@ -26,7 +27,13 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.name]: action.value,
-      }
+      };
+    case 'LOG_USER':
+      return {
+        ...state,
+        loggedUserName: `${action.userData.name} ${action.userData.lastname}`,
+        logged: true,
+      };
     default:
       return state;
   }

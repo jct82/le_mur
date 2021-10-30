@@ -15,6 +15,7 @@
   &__usersList{
     &__user{
       margin: 0.5rem 0;
+      margin-left: 1rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -41,6 +42,8 @@
   }
   
   &__submitBtn{
+    position: absolute;
+    bottom: 0px;
     background-color: black;
     color: white;
     border:none;

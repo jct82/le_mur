@@ -9,9 +9,10 @@ import Select from '../inputForm/select';
 // import FileInput from '../inputForm/file';
 import { createWallAction, deleteCoworker, storeWallInputValue } from '../../actions/walls';
 import AddedUser from './AddedUser';
+import FileInput from '../inputForm/file';
 
 // Liste en dur des collaboratueurs au projet. il faudra les récuprer du back
-const coworkers = ['julien politi', 'ariana bredon'];
+const coworkers = ['julien politi', 'ariana bredon', 'michel wagner', 'antoine sauvé', 'jean-Charles Trinquet', 'etienn Pinon'];
 
 const WallForm = ({ setFormOpen }) => {
   const [picture, setPicture] = useState();
@@ -45,8 +46,8 @@ const WallForm = ({ setFormOpen }) => {
             <img className="wallForm__closeIcon" src={closeIcon} alt="fermeture de la modale" onClick={handleCloseModal} />
             <Input type="text" label="nom du projet" name="title" changeInput={handleChangeInput} value={title} />
             <Textarea label="description" name="description" changeInput={handleChangeInput} value={description} />
-            <Input type="file" name="photo" changeInput={handleChangePicture} />
-            {/* <FileInput type="file" name="photo" changeInput={handleChangePicture} /> */}
+            {/* <Input type="file" name="photo" changeInput={handleChangePicture} /> */}
+            <FileInput type="file" name="photo" changeInput={handleChangePicture} label="upload picture" />
           </div>
           <div className="wallForm__rightContainer">
             <Select name="users" label="nom du collaborateur" options={coworkers} changeInput={handleChangeInput} />
@@ -65,3 +66,4 @@ WallForm.propTypes = {
 };
 
 export default WallForm;
+// label, value, changeInput, name

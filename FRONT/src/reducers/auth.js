@@ -6,7 +6,7 @@ const initialState = {
   lastname: '',
   role: '',
   loggedUserName: '',
-  logged: true,
+  logged: false,
   credentials: {
     email: '',
     password: '',

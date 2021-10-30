@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const wallMiddleware = (store) => (next) => (action) => {
+  console.log(action);
   const state = store.getState();
   switch (action.type) {
     case 'CREATE_WALL': {
@@ -19,7 +20,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          console.log('ok mur crée');
+          console.log(response, 'ok mur crée');
         })
         .catch ((error) => {
           console.error(error);

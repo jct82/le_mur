@@ -1,3 +1,5 @@
+$user-menu-width:400px;
+
 .header {
   z-index:18;
   overflow: hidden;
@@ -6,7 +8,7 @@
   align-items: top;
   position: absolute;
   margin: 0 0 0 1rem;
-  height: 190px;
+  height: 85px;
   width:calc(100% - 1rem);
 
   &__logo{
@@ -25,8 +27,8 @@
     top:0px;
     right:0px;
     display: inline-block;
-    border-top: 80px solid rgb(255, 255, 255);
-    border-left: 80px solid transparent;
+    border-top: 85px solid rgb(255, 255, 255);
+    border-left: 85px solid transparent;
     &__img{
       position: absolute;
       right:7px;
@@ -45,8 +47,8 @@
     font-weight: 300;  
     padding: 1rem;
     position: absolute;
-    width: 240px;
-    height: 190px;
+    width: $user-menu-width;
+    height: 85px;
     background-color: rgb(0, 0, 0);
     &__formTitle{
       color: white;
@@ -57,15 +59,19 @@
   &__btnContainer{
     text-align: center;
     font-weight: 300;
-    padding: 1rem;
+    padding: 0.5rem;
     position: absolute;
-    width: 240px;
-    height: 80px;
+    width: $user-menu-width;
+    height: 85px;
     background-color: rgb(0, 0, 0);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
     &__userName{
       color: white;
-      padding-bottom:0.5rem;
-      border-bottom: 0.5px dotted white;
+      // padding-bottom:0.5rem;
+      // border-bottom: 0.5px dotted white;
     }
     &__buttons{
       display: flex;
@@ -83,6 +89,9 @@
   }
   &__submitBtn{
     background-color: black;
+    position: absolute;
+    right:0rem;
+    top:0.5rem;
     &__img{
       width: 30px;
     }
@@ -94,12 +103,15 @@
 
 
 .--open{
-  transform: translate(-240px,0px);
+  transform: translate(-$user-menu-width,0px);
   transition: 0.3s transform ease-in;
 }
 
 .testInput{
+  padding-bottom: 0px;
   width:calc(100% - 2rem);
+  display: flex;
+  align-items: flex-end;
   position: absolute;
-  top:-90px;
+  top:-100px;
 }

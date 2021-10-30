@@ -21,7 +21,7 @@ const Select = ({
   });
   return (
     <div className="input-wrapper">
-      <select onBlur={focusOut} name={name} onChange={focusOut} value={value}>
+      <select name={name} onChange={focusOut} value={value}>
         <option value="" onClick={focusOut}></option>
         {optionsJSX}
       </select>

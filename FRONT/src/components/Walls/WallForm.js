@@ -7,8 +7,11 @@ import PropTypes from 'prop-types';
 import Textarea from '../inputForm/textarea';
 import Select from '../inputForm/select';
 // import FileInput from '../inputForm/file';
-import { createWallAction, storeWallInputValue } from '../../actions/walls';
-const coworkers = ['julien politi', 'ariana bredon', 'antoine sauvé', 'jean-charles trinquet', 'etienne pinon'];
+import { createWallAction, deleteCoworker, storeWallInputValue } from '../../actions/walls';
+import AddedUser from './AddedUser';
+
+// Liste en dur des collaboratueurs au projet. il faudra les récuprer du back
+const coworkers = ['julien politi', 'ariana bredon'];
 
 const WallForm = ({ setFormOpen }) => {
   const [picture, setPicture] = useState();
@@ -23,9 +26,6 @@ const WallForm = ({ setFormOpen }) => {
     const { value, name } = e.target;
     dispatch(storeWallInputValue(name, value));
   };
-  const handleAddCoworker = (e) => {
-    console.log(e.target.value);
-  };
   const handleSubmitForm = (e) => {
     e.preventDefault();
     dispatch(createWallAction(picture));
@@ -33,16 +33,28 @@ const WallForm = ({ setFormOpen }) => {
   const handleChangePicture = (e) => {
     setPicture(e.target.files[0]);
   };
+  const handleDeleteCoworker = (user) => {
+    console.log(user);
+    dispatch(deleteCoworker(user));
+  };
   return (
     <>
       <form className="wallForm dark" type="submit" onSubmit={handleSubmitForm}>
-        <img className="wallForm__closeIcon" src={closeIcon} alt="fermeture de la modale" onClick={handleCloseModal} />
-        <Input type="text" label="nom du projet" name="title" changeInput={handleChangeInput} value={title} />
-        <Textarea label="description" name="description" changeInput={handleChangeInput} value={description} />
-        <Input type="file" name="photo" changeInput={handleChangePicture} />
-        {/* <FileInput type="file" name="photo" changeInput={handleChangePicture} /> */}
-        <Select name="users" label="nom du collaborateur" options={coworkers} changeInput={handleAddCoworker} />
-        <button className="wallForm__submitBtn" type="submit">créer le projet</button>
+        <h1 className="wallForm__title">Nouveau mur</h1>
+        <div className="wallForm__container">
+          <div className="wallForm__leftContainer">
+            <img className="wallForm__closeIcon" src={closeIcon} alt="fermeture de la modale" onClick={handleCloseModal} />
+            <Input type="text" label="nom du projet" name="title" changeInput={handleChangeInput} value={title} />
+            <Textarea label="description" name="description" changeInput={handleChangeInput} value={description} />
+            <Input type="file" name="photo" changeInput={handleChangePicture} />
+            {/* <FileInput type="file" name="photo" changeInput={handleChangePicture} /> */}
+          </div>
+          <div className="wallForm__rightContainer">
+            <Select name="users" label="nom du collaborateur" options={coworkers} changeInput={handleChangeInput} />
+            <AddedUser users={wallCreation.users} onDeleteCoworker={handleDeleteCoworker} />
+            <button className="wallForm__submitBtn" type="submit">créer le projet</button>
+          </div>
+        </div>
       </form>
       <div className="greyBackground" />
     </>

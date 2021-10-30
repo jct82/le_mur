@@ -48,22 +48,34 @@ const initialState = {
   wallCreation: {
     title: '',
     description: '',
+    users: [],
   },
 };
 
 const reducer = (state = initialState, action = {}) => {
-  console.log(action.picture);
   switch (action.type) {
     case 'GET_WALLS':
       return {
         ...state,
+      };
+    case 'DELETE_COWORKER':
+      return {
+        ...state,
+        wallCreation: {
+          ...state.wallCreation,
+          users: state.wallCreation.users.filter((user) => user !== action.user),
+        },
       };
     case 'STORE_WALL_INPUT':
       return {
         ...state,
         wallCreation: {
           ...state.wallCreation,
-          [action.name]: action.value,
+          // eslint-disable-next-line no-nested-ternary
+          [action.name]: action.name === 'users'
+            ? !state.wallCreation.users.includes(action.value)
+              ? [...state.wallCreation.users, action.value] : [...state.wallCreation.users]
+            : action.value,
         },
       };
     default:

@@ -1,4 +1,5 @@
 import closeIcon from 'src/assets/icons/cross-neg-white.png';
+import PropTypes from 'prop-types';
 
 const AddedUser = ({users, onDeleteCoworker}) => (
   <ul className="wallForm__usersList">
@@ -12,5 +13,10 @@ const AddedUser = ({users, onDeleteCoworker}) => (
     }
   </ul>
 );
+
+AddedUser.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onDeleteCoworker: PropTypes.func.isRequired,
+};
 
 export default AddedUser;

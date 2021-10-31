@@ -1,12 +1,13 @@
 import Logo from 'src/assets/img/Logo.svg';
 import './header.scss';
+import { Link } from 'react-router-dom';
 import UserMenu from './UserMenu';
 
 const MainHeader = () => (
   <header className="header">
-    <div className="header__logo">
+    <Link className="header__logo" to="/">
       <img className="header__logo__img" src={Logo} alt="logo" />
-    </div>
+    </Link>
     <UserMenu />
   </header>
 );

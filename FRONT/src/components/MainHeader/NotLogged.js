@@ -7,13 +7,20 @@ const NotLogged = () => {
   const dispatch = useDispatch();
   const passwordInputValue = useSelector((state) => state.user.credentials.password);
   const emailInputValue = useSelector((state) => state.user.credentials.email);
+
   const handleChangeInput = (e) => {
     const { value, name } = e.target;
     dispatch(storeUSerInputValue(name, value));
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(submitUserLogin());
+  };
+
   return (
     <div className="userMenu__login">
-      <form className="dark testInput">
+      <form className="dark testInput" onSubmit={handleSubmit}>
         <Input type="text" label="email" name="email" changeInput={handleChangeInput} value={emailInputValue} />
         <Input type="password" label="password" name="password" changeInput={handleChangeInput} value={passwordInputValue} />
         <button className="userMenu__submitBtn" type="submit"><img className="userMenu__submitBtn__img" src={submitBtn} alt="submit" /></button>

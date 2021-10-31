@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-
+import { useLocation } from 'react-router-dom';
 import Input from "../inputForm/inputs";
 import Textarea from "../inputForm/textarea";
 import { updateDocName, postLink } from "src/actions/wall";
@@ -7,6 +7,10 @@ import { updateDocName, postLink } from "src/actions/wall";
 import './style.scss';
 
 const Wall = () => {
+  // pour passer les infos du mur depuis la page Walls
+  const location = useLocation();
+  const { wallTitle, wallId } = location.state;
+
   const dispatch = useDispatch();
   const nameVal = useSelector((state) => state.elements.name);
   const descVal = useSelector((state) => state.elements.description);
@@ -52,7 +56,7 @@ const Wall = () => {
   return (
     <div className="wall">
       <div className="sub-header">
-        <h1>page Projet</h1>
+        <h1>{ wallTitle }</h1>
       </div>
       <div className="main">
         <div className="dashboard">

@@ -13,3 +13,7 @@ export const createUser = () => (
 export const logUser = (userData) => (
   { type: 'LOG_USER', userData: userData }
 );
+
+export const submitUserLogin = () => (
+  { type: 'SUBMIT_USER_LOGIN' }
+);

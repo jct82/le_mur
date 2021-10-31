@@ -1,16 +1,17 @@
 import './walls.scss';
 import PropTypes from 'prop-types';
 import deleteIcon from 'src/assets/icons/file-erase.png';
+import { Link } from 'react-router-dom';
 import UserTag from './UserTag';
 
-const WallCard = ({ titleColor, title, photo, users, description }) => (
+const WallCard = ({ titleColor, title, photo, users, description, id }) => (
   <div className="wallcard">
     <div className="wallcard__deleteBtn">
       <img className="wallcard__deleteBtn__deleteIcon" src={deleteIcon} alt="delete file" />
     </div>
-    <div className="wallcard__imgContainer">
+    <Link className="wallcard__imgContainer" to={{ pathname: '/wall', state: { wallId: id, wallTitle: title } }}>
       <div className="wallcard__imgContainer__img" style={{ backgroundImage: `url('${photo}')` }} />
-    </div>
+    </Link>
     <div className="wallcard__description">
       <div className="wallcard__description__title" style={{ backgroundColor: `${titleColor}` }}>{title}</div>
       <p>{description}</p>

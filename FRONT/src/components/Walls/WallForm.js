@@ -66,4 +66,3 @@ WallForm.propTypes = {
 };
 
 export default WallForm;
-// label, value, changeInput, name

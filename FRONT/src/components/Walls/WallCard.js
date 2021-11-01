@@ -1,30 +1,68 @@
 import './walls.scss';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import deleteIcon from 'src/assets/icons/file-erase.png';
+import crossIcon from 'src/assets/icons/cross-neg-white.png';
 import { Link } from 'react-router-dom';
 import UserTag from './UserTag';
 
-const WallCard = ({ titleColor, title, photo, users, description, id }) => (
-  <div className="wallcard">
-    <div className="wallcard__deleteBtn">
-      <img className="wallcard__deleteBtn__deleteIcon" src={deleteIcon} alt="delete file" />
-    </div>
-    <Link className="wallcard__imgContainer" to={{ pathname: '/wall', state: { wallId: id, wallTitle: title } }}>
-      <div className="wallcard__imgContainer__img" style={{ backgroundImage: `url('${photo}')` }} />
-    </Link>
-    <div className="wallcard__description">
-      <div className="wallcard__description__title" style={{ backgroundColor: `${titleColor}` }}>{title}</div>
-      <p>{description}</p>
-    </div>
-    <div className="wallcard__coworkers">
-      {
-        users && users.map((user) => (
-          <UserTag pseudo={user} key={user} />
-        ))
+const WallCard = ({
+  titleColor, title, photo, users, description, id,
+}) => {
+  const [deleteWall, setDeleteWall] = useState(false);
+  const [deleteWallId, setDeleteWallId] = useState();
+  const handleDeleteWall = (wallId) => {
+    setDeleteWall(true);
+    setDeleteWallId(wallId);
+  };
+  const handleCloseDeleteBox = () => {
+    console.log('ok');
+    setDeleteWallId(false);
+    setDeleteWallId(null);
+  };
+  return (
+    <div className="wallcard">
+      <div className="wallcard__deleteBtn" onClick={() => handleDeleteWall(id)}>
+        <img className="wallcard__deleteBtn__deleteIcon" src={deleteIcon} alt="delete file" />
+      </div>
+      <div className="wallcard__imgContainer">
+
+        {/* ------affichage conditionel confirmation de suppression du mur  */}
+        {
+        deleteWall && id === deleteWallId
+          ? (
+            <div className="wallcard__imgContainer__deleteBox --deleteDialog">
+              <div className="wallcard_imgContainer__deleteBox__delete">
+                <img className="wallcard__imgContainer__deleteBox__delete__closeIcon" src={crossIcon} onClick={handleCloseDeleteBox} alt="fermeture" />
+                <p className="wallcard__imgContainer__deleteBox__delete"> Supprimer le mur ?
+                  <div className="wallcard__imgContainer__deleteBox__delete__btn">Oui</div>
+                  <div className="wallcard__imgContainer__deleteBox__delete__btn">Non</div>
+                </p>
+              </div>
+            </div>
+          )
+          : (
+            <Link to={{ pathname: '/wall', state: { wallId: id, wallTitle: title } }}>
+              <div className="wallcard__imgContainer__img" style={{ backgroundImage: `url('${photo}')` }} />
+            </Link>
+          )
       }
+
+      </div>
+      <div className="wallcard__description">
+        <div className="wallcard__description__title" style={{ backgroundColor: `${titleColor}` }}>{title}</div>
+        <p>{description}</p>
+      </div>
+      <div className="wallcard__coworkers">
+        {
+          users && users.map((user) => (
+            <UserTag pseudo={user} key={user} />
+          ))
+        }
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 WallCard.propTypes = {
   users: PropTypes.arrayOf(PropTypes.string).isRequired,

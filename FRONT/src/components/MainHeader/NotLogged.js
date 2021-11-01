@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import submitBtn from 'src/assets/icons/submit-neg.png';
-import { storeUSerInputValue } from '../../actions/users';
+import { storeUSerInputValue, submitUserLogin } from '../../actions/users';
 import Input from '../inputForm/inputs';
 
 const NotLogged = () => {

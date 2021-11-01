@@ -2,6 +2,7 @@ import './wallForm.scss';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import closeIcon from 'src/assets/icons/cross-neg-white.png';
+import submit from 'src/assets/icons/submit-neg.png';
 import Input from 'src/components/inputForm/inputs';
 import PropTypes from 'prop-types';
 import Textarea from '../inputForm/textarea';
@@ -46,13 +47,12 @@ const WallForm = ({ setFormOpen }) => {
             <img className="wallForm__closeIcon" src={closeIcon} alt="fermeture de la modale" onClick={handleCloseModal} />
             <Input type="text" label="nom du projet" name="title" changeInput={handleChangeInput} value={title} />
             <Textarea label="description" name="description" changeInput={handleChangeInput} value={description} />
-            {/* <Input type="file" name="photo" changeInput={handleChangePicture} /> */}
             <FileInput type="file" name="photo" changeInput={handleChangePicture} label="upload picture" />
           </div>
           <div className="wallForm__rightContainer">
             <Select name="users" label="nom du collaborateur" options={coworkers} changeInput={handleChangeInput} />
             <AddedUser users={wallCreation.users} onDeleteCoworker={handleDeleteCoworker} />
-            <button className="wallForm__submitBtn" type="submit">créer le projet</button>
+            <button className="wallForm__submitBtn" type="submit">créer le projet<img className="wallForm__submitBtn__submitIcon" src={submit} alt="create wall" /></button>
           </div>
         </div>
       </form>

@@ -50,6 +50,12 @@
     margin-bottom: 2rem;
     padding:0.8rem;
     border:1px solid white;
+    display: flex;
+    align-items: center;
+    &__submitIcon{
+      margin-left:0.5rem;
+      width:30px;
+    }
   }
   &__submitBtn:hover{
     background-color: white;

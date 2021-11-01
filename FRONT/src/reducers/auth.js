@@ -34,10 +34,15 @@ const reducer = (state = initialState, action = {}) => {
         loggedUserName: `${action.userData.name} ${action.userData.lastname}`,
         logged: true,
       };
+    case 'DISCONNECT_USER':
+      return {
+        ...state,
+        loggedUserName: '',
+        logged: false,
+      };
     default:
       return state;
   }
 };
 
 export default reducer;
-

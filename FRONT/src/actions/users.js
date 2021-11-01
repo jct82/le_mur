@@ -17,3 +17,7 @@ export const logUser = (userData) => (
 export const submitUserLogin = () => (
   { type: 'SUBMIT_USER_LOGIN' }
 );
+
+export const disconnectUser = () => (
+  { type: 'DISCONNECT_USER' }
+);

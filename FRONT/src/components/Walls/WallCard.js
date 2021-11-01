@@ -32,6 +32,7 @@ WallCard.propTypes = {
   title: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default WallCard;

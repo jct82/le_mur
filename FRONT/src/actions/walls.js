@@ -9,3 +9,7 @@ export const deleteCoworker = (user) => (
 export const createWallAction = (picture) => (
   { type: 'CREATE_WALL', picture }
 );
+
+export const deleteWall = (id) => (
+  { type: 'DELETE_WALL', id }
+);

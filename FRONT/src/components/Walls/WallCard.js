@@ -1,5 +1,6 @@
 import './walls.scss';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import deleteIcon from 'src/assets/icons/file-erase.png';
 import crossIcon from 'src/assets/icons/cross-neg-white.png';
@@ -11,14 +12,18 @@ const WallCard = ({
 }) => {
   const [deleteWall, setDeleteWall] = useState(false);
   const [deleteWallId, setDeleteWallId] = useState();
+  const dispatch = useDispatch();
+
   const handleDeleteWall = (wallId) => {
     setDeleteWall(true);
     setDeleteWallId(wallId);
   };
   const handleCloseDeleteBox = () => {
-    console.log('ok');
     setDeleteWallId(false);
     setDeleteWallId(null);
+  };
+  const handleConfirmDeleteWall = (wallId) => {
+    dispatch(deleteWall(wallId));
   };
   return (
     <div className="wallcard">
@@ -35,8 +40,8 @@ const WallCard = ({
               <div className="wallcard_imgContainer__deleteBox__delete">
                 <img className="wallcard__imgContainer__deleteBox__delete__closeIcon" src={crossIcon} onClick={handleCloseDeleteBox} alt="fermeture" />
                 <p className="wallcard__imgContainer__deleteBox__delete"> Supprimer le mur ?
-                  <div className="wallcard__imgContainer__deleteBox__delete__btn">Oui</div>
-                  <div className="wallcard__imgContainer__deleteBox__delete__btn">Non</div>
+                  <div className="wallcard__imgContainer__deleteBox__delete__btn" onClick={() => handleConfirmDeleteWall(id)}>Oui</div>
+                  <div className="wallcard__imgContainer__deleteBox__delete__btn" onClick={handleCloseDeleteBox}>Non</div>
                 </p>
               </div>
             </div>

@@ -23,7 +23,7 @@ const WallCard = ({
     setDeleteWallId(null);
   };
   const handleConfirmDeleteWall = (wallId) => {
-    dispatch(deleteWall(wallId));
+    // dispatch(deleteWall(wallId));
   };
   return (
     <div className="wallcard">

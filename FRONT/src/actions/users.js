@@ -7,5 +7,17 @@ export const storeUserRegisterInput = (inputName, inputValue) => (
 );
 
 export const createUser = () => (
-  { type: 'CREATE_USER'}
+  { type: 'CREATE_USER' }
+);
+
+export const logUser = (userData) => (
+  { type: 'LOG_USER', userData: userData }
+);
+
+export const submitUserLogin = () => (
+  { type: 'SUBMIT_USER_LOGIN' }
+);
+
+export const disconnectUser = () => (
+  { type: 'DISCONNECT_USER' }
 );

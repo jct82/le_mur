@@ -1,30 +1,31 @@
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+import { logUser } from '../actions/users';
 
 const authMiddleware = (store) => (next) => (action) => {
   const state = store.getState();
-  console.log(action);
   switch (action.type) {
-    // case 'SUBMIT_USER_CREDENTIALS': {
-    //   const config = {
-    //     method: 'post',
-    //     baseURL: 'http://localhost:3001/',
-    //     url: '/login',
-    //     data: {
-    //       email: state.user.userCredentials.email,
-    //       password: state.user.userCredentials.password,
-    //     },
-    //   };
-    //   axios(config)
-    //     .then((response) => {
-    //       console.log(response.data);
-    //       store.dispatch(logUserIn(response.data));
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    //   next(action);
-    //   break;
-    // }
+    case 'SUBMIT_USER_LOGIN': {
+      const config = {
+        method: 'post',
+        baseURL: 'http://54.196.235.242/user/',
+        url: '/login',
+        data: {
+          email: state.user.credentials.email,
+          password: state.user.credentials.password,
+        },
+      };
+      axios(config)
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch(logUser(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      next(action);
+      break;
+    }
     case 'CREATE_USER': {
       const config = {
         method: 'post',
@@ -40,13 +41,19 @@ const authMiddleware = (store) => (next) => (action) => {
       axios(config)
         .then((response) => {
           console.log(response.data);
+          if (response.status === 200) {
+            store.dispatch(logUser(response.data));
+              <Redirect to="walls" />;
+          }
         })
         .catch((error) => {
           console.log(error);
-      });
+        });
+      next(action);
+      break;
     }
     default:
-next(action);
+      next(action);
   }
 };
 

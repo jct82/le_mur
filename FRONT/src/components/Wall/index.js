@@ -6,10 +6,15 @@ import { changePanel, toggleEye } from 'src/actions/wall.js'
 import Docs from './docs';
 import AddDocForm from './addDoc';
 import InfoDocForm from './infoDoc';
+import { useLocation } from 'react-router-dom';
 
 import './style.scss';
 
 const Wall = () => {
+  // pour passer les infos du mur depuis la page Walls
+  const location = useLocation();
+  const { wallTitle, wallId } = location.state;
+
   const dispatch = useDispatch();
   const { panel } = useSelector((state) => state.wall);
 
@@ -39,7 +44,7 @@ const Wall = () => {
   return (
     <div className="wall">
       <div className="sub-header">
-        <h1>page Projet</h1>
+        <h1>{ wallTitle }</h1>
       </div>
       <div className="main">
         <div className="dashboard">

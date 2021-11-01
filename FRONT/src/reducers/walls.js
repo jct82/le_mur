@@ -48,7 +48,7 @@ const initialState = {
   wallCreation: {
     title: '',
     description: '',
-    photo: '',
+    users: [],
   },
 };
 
@@ -58,12 +58,12 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
       };
-    case 'STORE_WALL_PREVIEW_PICTURE':
+    case 'DELETE_COWORKER':
       return {
         ...state,
         wallCreation: {
           ...state.wallCreation,
-          photo: action.picture,
+          users: state.wallCreation.users.filter((user) => user !== action.user),
         },
       };
     case 'STORE_WALL_INPUT':
@@ -71,7 +71,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         wallCreation: {
           ...state.wallCreation,
-          [action.name]: action.value,
+          // eslint-disable-next-line no-nested-ternary
+          [action.name]: action.name === 'users'
+            ? !state.wallCreation.users.includes(action.value)
+              ? [...state.wallCreation.users, action.value] : [...state.wallCreation.users]
+            : action.value,
         },
       };
     default:

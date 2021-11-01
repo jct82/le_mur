@@ -54,7 +54,6 @@
   flex-wrap: wrap;
 }
 .wallcard{
- 
   position:relative;
   font-family: 'Montserrat', sans-serif;
   width: 31%;
@@ -79,12 +78,56 @@
     &__deleteIcon{
       width: 80%;
     }
+    transform: translateY(0px);
+    transition: 0.2s transform ease-in;
+  }
+  &__deleteBtn:hover{
+    transform: translateY(-5px);
+    transition: 0.2s transform ease-in;
   }
   &__imgContainer{
     width:100%;
     box-shadow: 4px 5px 5px -2px rgba(0,0,0,0.25);
     border:12px solid white;
     overflow: hidden;
+    
+    &__deleteBox{
+      animation-duration: 0.5s;
+      animation-name: moveUp;
+      position: relative;
+      background-size: cover;
+      width:100%;
+      height: 250px;
+      text-align: center;
+      &__delete{
+        padding:1rem;
+        height: 180px;
+        position: absolute;
+        left:0;
+        right:0;
+        top:calc(50% - 90px);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        &__closeIcon{
+          margin:0.5rem;
+          right:0px;
+          position: absolute;
+          width: 20px;
+        }
+        &__btn{
+          border:1px solid white;
+          padding:0.5rem;
+          display: inline-block;
+          margin:0.5rem;
+        }
+        &__btn:hover{
+          color: black;
+          background-color: white;
+        }
+      }
+    }
     &__img{
       background-size: cover;
       width:100%;
@@ -143,4 +186,8 @@
       }
     }
   }
+}
+
+.--deleteDialog{
+  background-color: black;
 }

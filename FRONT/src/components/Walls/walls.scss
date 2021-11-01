@@ -91,6 +91,8 @@
     border:12px solid white;
     overflow: hidden;
     &__deleteBox{
+      animation-duration: 0.5s;
+      animation-name: moveUp;
       position: relative;
       background-size: cover;
       width:100%;

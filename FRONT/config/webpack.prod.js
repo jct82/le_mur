@@ -41,13 +41,6 @@ module.exports = merge(common, {
               implementation: require('sass'),
             },
           },
-          {
-            loader: 'string-replace-loader',
-            options: {
-              search: '.png',
-              replace: '',
-            },
-          },
         ],
       },
     ],

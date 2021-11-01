@@ -1,4 +1,4 @@
-import { UPDATE_DOC_PROPS, POST_LINK, DELETE_LINK  } from "src/actions/wall";
+import { UPDATE_DOC_PROPS, POST_LINK, DELETE_LINK, VIEW_DOC } from "src/actions/element";
 
 const initialState = {
   id: 1,
@@ -10,6 +10,7 @@ const initialState = {
   link: [],
   urlSrc: '',
   OwnerId: 1,
+  detailed: false,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -36,13 +37,25 @@ const reducer = (state = initialState, action = {}) => {
       const newLinks = allLinks.filter((link) => {
         return link != action.link
       });
-      
+
       return{
         ...state,
         link: newLinks,
         currentLink: '',
       }
     }
+    case VIEW_DOC :
+      const {id, name, description, type, link, urlSrc, ownerId} = action.doc;
+      return{
+        ...state,
+        id: id,
+        name: name,
+        description: description,
+        type: type,
+        link: link,
+        urlSrc: urlSrc,
+        ownerId: ownerId,
+      }
     default:
       return state;
   }

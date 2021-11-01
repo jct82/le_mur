@@ -1,4 +1,6 @@
 
+
+
 input, select, textarea, button{
   font-family: 'Montserrat', sans-serif;
 }
@@ -10,6 +12,7 @@ input, select, textarea, button{
   position:relative;
   margin-bottom: 20px;
   label{
+    font-size: 16px;
     transform: scale(1) translate(15px, 27px) translateZ(0);
     transition:0.5s;
     pointer-events:none;
@@ -20,9 +23,16 @@ input, select, textarea, button{
   input[type="text"]:focus + label,
   input[type="email"]:focus + label,
   input[type="password"]:focus + label,
-  input[type="url"]:focus + label,
-  textarea:focus + label{
+  input[type="url"]:focus + label{
     transform: scale(.8) translate(0px, 0px) translateZ(0);
+  }
+
+  textarea:focus + label{
+    transform: scale(.8) translate(-6px, 0px) translateZ(0);
+  }
+
+  select:focus + label{
+    transform: scale(.8) translate(-12px, 0px) translateZ(0);
   }
 
   textarea{
@@ -85,12 +95,29 @@ input, select, textarea, button{
     width: 100%;
   }
   &.on{
-    label{
+    input[type="text"] + label,
+    input[type="email"] + label,
+    input[type="password"] + label,
+    input[type="url"] + label{
       transform: scale(.8) translate(0px, 0px) translateZ(0);
     }
+    textarea + label{
+      transform: scale(.8) translate(-6px, 0px) translateZ(0);
+    }
+    select + label{
+      transform: scale(.8) translate(-12px, 0px) translateZ(0);
+    }
     input[type="text"]:focus + label,
-    textarea:focus + label{
+    input[type="email"]:focus + label,
+    input[type="password"]:focus + label,
+    input[type="url"]:focus + label{
       transform: scale(.8) translate(0px, 0px) translateZ(0);
+    }
+    textarea:focus + label{
+      transform: scale(.8) translate(-6px, 0px) translateZ(0);
+    }
+    select:focus + label{
+      transform: scale(.8) translate(-12px, 0px) translateZ(0);
     }
   }
 }
@@ -101,29 +128,85 @@ input, select, textarea, button{
   border: 1px solid #000000;
   background-color: #ffffff;
   box-sizing: border-box;
+  background-repeat: no-repeat;
+  cursor:pointer;
 }
 
 .btn-submit{
-  background-image: url('../assets/icons/submit.png');
-  background-size: 100%;
+  width: 50px;
+  background-image: url(#{$prodPath}/icons/submit.png);
+  background-size: 25px;
+  background-position: center;
 }
-.btn-change{
-  
+
+.btn-submit-txt{
+  padding-left: 35px;
+  background-image: url(#{$prodPath}/icons/submit.png);
+  background-size: 25px;
+  background-position: 8px center;
 }
-.btn-see{
-  
+
+.btn-change-txt{
+  padding-left: 30px;
+  background-image: url(#{$prodPath}/icons/pencil.png);
+  background-size: 17px;
+  background-position: 8px center;
 }
-.btn-info{
-  
+
+.btn-supp-txt{
+  padding-left: 25px;
+  background-image: url(#{$prodPath}/icons/close.png);
+  background-size: 12px;
+  background-position: 8px center;
 }
-.btn-add{
-  
+
+.fake-file{
+  padding-left: 35px;
+  background-image: url(#{$prodPath}/icons/upload.png);
+  background-position: 8px center;
+  background-size: 21px;
 }
-.btn-delete{
-  
-}
+// .btn-change{
+//   width: 50px;
+//   background-image: url(#{$prodPath}/icons/pencil.png);
+//   background-repeat: no-repeat;
+//   background-size: 20px;
+//   background-position: center;
+// }
+// .btn-see{
+//   width: 50px;
+//   background-image: url(#{$prodPath}/icons/view.png);
+//   background-repeat: no-repeat;
+//   background-size: 28px;
+//   background-position: center;
+// }
+// .btn-info{
+//   width: 50px;
+//   background-image: url(#{$prodPath}/icons/info.png);
+//   background-repeat: no-repeat;
+//   background-size: 25px;
+//   background-position: center;
+// }
+// .btn-add{
+//   width: 50px;
+//   background-image: url(#{$prodPath}/icons/plus.png);
+//   background-repeat: no-repeat;
+//   background-size: 25px;
+//   background-position: center;
+// }
+// .btn-delete{
+//   width: 50px;
+//   background-image: url(#{$prodPath}/icons/cross.png);
+//   background-repeat: no-repeat;
+//   background-size: 25px;
+//   background-position: center;
+// }
 .btn-delete-txt{
-  
+  // width: 50px;
+  // background-image: url(#{$prodPath}/icons/submit.png);
+  // background-repeat: no-repeat;
+  // background-size: 25px;
+  // background-position: center;
 }
 
 form.dark{
@@ -184,7 +267,17 @@ input[type="file"]{
   .btn{
     flex-grow: 0;
     flex-shrink: 0;
-    flex-basis: 30px;
+    flex-basis: 25px;
     margin-left: 15px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    border: none;
+    &.add{
+      background-image: url(#{$prodPath}/icons/plus-neg.png);
+    }
+    &.supp{
+      background-image: url(#{$prodPath}/icons/cross-neg.png);
+    }
   }
 }

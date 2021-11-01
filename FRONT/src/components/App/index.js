@@ -10,7 +10,7 @@ import MainHeader from '../MainHeader';
 // == Composant
 const App = () => (
 
-  <div className="app" style={{ backgroundImage: 'url(/fondLiege.jpg)' }}>
+  <div className="app">
     <MainHeader />
     <Switch>
       <Route exact path="/">

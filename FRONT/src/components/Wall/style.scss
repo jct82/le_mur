@@ -1,4 +1,8 @@
+@import '../../styles/vars';
 .wall{
+  .app & {
+    background:#fff5e4;
+  }
   height: 100vh;
   box-sizing: border-box;
   .sub-header{
@@ -39,6 +43,15 @@
         text-align: center;
         opacity: 1;
         transition: 0.5s;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-position: center;
+        &.info{
+          background-image: url(#{$prodPath}/icons/info.png);
+        }
+        &.add{
+          background-image: url(#{$prodPath}/icons/plus.png);
+        }
         &:not(:last-child) {
           border-bottom: 1px solid #000000;
         }
@@ -50,9 +63,12 @@
       box-sizing: border-box;
       .board{
         height: calc(100vh - 180px);
+        padding: 25px 0 0 20px;
+        box-sizing: border-box;
         border: 8px solid #9e9e9e;
         background-color: #c5927a;
-        box-sizing: border-box;
+        background-image: url(#{$prodPath}/fondLiege.jpg);
+        background-repeat: no-repeat;
       }
     }
     .dashboard{
@@ -68,13 +84,44 @@
       transition: 0.5s;
       .close-panel{
         position: absolute;
-        top: 10px;
+        width: 25px;
+        height: 20px;
         right: 15px;
-        font-size: 30px;
+        top: 10px;
+        background-image: url(#{$prodPath}/icons/left-arrow.png);
+        background-repeat: space;
+        background-size: 50%;
+        background-position: center;
+      }
+      .user-btn-block{
+        button{
+          width: 107px;
+          float: right;
+          clear: both;
+        }
+        .btn-change-txt{
+          margin-top: 35px;
+          margin-bottom: 8px;
+        }
       }
       input[type="submit"]{
         float: right;
-        margin-top: 35px;;
+        margin-top: 35px;
+      }
+      .fade-elem{
+        display: none;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        bottom: 0;
+        left:0;
+        right: 0;
+        background: #ffffff;
+        opacity: 0;
+        &.on{
+          display: block;
+          animation: fade-loop 1s;
+        }
       }
     }
     &.on{
@@ -95,9 +142,117 @@
       border-bottom: 1px solid #000000;
     }
   }
+  .doc{
+    position: relative;
+    display: inline-block;
+    font-size: 0;
+    margin: 0 20px 25px 0px;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    img{
+      position: relative;
+      z-index:2;
+    }
+    .see-btn{
+      position: absolute;
+      right: -2px;
+      top: -20px;
+      z-index: 1;
+      width: 30px;
+      height: 20px;
+      background-image: url(#{$prodPath}/icons/view.png);
+      background-size: 18px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #ffffff;
+    }
+    &.owned{
+      box-shadow: 0px 0px 8px 4px #ffffff;
+      .see-btn{
+        box-shadow: 0px 0px 8px 4px #ffffff;
+      }
+    }
+    &.on{
+      .see-btn{
+        display: block;
+      }
+    }
+  }
+  .add-doc-form{
+    .input-list .field{
+      font-size: 12px;
+    }
+  }
+  
+  .form-info{
+    .info-block{
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.2;
+      label{
+        padding-top: 10px;
+        padding-right: 10px;
+        margin-bottom: 10px;
+      }
+      p{
+        padding-top: 10px;
+        margin-bottom: 0;
+        &:not(.block){
+          display: inline-block;
+        }
+      }
+      li{
+        &:first-child{
+          padding-top: 10px;
+        }
+        a{
+          display: block;
+          color:#000000;
+          font-size: 12px;
+          line-height: 1.4;
+          &:hover{
+            color:#000000;
+            text-decoration: underline;
+          }
+          &:before{
+            content:'-';
+            display: inline-block;
+            margin-right:5px;
+          }
+        }
+      }
+      
+      img{
+        max-width: 100%;
+        margin-top: 10px;
+      }
+    }
+  }
 }
 
 
+@keyframes fade-loop{
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
 
+@-webkit-keyframes fade-loop{
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
 
 

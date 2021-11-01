@@ -1,19 +1,12 @@
-export const UPDATE_DOC_PROPS = 'UPDATE_DOC_PROPS';
-export const POST_LINK = 'POST_LINK';
-export const DELETE_LINK = 'DELETE_LINK';
+export const CHANGE_PANEL = 'CHANGE_PANEL';
+export const TOGGLE_EYE = 'TOGGLE_EYE';
 
-export const updateDocName = (name, prop) => ({
-  type: UPDATE_DOC_PROPS,
-  name: name,
-  prop: prop,
+export const changePanel = (panel) => ({
+  type: CHANGE_PANEL,
+  panel: panel,
 });
 
-export const postLink = (link) => ({
-  type: POST_LINK,
-  link: link,
-});
-
-export const deleteLink = (link) => ({
-  type: DELETE_LINK,
-  link: link,
+export const toggleEye = (detailed) => ({
+  type: TOGGLE_EYE,
+  detailed: detailed
 });

@@ -21,7 +21,7 @@ const userController = {
             console.log(req.body);
             const newUser = new User(req.body);
             newUser.save();
-            res.satus(200).json(newUser)
+            res.status(200).json(newUser)
 
 
         } catch (error) {

@@ -8,7 +8,7 @@ class NoDataError extends Error {
     }
 }
 
-module.exports = class CoreModel {
+module.exports = class Core {
 
     static NoDataError = NoDataError;
 
@@ -44,12 +44,12 @@ module.exports = class CoreModel {
 
     //static method to find one registration. available for all models
     static async findOne(id) {
-        const data = this.fetchOne(`SELECT * FROM ${this.tableName} WHERE "id" = $1`, [id]);
+        const data = this.fetchOne(`SELECT * FROM "${this.tableName}" WHERE "id" = $1`, [id]);
         return await new this(data);
     }
     //static method to find all registrations. available for all models
     static async findAll() {
-        const data = await Core.fetch(`SELECT * FROM ${this.tableName};`);
+        const data = await Core.fetch(`SELECT * FROM "${this.tableName}";`);
         return data.map(d => new this(d));
     }
 }

@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 //express-session options 
-app.use(['/user/login/']
+app.use(['/user/login/'],
   session({
   resave: true,
   saveUninitialized: true,

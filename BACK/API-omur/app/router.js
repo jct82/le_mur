@@ -10,6 +10,7 @@ const userController = require('./controllers/userController');
 // user roads details 
 router.get('/user/register', userController.listUsers);
 router.post('/user/register', userController.addUser);
+// router.post('/user/login', userController.connectUser);
 
 
 

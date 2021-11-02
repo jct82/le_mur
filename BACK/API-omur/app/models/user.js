@@ -12,6 +12,7 @@ module.exports = class User extends Core {
         return data.map(d => new User(d));
     }
 
+   
 
     // method to save a new user in database
     async save() {

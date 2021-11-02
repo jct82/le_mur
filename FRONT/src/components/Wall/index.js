@@ -2,10 +2,13 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import docs from 'src/data/element';
 import user from 'src/data/user';
+import { emptyForm } from 'src/actions/element.js'
 import { changePanel, toggleEye } from 'src/actions/wall.js'
 import Docs from './docs';
 import AddDocForm from './addDoc';
 import InfoDocForm from './infoDoc';
+import ChangeWallForm from './changeWall';
+import InfoWallForm from './infoWall';
 import { useLocation } from 'react-router-dom';
 
 import './style.scss';
@@ -24,6 +27,9 @@ const Wall = () => {
 
   const closePanel = () => {
     document.querySelector('.main').classList.remove('on');
+    setTimeout(() => {
+      dispatch(emptyForm({nameF: '', descriptionF: '', typeF : '', linkF: [], urlSrcF: '', currentLinkF: ''}));
+    },500);
   }
 
   const displayPanel = (e) => {
@@ -50,11 +56,13 @@ const Wall = () => {
         <div className="dashboard">
           <div className="close-panel" onClick={closePanel}></div>
           <div className="fade-elem"></div>
-          {panel == 'addDocPanel' && <AddDocForm />}
+          {panel == 'infoWallPanel' && <InfoWallForm />}
+          {panel == 'changeWallPanel' && <ChangeWallForm />}
           {panel == 'infoDocPanel' && <InfoDocForm />}
+          {panel == 'addDocPanel' && <AddDocForm />}
         </div>
         <div className="menu-bar">
-          <div className="icon info" panel="infoDocPanel" onClick={displayPanel}></div>
+          <div className="icon info" panel="infoWallPanel" onClick={displayPanel}></div>
           <div className="icon add" panel="addDocPanel" onClick={displayPanel}></div>
         </div>
         <div className="board-wrapper">

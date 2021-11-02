@@ -163,48 +163,6 @@ input, select, textarea, button{
   background-position: 8px center;
   background-size: 21px;
 }
-// .btn-change{
-//   width: 50px;
-//   background-image: url(#{$prodPath}/icons/pencil.png);
-//   background-repeat: no-repeat;
-//   background-size: 20px;
-//   background-position: center;
-// }
-// .btn-see{
-//   width: 50px;
-//   background-image: url(#{$prodPath}/icons/view.png);
-//   background-repeat: no-repeat;
-//   background-size: 28px;
-//   background-position: center;
-// }
-// .btn-info{
-//   width: 50px;
-//   background-image: url(#{$prodPath}/icons/info.png);
-//   background-repeat: no-repeat;
-//   background-size: 25px;
-//   background-position: center;
-// }
-// .btn-add{
-//   width: 50px;
-//   background-image: url(#{$prodPath}/icons/plus.png);
-//   background-repeat: no-repeat;
-//   background-size: 25px;
-//   background-position: center;
-// }
-// .btn-delete{
-//   width: 50px;
-//   background-image: url(#{$prodPath}/icons/cross.png);
-//   background-repeat: no-repeat;
-//   background-size: 25px;
-//   background-position: center;
-// }
-.btn-delete-txt{
-  // width: 50px;
-  // background-image: url(#{$prodPath}/icons/submit.png);
-  // background-repeat: no-repeat;
-  // background-size: 25px;
-  // background-position: center;
-}
 
 form.dark{
   margin-top: 100px;
@@ -232,6 +190,25 @@ form.dark{
     background-color:#000000;
     color:#ffffff;
     border: 1px solid #ffffff;
+  }
+  .btn-submit{
+    background-image: url(#{$prodPath}/icons/submit-neg.png);
+  }
+  
+  .btn-submit-txt{
+    background-image: url(#{$prodPath}/icons/submit-neg.png);
+  }
+  
+  .btn-change-txt{
+    background-image: url(#{$prodPath}/icons/pencil.png);
+  }
+  
+  .btn-supp-txt{
+    background-image: url(#{$prodPath}/icons/close.png);
+  }
+  
+  .fake-file{
+    background-image: url(#{$prodPath}/icons/upload.png);
   }
 }
 

@@ -2,6 +2,7 @@ export const UPDATE_DOC_PROPS = 'UPDATE_DOC_PROPS';
 export const POST_LINK = 'POST_LINK';
 export const DELETE_LINK = 'DELETE_LINK';
 export const VIEW_DOC = 'VIEW_DOC';
+export const EMPTY_FORM = 'EMPTY_FORM';
 
 export const updateDocName = (name, prop) => ({
   type: UPDATE_DOC_PROPS,
@@ -23,3 +24,8 @@ export const viewDoc = (doc) => ({
   type: VIEW_DOC,
   doc: doc,
 });
+
+export const emptyForm = (doc) => ({
+  type: EMPTY_FORM,
+  doc: doc,  
+})

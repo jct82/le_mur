@@ -52,7 +52,7 @@ const WallForm = ({ setFormOpen }) => {
           <div className="wallForm__rightContainer">
             <Select name="users" label="nom du collaborateur" value="" options={coworkers} changeInput={handleChangeInput} />
             <AddedUser users={wallCreation.users} onDeleteCoworker={handleDeleteCoworker} />
-            <button className="wallForm__submitBtn" type="submit">créer le projet<img className="wallForm__submitBtn__submitIcon" src={submit} alt="create wall" /></button>
+            <button className="btn btn-submit-txt" type="submit">créer le projet</button>
           </div>
         </div>
       </form>

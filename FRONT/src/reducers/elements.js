@@ -1,4 +1,4 @@
-import { UPDATE_DOC_PROPS, POST_LINK, DELETE_LINK, VIEW_DOC } from "src/actions/element";
+import { UPDATE_DOC_PROPS, POST_LINK, DELETE_LINK, VIEW_DOC, EMPTY_FORM } from "src/actions/element";
 
 const initialState = {
   id: 1,
@@ -10,7 +10,6 @@ const initialState = {
   link: [],
   urlSrc: '',
   OwnerId: 1,
-  detailed: false,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -55,6 +54,17 @@ const reducer = (state = initialState, action = {}) => {
         link: link,
         urlSrc: urlSrc,
         ownerId: ownerId,
+      }
+    case EMPTY_FORM :
+      const {nameF, descriptionF, typeF, linkF, urlSrcF, currentLinkF} = action.doc;
+      return{
+        ...state,
+        name: nameF,
+        description: descriptionF,
+        type: typeF,
+        link: linkF,
+        urlSrc: urlSrcF,
+        currentLink: currentLinkF,
       }
     default:
       return state;

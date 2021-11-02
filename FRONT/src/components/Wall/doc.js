@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { viewDoc } from 'src/actions/element.js'
 import { toggleEye } from 'src/actions/wall.js'
@@ -21,8 +22,20 @@ const Doc = ( {doc, user, getAction, getInfo} ) => {
     <div className={doc.ownerId == user ? "doc owned" : "doc"} >
       {doc.id == detailed && <div className="see-btn" panel={getAction} onClick={seeDoc}></div>}
       {doc.type== 'image' && <img src={doc.urlSrc} alt={doc.name} onClick={posterEye}/>}
-      {doc.type== 'texte' && <div>{doc.urlSrc}</div>}
+      {doc.type== 'texte' && <div className="doc-txt">{doc.urlSrc}</div>}
     </div>
   )
+};
+
+Doc.propTypes = {
+  doc: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    urlSrc: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
+  user: PropTypes.number.isRequired,
+  getInfo: PropTypes.func.isRequired,
+  getAction: PropTypes.string.isRequired,
 };
 export default Doc;

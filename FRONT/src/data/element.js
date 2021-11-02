@@ -1,6 +1,6 @@
 const docs = [
   {
-    id: '1',
+    id: 1,
     name: 'hotu',
     description: 'livre de simonin',
     type: 'image',
@@ -10,7 +10,7 @@ const docs = [
     ownerId: '1',
   },
   {
-    id: '2',
+    id: 2,
     name: 'rare chandeliers',
     description: 'album d Action Bronson',
     type: 'image',
@@ -20,7 +20,7 @@ const docs = [
     ownerId: '2',
   },
   {
-    id: '3',
+    id: 3,
     name: 'on',
     description: 'album d Altin Gun',
     type: 'image',
@@ -30,7 +30,7 @@ const docs = [
     ownerId: '2',
   },
   {
-    id: '4',
+    id: 4,
     name: 'Lo mato',
     description: 'album de Willie Colon et Hector Lavoe',
     type: 'image',
@@ -40,7 +40,7 @@ const docs = [
     ownerId: '1',
   },
   {
-    id: '5',
+    id: 5,
     name: 'Ubiquity',
     description: 'album de Roy Ayers',
     type: 'image',
@@ -48,6 +48,16 @@ const docs = [
     link: ['https://www.youtube.com/watch?v=nC9dQOnUyao'],
     urlSrc: 'images/test/images4.jpeg',
     ownerId: '2',
+  },
+  {
+    id: 5,
+    name: 'nike',
+    description: 'slogan',
+    type: 'texte',
+    position: '5',
+    link: ['https://fr.wikipedia.org/wiki/Just_Do_It#Description'],
+    urlSrc: 'Just do it',
+    ownerId: '4',
   },
 ];
 

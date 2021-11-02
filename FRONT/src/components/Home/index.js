@@ -1,16 +1,16 @@
-/*import React from 'react';
-import { useSelector } from 'react-redux';
-*/
-
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import Form from '../RegisterForm/Form';
 import Button from '../RegisterForm/Button';
 import './styles.scss';
 
 
 const Home = () => {
+  const logged = useSelector((state) => state.user.logged);
   return (
     <div className="home">
+      {logged && <Redirect to="/walls" />}
       <div className="white-triangle"></div>
       <div className="left_container">
         <div className="inner_container">
@@ -26,7 +26,6 @@ const Home = () => {
             <figcaption className="citation_author">Simon Sinek</figcaption>
           </div>
         </div>
-
       </div>
 
       <div className="right_container">

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 import { logUser } from '../actions/users';
 
 const authMiddleware = (store) => (next) => (action) => {
@@ -43,7 +42,6 @@ const authMiddleware = (store) => (next) => (action) => {
           console.log(response.data);
           if (response.status === 200) {
             store.dispatch(logUser(response.data));
-              <Redirect to="walls" />;
           }
         })
         .catch((error) => {

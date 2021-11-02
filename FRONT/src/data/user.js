@@ -1,4 +1,4 @@
-const docs = [
+const users = [
   {
     id: '1',
     name: 'julien',
@@ -29,4 +29,4 @@ const docs = [
   }
 ];
 
-export default docs
+export default users

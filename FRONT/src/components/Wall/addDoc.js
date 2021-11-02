@@ -24,8 +24,6 @@ const addDocForm = () => {
   }
 
   const fileChange = (e) => {
-    console.log(e.target);
-    console.log(e.target.files);
     dispatch(updateDocName(e.target.files[0].name, e.target.name));
   }
 
@@ -62,7 +60,7 @@ const addDocForm = () => {
             <button className="btn add" type="button" onClick={addLink}></button>
           </div>
           {linksListJSX}
-        </div>
+        </div>+
         <input className="btn btn-submit-txt" type="submit" value="Valider"/>
       </form>
     </div>

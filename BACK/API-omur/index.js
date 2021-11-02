@@ -17,7 +17,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 //express-session options 
-app.use(session({
+app.use(['/user/login/']
+  session({
   resave: true,
   saveUninitialized: true,
   secret: process.env.APP_SECRET,

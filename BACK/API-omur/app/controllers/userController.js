@@ -49,7 +49,8 @@ const userController = {
                 res.status(401).json({message:"non-existent email"})
             }else{
                 if (wp!=user.password){
-                 res.status(401).json({message:"password error"})   
+                 res.status(401).json({message:"password error"})  
+                 return; 
                 }else{
                      // we put them in session
                     req.session.user_id = user.id;

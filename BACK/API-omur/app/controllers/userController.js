@@ -1,6 +1,7 @@
 const datamapper = require('../datamapper');
 const User = require('../models/user');
 
+
 const userController = {
     listUsers: async function (req, res, next){
 
@@ -37,27 +38,30 @@ const userController = {
         try {
             // we get login and password from login form
             const email = req.body.email;
-            const mdp = req.body.password;
-            // we put them in session
-            req.session.email = email;
-            req.session.mdp = mdp;
-            // we get all the users registred in bdd
-            const users = await User.findAll();
-            // console.log(users);
-
-            console.log(users)
-
-            // const names = users.map(user=>user.name);
-            // console.log(names);
-
+            const wp = req.body.password;
            
+                    
+            // we get all the users registred in bdd
+            const user = await User.findByEmail(email);
+            console.log(user);
 
-            
+            if (!user){
+                res.status(401).json({message:"non-existent email"})
+            }else{
+                if (wp!=user.password){
+                 res.status(401).json({message:"password error"})   
+                }else{
+                     // we put them in session
+                    req.session.user_id = user.id;
+                    req.session.email = user.email;
+                    req.session.name = user.name;
+                    req.session.lastname = user.lastname;
+                    req.session.password = user.password;
+                }
+            } ;                       
 
-
-            res.json(req.session)
-
-            
+            res.status(200).json(req.session);
+           
 
         } catch (error) {
             console.error(error);

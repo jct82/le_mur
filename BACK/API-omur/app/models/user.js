@@ -12,7 +12,11 @@ module.exports = class User extends Core {
         return data.map(d => new User(d));
     }
 
-   
+   //static method to find one registration. available for all models
+    static async findByEmail(mail) {
+        const data = await Core.fetchOne(`SELECT * FROM "user" WHERE email = $1`, [mail]);
+        return data;
+    }
 
     // method to save a new user in database
     async save() {

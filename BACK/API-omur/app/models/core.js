@@ -44,7 +44,7 @@ module.exports = class CoreModel {
 
     //static method to find one registration. available for all models
     static async findOne(id) {
-        const data = this.fetchOne(`SELECT * FROM ${this.tableName} WHERE id = $1`, [id]);
+        const data = this.fetchOne(`SELECT * FROM ${this.tableName} WHERE "id" = $1`, [id]);
         return await new this(data);
     }
     //static method to find all registrations. available for all models

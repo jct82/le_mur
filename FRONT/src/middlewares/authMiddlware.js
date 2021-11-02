@@ -7,7 +7,7 @@ const authMiddleware = (store) => (next) => (action) => {
     case 'SUBMIT_USER_LOGIN': {
       const config = {
         method: 'post',
-        baseURL: 'http://54.196.235.242/user/',
+        baseURL: 'http:localhost:3000/user',
         url: '/login',
         data: {
           email: state.user.credentials.email,

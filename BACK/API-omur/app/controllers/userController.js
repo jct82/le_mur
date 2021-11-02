@@ -45,10 +45,7 @@ const userController = {
             const users = await User.findAll();
             // console.log(users);
 
-            for (const user of users){
-                console.log(users[name])
-            }
-;
+            console.log(users)
 
             // const names = users.map(user=>user.name);
             // console.log(names);

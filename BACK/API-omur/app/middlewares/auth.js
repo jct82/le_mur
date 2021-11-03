@@ -5,9 +5,9 @@ const auth = {
 auth: async function (req, res, next) {
 
     try {
-        console.log(req.headers);
+      
         if(!req.headers.authorization){
-            res.status(401).json({message:"unauthorized"}) 
+            res.status(401).json({message:"unauthorized"});
             return 
         }
         // we remove "bearer" from the token in order to have just the key
@@ -17,10 +17,8 @@ auth: async function (req, res, next) {
         const decodedData = await jwt.verify(token, process.env.APP_SECRET);
         // We save the id in request
         req.userId = decodedData.id;
-        console.log('req.userId : ' + req.userId)
         
-
-        next()
+          next()
 
          }catch (error) {
          console.error(error);

@@ -6,10 +6,18 @@ module.exports = class Wall extends Core {
 
    
     // method to save a new wall in database
-    async saveWall() {
+    async saveInWall(userId) {
         
-        await Core.fetchOne(`INSERT INTO "wall" (title, description) VALUES ($1, $2) RETURNING *;`,
-        [this.title, this.description]);
+        await Core.fetchOne(`INSERT INTO "wall" (title, description, owner_id) VALUES ($1, $2, $3) RETURNING *;`,
+        [this.title, this.description,userId]);
+
+           
+    }
+
+    async saveWallInParticipate(collabId) {
+        
+        await Core.fetchOne(`INSERT INTO "participate" (wall_id, user_id) VALUES ($1, $2) RETURNING *;`,
+        [this.id, collabId]);
 
            
     }

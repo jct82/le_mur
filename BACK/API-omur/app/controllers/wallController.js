@@ -16,12 +16,15 @@ const wallController = {
 
     addWall: async function (req, res, next){
 
-        console.log(req.userId);
+
+        const userId = req.userId;
+        console.log('userId : '+ userId);
 
         try {
             console.log(req.body);
             const newWall = new Wall(req.body);
-            newWall.saveWall();
+            newWall.saveInWall(userId);
+            
             res.status(200).json(newWall)
 
 

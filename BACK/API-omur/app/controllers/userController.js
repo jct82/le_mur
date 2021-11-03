@@ -39,7 +39,7 @@ const userController = {
 
     connectUser: async function (req, res, next){
 
-        console.log ('headers : ' + JSON.stringify(req.headers.authorization));
+        // console.log ('headers : ' + JSON.stringify(req.headers.authorization));
         console.log('req.userId : ' + req.userId);
 
         try {

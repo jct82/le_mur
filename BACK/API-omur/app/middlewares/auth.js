@@ -14,6 +14,7 @@ auth: async function (req, res, next) {
         const decodedData = await jwt.verify(token, process.env.APP_SECRET);
         // We save the id in request
         req.userId = decodedData.id;
+        console.log('req.userId : ' + req.userId)
         }
 
         next()

@@ -39,6 +39,8 @@ const userController = {
 
     connectUser: async function (req, res, next){
 
+        console.log ('headers : ' + req.headers);
+
         try {
             // we get login and password from login form
             const email = req.body.email;
@@ -59,6 +61,7 @@ const userController = {
                      // token generation
                      const token = jwt.sign({id:user.id, email:user.email, name:user.name, lastname:user.lastname}, 'thisisasecret', {expiresIn : '24h'})
                      res.status(200).json({result: user, token});
+                     
                 }
             } ;                       
 

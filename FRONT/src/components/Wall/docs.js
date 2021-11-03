@@ -16,7 +16,7 @@ const Docs = ( {docs, user, getAction, getInfo} ) => {
   ));
  
   return (
-    <div>
+    <div className="board">
       {docListJSX}
     </div>
   )

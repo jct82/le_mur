@@ -1,8 +1,8 @@
 import './wallForm.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import closeIcon from 'src/assets/icons/cross-neg-white.png';
-import submit from 'src/assets/icons/submit-neg.png';
+// import submit from 'src/assets/icons/submit-neg.png';
 import Input from 'src/components/inputForm/inputs';
 import PropTypes from 'prop-types';
 import Textarea from '../inputForm/textarea';
@@ -11,15 +11,21 @@ import Select from '../inputForm/select';
 import { createWallAction, deleteCoworker, storeWallInputValue } from '../../actions/walls';
 import AddedUser from './AddedUser';
 import FileInput from '../inputForm/file';
+import { getAllUsers } from '../../actions/users';
 
 // Liste en dur des collaboratueurs au projet. il faudra les récuprer du back
 const coworkers = ['julien politi', 'ariana bredon', 'michel wagner', 'antoine sauvé', 'jean-Charles Trinquet', 'etienn Pinon'];
 
 const WallForm = ({ setFormOpen }) => {
-  const [picture, setPicture] = useState();
   const dispatch = useDispatch();
+  const [picture, setPicture] = useState();
   const wallCreation = useSelector((state) => state.walls.wallCreation);
+  // const coworkers = useSelector((state)=>)
   const { title, description } = wallCreation;
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, []);
 
   const handleCloseModal = () => {
     setFormOpen((prevState) => !prevState);

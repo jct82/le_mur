@@ -1,4 +1,5 @@
-import axios from 'axios';
+// import axios from 'axios';
+import API from './api';
 
 const wallMiddleware = (store) => (next) => (action) => {
   console.log(action);
@@ -13,16 +14,16 @@ const wallMiddleware = (store) => (next) => (action) => {
       wallData.append('users', state.walls.wallCreation.users);
       const config = {
         method: 'post',
-        baseURL: 'http://54.196.235.242/user/',
-        url: '/walls',
+        // baseURL: 'http://54.196.235.242/user/',
+        url: '/user/walls',
         data: wallData,
         headers: { 'Content-Type': 'multipart/form-data' },
       };
-      axios(config)
+      API(config)
         .then((response) => {
           console.log(response, 'ok mur crée');
         })
-        .catch ((error) => {
+        .catch((error) => {
           console.error(error);
         });
       next(action);

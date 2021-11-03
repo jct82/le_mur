@@ -12,6 +12,7 @@ const initialState = {
     email: '',
     password: '',
   },
+  users: [],
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -30,10 +31,10 @@ const reducer = (state = initialState, action = {}) => {
         [action.name]: action.value,
       };
     case 'LOG_USER':
-      localStorage.setItem('profile', JSON.stringify(...action.userData));
+      localStorage.setItem('profile', JSON.stringify(action.userData.token));
       return {
         ...state,
-        loggedUserName: `${action.userData.name} ${action.userData.lastname}`,
+        loggedUserName: `${action.userData.result.name} ${action.userData.result.lastname}`,
         logged: true,
       };
     case 'DISCONNECT_USER':

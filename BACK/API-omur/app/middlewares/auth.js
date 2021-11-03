@@ -5,8 +5,6 @@ const auth = {
 auth: async function (req, res, next) {
 
     try {
-        if (req.headers.authorization){
-
         // we remove "bearer" from the token in order to have just the key
         const token = req.headers.authorization.split(" ")[1];
 
@@ -15,7 +13,7 @@ auth: async function (req, res, next) {
         // We save the id in request
         req.userId = decodedData.id;
         console.log('req.userId : ' + req.userId)
-        }
+        
 
         next()
 

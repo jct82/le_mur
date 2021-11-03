@@ -35,6 +35,10 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         loggedUserName: `${action.userData.result.name} ${action.userData.result.lastname}`,
+        credentials: {
+          email: '',
+          password: '',
+        },
         logged: true,
       };
     case 'DISCONNECT_USER':

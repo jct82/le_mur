@@ -5,6 +5,9 @@ const auth = {
 auth: async function (req, res, next) {
 
     try {
+        if(!req.headers.authorization){
+            res.status(401).json({message:"unauthorized"})  
+        }
         // we remove "bearer" from the token in order to have just the key
         const token = req.headers.authorization.split(" ")[1];
 

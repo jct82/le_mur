@@ -1,4 +1,5 @@
 const Wall = require('../models/wall');
+const multer = require('multer');
 
 const wallController = {
     listWalls: async function (req, res, next){
@@ -18,13 +19,13 @@ const wallController = {
 
 
         const userId = req.userId;
-        console.log('userId : '+ userId);
+        console.log('req.files : '+ req.files);
 
         try {
-            console.log(req.body);
+            console.log('req.files : '+ req.files);
             const newWall = new Wall(req.body);
             newWall.saveInWall(userId);
-            
+
             res.status(200).json(newWall)
 
 

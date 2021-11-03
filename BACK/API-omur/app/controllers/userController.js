@@ -24,9 +24,11 @@ const userController = {
         try {
             console.log(req.body);
             const newUser = new User(req.body);
-
-            newUser.save();
-            res.status(200).json(newUser)
+            
+            await newUser.save();
+            // token generation
+            const token = jwt.sign({id:newUser.id, email:newUser.email, name:newUser.name, lastname:newUser.lastname}, process.env.APP_SECRET, {expiresIn : '24h'});
+            res.status(200).json({newUser:newUser, token})
 
 
         } catch (error) {

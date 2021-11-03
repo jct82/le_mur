@@ -8,7 +8,7 @@ auth: async function (req, res, next) {
         if (req.headers.authorization){
 
         // we remove "bearer" from the token in order to have just the key
-        const token = req.headers.authorization.split("")[1];
+        const token = req.headers.authorization.split(" ")[1];
 
         // We verify and decode the token
         const decodedData = await jwt.verify(token, process.env.APP_SECRET);

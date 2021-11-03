@@ -1,6 +1,12 @@
+import userProfileForm from "./userProfileForm";
+import React from "react";
+
+
 const UserProfile = () => {
   return (
-    <h1>Page user profile</h1>
+    <div className="user-profile-container">
+    
+    </div>
   )
 };
 

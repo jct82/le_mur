@@ -1,4 +1,4 @@
-import Reac from 'react';
+import React from 'react';
 import { useState } from 'react';
 import FormSignup from './FormSignup';
 import './styles.scss';

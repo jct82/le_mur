@@ -6,7 +6,7 @@ import UserProfile from 'src/components/UserProfile';
 import './styles.css';
 import { Route, Switch } from 'react-router-dom';
 import MainHeader from '../MainHeader';
-
+import Footer from 'src/components/Footer';
 // == Composant
 const App = () => (
 
@@ -25,7 +25,9 @@ const App = () => (
       <Route exact path="/userprofile">
         <UserProfile />
       </Route>
+     
     </Switch>
+  <Footer />
   </div>
 );
 

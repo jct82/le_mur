@@ -1,4 +1,5 @@
 @use 'src/styles/vars';
+@use 'src/styles/index';
 
 
 
@@ -59,13 +60,13 @@
 }
 */
   .app_title {
+    margin-top: 1.5rem;
     font-size: 11vw;
     text-align: left;
   }
 
   .page_title {
-    font-family: 'Lucida';
-    font-size: 1.4vw;
+    font-size: 1.3rem;
     color: #ed9c4b;
     padding-bottom: 3%;
     padding-left: 6%;
@@ -92,25 +93,22 @@
   */
 
   .app_resume {
-    font-size: 0.9vw;
+    font-size: 1rem;
     color: #6b6b6b;
-    font-family: 'Lucida Console';
     text-align: left;
     line-height: 140%;
   }
 
   .citationTexte {
     padding-top: 5%;
-    font-size: 1vw;
+    font-size: 1rem;
     color: #414040;
-    font-family: 'Lucida';
   }
 
   .citation_author {
     padding-top: 1.5%;
     color: #6b6b6b;
-    font-size: 0.9vw;
-    font-family: 'Lucida Console';
+    font-size: 0.9rem;
   }
 }
 

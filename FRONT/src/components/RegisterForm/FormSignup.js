@@ -4,6 +4,8 @@ import useForm from './useForm';
 import infoValidate from './infoValidate';
 import { useDispatch, useSelector } from 'react-redux';
 import { storeUserRegisterInput, createUser } from '../../actions/users';
+import Input from 'src/components/inputForm/inputs';
+import PropTypes from 'prop-types';
 
 const FormSignup = ({ submitForm }) => {
   // send actions to the reducer
@@ -38,17 +40,8 @@ const FormSignup = ({ submitForm }) => {
           <label htmlFor="Prénom"
             className="form-label">
             Prénom
+            <Input type="text" name="name" className="form-input" value={user.name} onChange={handleChange} />
           </label>
-          <input
-            id="prénom"
-            type="text"
-            name="name"
-            className="form-input"
-            placeholder="Entrez votre Prénom"
-            value={user.name}
-            onChange={handleChange}
-          />
-
         </div>
 
 
@@ -62,7 +55,6 @@ const FormSignup = ({ submitForm }) => {
             type="text"
             name="lastname"
             className="form-input"
-            placeholder="Entrez votre Nom"
             value={user.lastname}
             onChange={handleChange}
           />
@@ -78,7 +70,6 @@ const FormSignup = ({ submitForm }) => {
             type="email"
             name="email"
             className="form-input"
-            placeholder="Entrez votre email"
             value={user.email}
             onChange={handleChange}
           />
@@ -95,7 +86,6 @@ const FormSignup = ({ submitForm }) => {
             type="password"
             name="password"
             className="form-input"
-            placeholder="Entrez votre mot de passe"
             value={user.password}
             onChange={handleChange}
           />
@@ -112,7 +102,6 @@ const FormSignup = ({ submitForm }) => {
             type="password2"
             name="password2"
             className="form-input"
-            placeholder="Entrez votre mot de passe"
             value={user.password2}
             onChange={handleChange}
           />
@@ -126,5 +115,8 @@ const FormSignup = ({ submitForm }) => {
   )
 }
 
-export default FormSignup
+FormSignup.propTypes = {
+  submitForm: PropTypes.func.isRequired,
+};
+export default FormSignup;
 

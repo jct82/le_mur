@@ -30,7 +30,6 @@ const userController = {
             const token = jwt.sign({id:newUser.id, email:newUser.email, name:newUser.name, lastname:newUser.lastname}, process.env.APP_SECRET, {expiresIn : '24h'});
             res.status(200).json({newUser:newUser, token})
 
-
         } catch (error) {
             console.error(error)
             if (error instanceof User.NoDataError) {

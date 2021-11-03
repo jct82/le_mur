@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { logUser } from '../actions/users';
+import API from './api';
+// const API = axios.create({ baseURL: 'http://54.196.235.242/user/' });
 
 const authMiddleware = (store) => (next) => (action) => {
   const state = store.getState();
@@ -7,17 +9,16 @@ const authMiddleware = (store) => (next) => (action) => {
     case 'SUBMIT_USER_LOGIN': {
       const config = {
         method: 'post',
-        baseURL: 'http:localhost:3000/user',
-        url: '/login',
+        // baseURL: 'http://54.196.235.242/user/',
+        url: '/user/login',
         data: {
           email: state.user.credentials.email,
           password: state.user.credentials.password,
         },
       };
-      axios(config)
+      API(config)
         .then((response) => {
-          console.log(response.data);
-          store.dispatch(logUser(response.data));
+          store.dispatch(logUser(response.data)); // renvoyer le new User name et lastName et Id.
         })
         .catch((error) => {
           console.log(error);
@@ -28,8 +29,8 @@ const authMiddleware = (store) => (next) => (action) => {
     case 'CREATE_USER': {
       const config = {
         method: 'post',
-        baseURL: 'http://54.196.235.242/user/',
-        url: '/register',
+        // baseURL: 'http://54.196.235.242/user/',
+        url: '/user/register',
         data: {
           name: state.user.name,
           lastname: state.user.lastname,
@@ -37,7 +38,7 @@ const authMiddleware = (store) => (next) => (action) => {
           password: state.user.password,
         },
       };
-      axios(config)
+      API(config)
         .then((response) => {
           console.log(response.data);
           if (response.status === 200) {

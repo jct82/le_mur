@@ -30,12 +30,14 @@ const reducer = (state = initialState, action = {}) => {
         [action.name]: action.value,
       };
     case 'LOG_USER':
+      localStorage.setItem('profile', JSON.stringify(...action.userData));
       return {
         ...state,
         loggedUserName: `${action.userData.name} ${action.userData.lastname}`,
         logged: true,
       };
     case 'DISCONNECT_USER':
+      localStorage.clear();
       return {
         ...state,
         loggedUserName: '',

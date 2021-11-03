@@ -1,5 +1,8 @@
 const datamapper = require('../datamapper');
 const User = require('../models/user');
+// jwt token initialization
+const jwt = require('jsonwebtoken');
+
 
 
 const userController = {
@@ -21,6 +24,7 @@ const userController = {
         try {
             console.log(req.body);
             const newUser = new User(req.body);
+
             newUser.save();
             res.status(200).json(newUser)
 
@@ -52,16 +56,13 @@ const userController = {
                  res.status(401).json({message:"password error"})  
                  return; 
                 }else{
-                     // we put them in session
-                    req.session.user_id = user.id;
-                    req.session.email = user.email;
-                    req.session.name = user.name;
-                    req.session.lastname = user.lastname;
-                    req.session.password = user.password;
+                     // token generation
+                     const token = jwt.sign({id:user.id, email:user.email, name:user.name, lastname:user.lastname}, 'thisisasecret', {expiresIn : '24h'})
+                     res.status(200).json({result: user, token});
                 }
             } ;                       
 
-            res.status(200).json(req.session);
+            
            
 
         } catch (error) {

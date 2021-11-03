@@ -4,7 +4,7 @@ console.log(dotenv)
 //express initialization
 const express = require("express");
 //express-session initialization
-const session = require('express-session');
+//const session = require('express-session');
 
 const app = express();
 
@@ -16,6 +16,7 @@ app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+/*
 //express-session options 
 app.use(session({
   resave: true,
@@ -26,6 +27,7 @@ app.use(session({
     maxAge: (24*30*1000*60*60) // one month
   }
 }));
+*/
 
 // router initialization
 const router = require("./app/router");

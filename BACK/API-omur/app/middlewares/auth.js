@@ -5,6 +5,7 @@ const auth = {
 auth: async function (req, res, next) {
 
     try {
+        console.log(req.headers);
         if(!req.headers.authorization){
             res.status(401).json({message:"unauthorized"})  
         }

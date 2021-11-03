@@ -60,7 +60,7 @@ const addDocForm = () => {
             <button className="btn add" type="button" onClick={addLink}></button>
           </div>
           {linksListJSX}
-        </div>+
+        </div>
         <input className="btn btn-submit-txt" type="submit" value="Valider"/>
       </form>
     </div>

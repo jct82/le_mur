@@ -5,6 +5,7 @@ import user from 'src/data/user';
 import { emptyForm } from 'src/actions/element.js'
 import { changePanel, toggleEye } from 'src/actions/wall.js'
 import Docs from './docs';
+// import Docs from '../Test/docs';
 import AddDocForm from './addDoc';
 import InfoDocForm from './infoDoc';
 import ChangeWallForm from './changeWall';
@@ -66,9 +67,7 @@ const Wall = () => {
           <div className="icon add" panel="addDocPanel" onClick={displayPanel}></div>
         </div>
         <div className="board-wrapper">
-          <div className="board">
-            <Docs docs={wallDoc} user={currentUser} getAction="infoDocPanel" getInfo={displayPanel} />
-          </div>
+          <Docs docs={wallDoc} user={currentUser} getAction="infoDocPanel" getInfo={displayPanel} />
         </div>
       </div>
     </div>

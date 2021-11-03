@@ -16,6 +16,8 @@ const wallController = {
 
     addWall: async function (req, res, next){
 
+        console.log(req.userId);
+
         try {
             console.log(req.body);
             const newWall = new Wall(req.body);

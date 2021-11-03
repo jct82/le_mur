@@ -39,7 +39,8 @@ const userController = {
 
     connectUser: async function (req, res, next){
 
-        console.log ('headers : ' + req.headers);
+        console.log ('headers : ' + JSON.stringify(req.headers.authorization));
+        console.log('req.userId : ' + req.userId);
 
         try {
             // we get login and password from login form
@@ -59,8 +60,8 @@ const userController = {
                  return; 
                 }else{
                      // token generation
-                     const token = jwt.sign({id:user.id, email:user.email, name:user.name, lastname:user.lastname}, 'thisisasecret', {expiresIn : '24h'})
-                     res.status(200).json({result: user, token});
+                     const token = jwt.sign({id:user.id, email:user.email, name:user.name, lastname:user.lastname}, process.env.APP_SECRET, {expiresIn : '24h'})
+                     res.status(200).json({result: user.email, token});
                      
                 }
             } ;                       

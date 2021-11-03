@@ -19,10 +19,10 @@ const wallController = {
 
 
         const userId = req.userId;
-        console.log('req.files : '+ req.files);
+        
 
         try {
-            console.log('req.files : '+ req.files);
+            console.log('req.body : '+ req.body);
             const newWall = new Wall(req.body);
             newWall.saveInWall(userId);
 

@@ -43,6 +43,7 @@ const authMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data);
           if (response.status === 200) {
+            console.log(response.data);
             store.dispatch(logUser(response.data));
           }
         })

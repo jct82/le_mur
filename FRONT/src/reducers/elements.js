@@ -8,8 +8,8 @@ const initialState = {
   position: 1,
   currentLink: '',
   link: [],
-  urlSrc: '',
-  OwnerId: 1,
+  src: '',
+  ownerid: 1,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -44,7 +44,7 @@ const reducer = (state = initialState, action = {}) => {
       }
     }
     case VIEW_DOC :
-      const {id, name, description, type, link, urlSrc, ownerId} = action.doc;
+      const {id, name, description, type, link, src, ownerid} = action.doc;
       return{
         ...state,
         id: id,
@@ -52,18 +52,18 @@ const reducer = (state = initialState, action = {}) => {
         description: description,
         type: type,
         link: link,
-        urlSrc: urlSrc,
-        ownerId: ownerId,
+        src: src,
+        ownerid: ownerid,
       }
     case EMPTY_FORM :
-      const {nameF, descriptionF, typeF, linkF, urlSrcF, currentLinkF} = action.doc;
+      const {nameF, descriptionF, typeF, linkF, srcF, currentLinkF} = action.doc;
       return{
         ...state,
         name: nameF,
         description: descriptionF,
         type: typeF,
         link: linkF,
-        urlSrc: urlSrcF,
+        src: srcF,
         currentLink: currentLinkF,
       }
     default:

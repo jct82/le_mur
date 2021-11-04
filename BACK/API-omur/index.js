@@ -8,13 +8,20 @@ const express = require("express");
 
 const app = express();
 
+
 // using cors to allow connecting from anywhere
 const cors = require('cors');
-app.use(cors());
 
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(cors({
+  // origin: "http://localhost:3000/",
+  credentials:true,
+
+  allowedHeaders: ["authorization", "Content-Type"],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
+}));
 
 /*
 //express-session options 

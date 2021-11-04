@@ -5,37 +5,56 @@ import { toggleEye } from 'src/actions/wall.js'
 
 import './style.scss';
 
-const Doc = ( {doc, user, getAction, getInfo} ) => {
+
+const imgWithClick = { cursor: "pointer" };
+
+const Doc = ({ photo, margin, direction, top, left }) => {
   const dispatch = useDispatch();
   const detailed = useSelector((state) => state.wall.detailed);
 
+  const imgStyle = { margin: margin };
+  if (direction === "column") {
+    imgStyle.position = "absolute";
+    imgStyle.left = left;
+    imgStyle.top = top;
+  }
+
   const posterEye = () => {
-    doc.id == detailed ? dispatch(toggleEye(-1)) : dispatch(toggleEye(doc.id));
+    photo.id == detailed ? dispatch(toggleEye(-1)) : dispatch(toggleEye(photo.id));
   }
 
   const seeDoc = (e) => {
-    dispatch(viewDoc(doc));
-    getInfo(e);
+    dispatch(viewDoc({id:photo.id, name:photo.name, description:photo.description, type:photo.type, link:photo.link, src:photo.src, ownerid:photo.ownerid}));
+    photo.getInfo(e);
   }
- 
+
+  // const arrayElem = Array.from(event.target.parentNode.children);
+  // arrayElem.forEach((elem, index) => {
+    
+  // });
+  const handleClick = event => {
+    // onClick(event, { photo, index });
+  };
+
   return (
-    <div className={doc.ownerId == user ? "doc owned" : "doc"} >
-      {doc.id == detailed && <div className="see-btn" panel={getAction} onClick={seeDoc}></div>}
-      {doc.type== 'image' && <img src={doc.urlSrc} alt={doc.name} onClick={posterEye}/>}
-      {doc.type== 'texte' && <div className="doc-txt">{doc.urlSrc}</div>}
+    <div className={photo.ownerid == photo.user ? "doc owned" : "doc"} onClick={handleClick}>
+      {photo.id == detailed && <div className="see-btn" panel={photo.getAction} onClick={seeDoc}></div>}
+      {photo.type== 'image' && <img src={photo.src} alt={photo.name} onClick={posterEye}/>}
+      {photo.type== 'texte' && <div className="doc-txt" onClick={posterEye}>{photo.src}</div>}
     </div>
-  )
+  );
 };
 
 Doc.propTypes = {
-  doc: PropTypes.shape({
+  photo: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    urlSrc: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
+    user: PropTypes.number.isRequired,
+    getInfo: PropTypes.func.isRequired,
+    getAction: PropTypes.string.isRequired,
   }).isRequired,
-  user: PropTypes.number.isRequired,
-  getInfo: PropTypes.func.isRequired,
-  getAction: PropTypes.string.isRequired,
+  
 };
 export default Doc;

@@ -12,10 +12,11 @@ const initialState = {
     email: '',
     password: '',
   },
-  users: [],
+  users: '',
 };
 
 const reducer = (state = initialState, action = {}) => {
+  console.log(action);
   switch (action.type) {
     case 'STORE_USER_LOGIN_INPUT':
       return {
@@ -35,6 +36,10 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         loggedUserName: `${action.userData.result.name} ${action.userData.result.lastname}`,
+        credentials: {
+          email: '',
+          password: '',
+        },
         logged: true,
       };
     case 'DISCONNECT_USER':
@@ -43,6 +48,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         loggedUserName: '',
         logged: false,
+      };
+    case 'STORE_USERS':
+      return {
+        ...state,
+        users: [...action.users],
       };
     default:
       return state;

@@ -5,7 +5,6 @@ import user from 'src/data/user';
 import { emptyForm } from 'src/actions/element.js'
 import { changePanel, toggleEye } from 'src/actions/wall.js'
 import Docs from './docs';
-// import Docs from '../Test/docs';
 import AddDocForm from './addDoc';
 import InfoDocForm from './infoDoc';
 import ChangeWallForm from './changeWall';
@@ -29,7 +28,7 @@ const Wall = () => {
   const closePanel = () => {
     document.querySelector('.main').classList.remove('on');
     setTimeout(() => {
-      dispatch(emptyForm({nameF: '', descriptionF: '', typeF : '', linkF: [], urlSrcF: '', currentLinkF: ''}));
+      dispatch(emptyForm({nameF: '', descriptionF: '', typeF : '', linkF: [], srcF: '', currentLinkF: ''}));
     },500);
   }
 

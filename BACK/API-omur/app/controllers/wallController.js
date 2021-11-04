@@ -33,13 +33,14 @@ const wallController = {
             const wall = await Wall.findByTitle(req.body.title);
             const wallId = wall.id;
             // We save wallId and collabId in "participate" table            
-            const collabIds = [(req.body.users).replace("'","")];
+            const collabIdsInit = (req.body.users).split(',');
+            const collabIds = collabIdsInit.map(id => parseInt(id));
             console.log(collabIds)
 
-            // for (const collab of collabIds){
-            //     collabId = parseInt(collab);
-            //     await newWall.saveWallInParticipate(wallId,collabId);
-            // }
+            for (const collab of collabIds){
+                collabId = parseInt(collab);
+                await newWall.saveWallInParticipate(wallId,collabId);
+            }
 
             
             res.status(200).json(newWall)

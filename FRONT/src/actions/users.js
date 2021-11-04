@@ -21,3 +21,11 @@ export const submitUserLogin = () => (
 export const disconnectUser = () => (
   { type: 'DISCONNECT_USER' }
 );
+
+export const getAllUsers = () => (
+  { type: 'GET_ALL_USERS' }
+);
+
+export const storeAllUsers = (users) => (
+  { type: 'STORE_USERS', users }
+);

@@ -16,27 +16,41 @@ const wallController = {
 
     addWall: async function (req, res){
 
-        console.log('req.body : '+ JSON.stringify(req.body));
-        console.log('req.file: '+ JSON.stringify(req.file));
-
         const userId = req.userId;
-        
+        console.log('userId : '+ userId)
 
-        // try {
+        try {
             
-        //     console.log('req.body : '+ req.body);
-        //     const newWall = new Wall(req.body);
-        //     await newWall.saveInWall(userId);
+            console.log('req.body : '+ JSON.stringify(req.body));
+            console.log('req.file: '+ JSON.stringify(req.file));
+            // we get the path of the photo and insert it in req.body
+            req.body.photo = req.file.path;
+            // We create a new instance of Wall and save it in database
+            const newWall = new Wall(req.body);
+            console.log(newWall);
+            await newWall.saveInWall(userId);
+            // We get the new wall id in database
+            const wall = await Wall.findByTitle(req.body.title);
+            const wallId = wall.id;
+            // We save wallId and collabId in "participate" table            
+            const collabIds = [(req.body.users).replace("'","")];
+            console.log(collabIds)
 
-        //     res.status(200).json(newWall)
+            // for (const collab of collabIds){
+            //     collabId = parseInt(collab);
+            //     await newWall.saveWallInParticipate(wallId,collabId);
+            // }
+
+            
+            res.status(200).json(newWall)
 
 
-        // } catch (error) {
-        //     console.error(error)
-        //     if (error instanceof User.NoDataError) {
-        //         return res.status(404).json(error.message)
-        //     }
-        // }
+        } catch (error) {
+            console.error(error)
+            if (error instanceof Wall.NoDataError) {
+                return res.status(404).json(error.message)
+            }
+        }
     },
 
 }

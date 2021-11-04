@@ -3,8 +3,9 @@ const multer = require("multer");
 
 
 const storage = multer.diskStorage({
+    // folder storage
     destination:  "public",
-
+    //file name with extension
     filename: function (req, file, cb) {
       let extension;
       if (file.mimetype == 'image/png') extension = 'png';

@@ -12,9 +12,10 @@ const wallController = require('./controllers/wallController');
 
 // user roads details 
 router.get('/user/list', auth.auth, userController.listUsers);
-router.get('/user/walls',auth.auth, wallController.listWalls);
 router.post('/user/register', userController.addUser);
 router.post('/user/login', userController.connectUser);
+// wall roads details
+router.get('/user/walls',auth.auth, wallController.listWalls);
 router.post('/user/walls',auth.auth,multerModule.single("photo"), wallController.addWall)
 
 

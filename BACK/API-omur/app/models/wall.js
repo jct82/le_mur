@@ -4,20 +4,26 @@ module.exports = class Wall extends Core {
 
     static tableName = 'wall';
 
+    //static method to find a wall by title
+    static async findByTitle(title) {
+        const data = await Core.fetchOne(`SELECT * FROM "wall" WHERE title = $1`, [title]);
+        return data;
+    }
+
    
     // method to save a new wall in database
     async saveInWall(userId) {
         
-        await Core.fetchOne(`INSERT INTO "wall" (title, description, owner_id) VALUES ($1, $2, $3) RETURNING *;`,
-        [this.title, this.description,userId]);
+        await Core.fetchOne(`INSERT INTO "wall" (title, description, photo, owner_id) VALUES ($1, $2, $3, $4) RETURNING *;`,
+        [this.title, this.description, this.photo,userId]);
 
            
     }
-
-    async saveWallInParticipate(collabId) {
+    // method to save a wall_id and collab_id in "participate" in database
+    async saveWallInParticipate(wallId,collabId) {
         
         await Core.fetchOne(`INSERT INTO "participate" (wall_id, user_id) VALUES ($1, $2) RETURNING *;`,
-        [this.id, collabId]);
+        [wallId, collabId]);
 
            
     }

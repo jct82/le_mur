@@ -18,7 +18,7 @@ const wallController = {
 
         console.log('req.body : '+ JSON.stringify(req.body));
         console.log('req.file: '+ JSON.stringify(req.file));
-
+        console.log(req.body.users)
         const userId = req.userId;
         
 

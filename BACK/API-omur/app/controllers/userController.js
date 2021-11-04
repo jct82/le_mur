@@ -28,7 +28,7 @@ const userController = {
             await newUser.save();
             // token generation
             const token = jwt.sign({id:newUser.id, email:newUser.email, name:newUser.name, lastname:newUser.lastname}, process.env.APP_SECRET, {expiresIn : '24h'});
-            res.status(200).json({newUser:newUser, token})
+            res.status(200).json({result:{id:newUser.id, name:newUser.name, lastname:newUser.lastname}, token})
 
 
         } catch (error) {
@@ -63,7 +63,7 @@ const userController = {
                 }else{
                      // token generation
                      const token = jwt.sign({id:user.id, email:user.email, name:user.name, lastname:user.lastname}, process.env.APP_SECRET, {expiresIn : '24h'})
-                     res.status(200).json({result: user.email, token});
+                     res.status(200).json({result:{id:user.id, name:user.name, lastname:user.lastname},token});
                      
                 }
             } ;                       

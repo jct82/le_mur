@@ -1,7 +1,7 @@
 const Wall = require('../models/wall');
 
 const wallController = {
-    listWalls: async function (req, res, next){
+    listWalls: async function (req, res){
 
         try {
             const walls = await Wall.findAll();
@@ -14,7 +14,7 @@ const wallController = {
         }
     },
 
-    addWall: async function (req, res, next){
+    addWall: async function (req, res){
 
         console.log('req.body : '+ JSON.stringify(req.body));
         console.log('req.file: '+ JSON.stringify(req.file));

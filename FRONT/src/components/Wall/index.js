@@ -28,7 +28,7 @@ const Wall = () => {
   const closePanel = () => {
     document.querySelector('.main').classList.remove('on');
     setTimeout(() => {
-      dispatch(emptyForm({nameF: '', descriptionF: '', typeF : '', linkF: [], urlSrcF: '', currentLinkF: ''}));
+      dispatch(emptyForm({nameF: '', descriptionF: '', typeF : '', linkF: [], srcF: '', currentLinkF: ''}));
     },500);
   }
 
@@ -66,9 +66,7 @@ const Wall = () => {
           <div className="icon add" panel="addDocPanel" onClick={displayPanel}></div>
         </div>
         <div className="board-wrapper">
-          <div className="board">
-            <Docs docs={wallDoc} user={currentUser} getAction="infoDocPanel" getInfo={displayPanel} />
-          </div>
+          <Docs docs={wallDoc} user={currentUser} getAction="infoDocPanel" getInfo={displayPanel} />
         </div>
       </div>
     </div>

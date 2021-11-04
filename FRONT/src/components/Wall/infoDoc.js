@@ -6,7 +6,7 @@ import './style.scss';
 const infoDocForm = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.id);
-  const {  name, description, type, urlSrc, link, ownerId } = useSelector((state) => state.elements);
+  const {  name, description, type, src, link, ownerid } = useSelector((state) => state.elements);
 
   const changeForm= () => {
     const fadeElem = document.querySelector('.fade-elem')
@@ -32,7 +32,7 @@ const infoDocForm = () => {
       </div>
       <div className="info-block">
         <label>Document :</label><span>{type}</span>
-        {type == 'image' ? <img src={urlSrc} /> : <p>{urlSrc}</p>}
+        {type == 'image' ? <img src={src} /> : <p>{src}</p>}
       </div>
       <div className="info-block">
         <label>Liens :</label>
@@ -40,7 +40,7 @@ const infoDocForm = () => {
           {link.map((item) => (<li key={item}><a href={item} target="_blank" className="block">{item}</a></li>))}
         </ul>
       </div>
-      {ownerId == user && 
+      {ownerid == user && 
         <div className="user-btn-block">
           <button className="btn btn-change-txt" type="button" onClick={changeForm}>Modifier</button>
           <button className="btn btn-supp-txt" type="button">Supprimer</button>

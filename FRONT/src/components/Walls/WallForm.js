@@ -1,8 +1,8 @@
 import './wallForm.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import closeIcon from 'src/assets/icons/cross-neg-white.png';
-import submit from 'src/assets/icons/submit-neg.png';
+// import submit from 'src/assets/icons/submit-neg.png';
 import Input from 'src/components/inputForm/inputs';
 import PropTypes from 'prop-types';
 import Textarea from '../inputForm/textarea';
@@ -11,14 +11,20 @@ import Select from '../inputForm/select';
 import { createWallAction, deleteCoworker, storeWallInputValue } from '../../actions/walls';
 import AddedUser from './AddedUser';
 import FileInput from '../inputForm/file';
+import { getAllUsers } from '../../actions/users';
+import SelectUser from '../inputForm/SelectUser';
 
 // Liste en dur des collaboratueurs au projet. il faudra les récuprer du back
-const coworkers = ['julien politi', 'ariana bredon', 'michel wagner', 'antoine sauvé', 'jean-Charles Trinquet', 'etienn Pinon'];
+// const coworkers = ['julien politi', 'ariana bredon', 'michel wagner', 'antoine sauvé', 'jean-Charles Trinquet', 'etienn Pinon'];
+// const coworkers = [{ id: 1, name: 'julien politi' }, { id: 2, name: 'ariana bredon' }];
 
 const WallForm = ({ setFormOpen }) => {
-  const [picture, setPicture] = useState();
   const dispatch = useDispatch();
+  const [picture, setPicture] = useState();
   const wallCreation = useSelector((state) => state.walls.wallCreation);
+  // const coworkerss = useSelector((state) => state.user.users);
+  const coworkers = useSelector((state) => state.user.users.map((user) => user.name));
+  // if (coworkerss)console.log(coworkerss);
   const { title, description } = wallCreation;
 
   const handleCloseModal = () => {
@@ -40,7 +46,7 @@ const WallForm = ({ setFormOpen }) => {
   };
   return (
     <>
-      <form className="wallForm dark" type="submit" onSubmit={handleSubmitForm}>
+      <form className="wallForm dark" type="submit" onSubmit={handleSubmitForm} encType="multipart/form-data">
         <h1 className="wallForm__title">Nouveau mur</h1>
         <div className="wallForm__container">
           <div className="wallForm__leftContainer">
@@ -50,7 +56,7 @@ const WallForm = ({ setFormOpen }) => {
             <FileInput type="file" name="photo" changeInput={handleChangePicture} value="" label="upload picture" />
           </div>
           <div className="wallForm__rightContainer">
-            <Select name="users" label="nom du collaborateur" value="" options={coworkers} changeInput={handleChangeInput} />
+            { coworkers && <Select name="users" label="nom du collaborateur" value="" options={coworkers} changeInput={handleChangeInput} /> }
             <AddedUser users={wallCreation.users} onDeleteCoworker={handleDeleteCoworker} />
             <button className="btn btn-submit-txt" type="submit">créer le projet</button>
           </div>

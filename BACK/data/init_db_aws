@@ -1,0 +1,14 @@
+# pour se connecter au serveur distant AWS
+# ssh ubuntu@54.196.235.242
+
+
+# je mets en place sqitch
+cd migrations
+sqitch init omur --engine pg
+sqitch add init -n "création de la structure de base"
+
+
+# je déploie en appelant mon script de déploiement
+bash sqitch_revert
+bash sqitch_deploy
+bash sqitch_verify

@@ -210,6 +210,15 @@ form.dark{
   .fake-file{
     background-image: url(#{$prodPath}/icons/upload.png);
   }
+
+  ::-webkit-scrollbar-track {
+    background: #1f1f1f;
+  }
+  
+  
+  ::-webkit-scrollbar-thumb {
+    background: #ffffff;
+  }
 }
 
 input[type="file"]{

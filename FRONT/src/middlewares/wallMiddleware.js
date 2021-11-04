@@ -1,28 +1,38 @@
-import axios from 'axios';
+// import axios from 'axios';
+import API from './api';
 
 const wallMiddleware = (store) => (next) => (action) => {
   console.log(action);
   const state = store.getState();
   switch (action.type) {
     case 'CREATE_WALL': {
-      // TODO creation du formadata
+      // TODO on va chercher dans le store la liste de tous les utilisateurs
+      // ( allUsers) et les users du mur (wallUsers)
+      const wallUsers = state.walls.wallCreation.users;
+      const allUser = state.user.users;
+
+      // apres on va récupérer l'id des utilisateurs
+      // du mur en comparant avec la liste de tout les utilisateurs
+      const usersId = wallUsers.map((user) => allUser.filter((oneUser) => oneUser.name === user));
+      const wallUserIds = usersId.map((user) => user[0].id);
+
+      // on crée un formData à envoyer au back
       const wallData = new FormData();
       wallData.append('photo', action.picture);
       wallData.append('title', state.walls.wallCreation.title);
       wallData.append('description', state.walls.wallCreation.description);
-      wallData.append('users', state.walls.wallCreation.users);
+      wallData.append('users', wallUserIds);
       const config = {
         method: 'post',
-        baseURL: 'http://54.196.235.242/user/',
-        url: '/walls',
+        url: '/user/walls',
         data: wallData,
         headers: { 'Content-Type': 'multipart/form-data' },
       };
-      axios(config)
+      API(config)
         .then((response) => {
           console.log(response, 'ok mur crée');
         })
-        .catch ((error) => {
+        .catch((error) => {
           console.error(error);
         });
       next(action);

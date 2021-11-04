@@ -33,65 +33,45 @@ const FormSignup = ({ submitForm }) => {
 
   return (
     <div className="form-content-right">
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form dark" onSubmit={handleSubmit}>
         <h1>S'inscrire</h1>
 
         <div className="form-inputs">
-          <label htmlFor="Prénom"
-            className="form-label">
-            Prénom
-            <Input type="text" name="name" className="form-input" value={user.name} onChange={handleChange} />
-          </label>
+          <Input type="text" name="name" value={user.name} changeInput={handleChange} label="Prénom" />
         </div>
 
-
         <div className="form-inputs">
-          <label htmlFor="nom"
-            className="form-label">
-            Nom
-          </label>
-          <input
-            id="nom"
+          <Input
             type="text"
             name="lastname"
-            className="form-input"
             value={user.lastname}
-            onChange={handleChange}
+            changeInput={handleChange}
+            label="Nom"
           />
-
         </div>
+
         <div className="form-inputs">
-          <label htmlFor="Email"
-            className="form-label">
-            Email
-          </label>
-          <input
-            id="email"
+          <Input
             type="email"
             name="email"
-            className="form-input"
             value={user.email}
-            onChange={handleChange}
+            changeInput={handleChange}
+            label="Email"
           />
 
         </div>
 
         <div className="form-inputs">
-          <label htmlFor="Password"
-            className="form-label">
-            Mot de passe
-          </label>
-          <input
-            id="password"
+          <Input
             type="password"
             name="password"
-            className="form-input"
             value={user.password}
-            onChange={handleChange}
+            changeInput={handleChange}
+            label="Mot de passe"
           />
 
         </div>
-
+        {/*
         <div className="form-inputs">
           <label htmlFor="Password2"
             className="form-label">
@@ -107,9 +87,8 @@ const FormSignup = ({ submitForm }) => {
           />
 
         </div>
-        <button className="from-input-btn" type="submit">
-          <span className="submit.png"></span>Enregistrer
-        </button>
+        */}
+        <button className="btn btn-submit-txt" type="submit">S'inscrire</button>
       </form>
     </div>
   )

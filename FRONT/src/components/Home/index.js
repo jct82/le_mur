@@ -18,7 +18,7 @@ const Home = () => {
           <div className="presentation">
           <div className="triangle"></div>
             <h2 className="page_title">Un espace de travail collaboratif</h2>
-            <p className="app_resume">C'est un espace de mise en commum d'idées visuelles qui vise à reproduire à distance l'expérience physique de la rencontre entre plusieurs créatifs, qui épingleraient sur un mur des images d'inspiration.</p>
+            <p className="app_resume">C'est un espace de mise en commun d'idées visuelles qui vise à reproduire à distance l'expérience physique de la rencontre entre plusieurs créatifs, qui épingleraient sur un mur des images d'inspiration.</p>
 
             <blockquote className="citation">
               <p className></p>

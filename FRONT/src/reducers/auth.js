@@ -54,6 +54,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         users: [...action.users],
       };
+      // case 'UPDATE_USERS':
+      // return {
+      //  ...state,
+      //  [action.name]: action.value,
+      //  };
     default:
       return state;
   }

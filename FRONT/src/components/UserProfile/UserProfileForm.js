@@ -1,129 +1,103 @@
-import react, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
+// form signup with 
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { storeUserRegisterInput, createUser } from '../../actions/users';
 import Input from 'src/components/inputForm/inputs';
-//import axios from 'axios';
-//import { useParams } from 'react-router-dom';
-//import Placeholder from './Placeholder';
+import PropTypes from 'prop-types';
 
-/*const INITIAL_STATE = {
-  name: 0,
-  lastname: "",
-};
-*/
-const userProfileForm = ({ changeToFalse }) => {
-
+const UserProfileForm = ({ submitProfileForm }) => {
+  // send actions to the reducer
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user)
-  const handleSubmit = () => {
+
+
+  const handleChange = (event) => {
+    console.log(event.target.value)
+    console.log(event.target.name)
+    const inputName = event.target.name
+    const inputValue = event.target.value
+    dispatch(storeUserRegisterInput(inputName, inputValue))
+  }
+  /* const updateProfile = (event) => {
+    event.preventDefault();
+    dispatch(updateUser())
+  }
+  */
+ /* met les info utilis
+ const user.name = useSelector((state) => state.user.name)
+ const {} = user.name;
+ */
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(createUser())
   }
 
-  const [name, setName ] = useState("");
-  const [lastname, setLastname ] = useState("");
-  // database call
-  /*useEffet(() => {
-    const userProfileForm = () => {
-
-    }
-  },[])
-  /*
-  const [user, setUser] = useState(INITIAL_STATE)
-  useEffect(() => {
-    (async () => {
-      try {
-        const user = await axios.get(
-          // data bidon
-          "https://jsonplaceholder.typicode.com/users/1"
-        );
-        setUser(user.data);
-      } catch (error) {
-        console.log(error)
-      }
-    })();
-  }, []);
-
-  const handleChange = (e) => {
-    console.log(e.target.name, " : ", e.target.value);
-    setUser({ ...user, [e.target.name ]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      console.log("Data for update : ", user);
-      const response = await axios.put(/*end point here)
-    }catch (error) {
-      console.log(error);
-    }
-  };
-*/
-return (
-  <div className="edit-container">
-    
-    <form className="form dark" onSubmit={handleSubmit}>
-    <h1>Modifier votre profil</h1>
-      <Input
-        type="text"
-        name="name"
-        value={user.name}
-        changeInput={handleSubmit}
-        label="Prénom"
-        onChange={event=>setName(event.target.value)}
-      />
-      <Input
-        type="text"
-        name="lastname"
-        value={user.lastname}
-        changeInput={handleSubmit}
-        label="Nom"
-      />
-      <Input
-        type="email"
-        name="lastname"
-        value={user.email}
-        changeInput={handleSubmit}
-        label="Email"
-      />
-      <Input 
-      type="password"
-      name="password"
-      value={user.password}
-      changeInput={handleSubmit}
-      label="Mot de passe"
-      />
-    </form>
-    <button className="btn btn-submit-txt" type="submit" onClick={userProfileForm}>Enregistrer</button>
-  </div>
-)
-};
-
-/*
-const userProfileForm = ({ editForm }) => 
-
-{const handleChange = () => {
-  const user = useSelector(state => state.user)
-};
-
-const handleSubmit = () => {
-
-};
   return (
-    <div className="edit-form">
+    <div className="form-content-right">
       <form className="form dark" onSubmit={handleSubmit}>
-      <div>Prénom: {user.name}</div>
-      <div>Nom: {user.lastname}</div>
-      <div>Email: {user.email}</div>
+        <h1>Modifier Votre Profil</h1>
+
+        <div className="form-inputs">
+          <Input type="text" name="name" value={user.name} changeInput={handleChange} label="Prénom" />
+        </div>
+
+        <div className="form-inputs">
+          <Input
+            type="text"
+            name="lastname"
+            value={user.lastname}
+            changeInput={handleChange}
+            label="Nom"
+          />
+        </div>
+
+        <div className="form-inputs">
+          <Input
+            type="email"
+            name="email"
+            value={user.email}
+            changeInput={handleChange}
+            label="Email"
+          />
+
+        </div>
+
+        <div className="form-inputs">
+          <Input
+            type="password"
+            name="password"
+            value={user.password}
+            changeInput={handleChange}
+            label="Mot de passe"
+          />
+
+        </div>
+        {/*
+        <div className="form-inputs">
+          <label htmlFor="Password2"
+            className="form-label">
+            Confirmez votre mot de passe
+          </label>
+          <input
+            id="password2"
+            type="password2"
+            name="password2"
+            className="form-input"
+            value={user.password2}
+            onChange={handleChange}
+          />
+
+        </div>
+        */}
+        <button className="btn btn-submit-txt" type="submit">Enregistrer</button>
       </form>
     </div>
-  );
+  )
 }
-*/
 
-/* 
-const mapStateToProps = state => ({
-  data: state.data
-})
-*/
-userProfileForm.propTypes = {
+UserProfileForm.propTypes = {
   userProfileForm: PropTypes.func.isRequired,
 };
-export default userProfileForm;
+export default UserProfileForm;
+

@@ -32,18 +32,18 @@ const wallController = {
             // We get the new wall id in database
             const wall = await Wall.findByTitle(req.body.title);
             const wallId = wall.id;
-            // We save wallId and collabId in "participate" table            
+            // We transform req.body.users into an array of integers         
             const collabIdsInit = (req.body.users).split(',');
             const collabIds = collabIdsInit.map(id => parseInt(id));
-            console.log(collabIds)
-
+            
+            // We save wallId and collabId in "participate" table 
             for (const collab of collabIds){
                 collabId = parseInt(collab);
                 await newWall.saveWallInParticipate(wallId,collabId);
             }
 
             
-            res.status(200).json(newWall)
+            res.status(200).json({result: {wall_id:wallId, collabs_is:collabIds},newWall})
 
 
         } catch (error) {

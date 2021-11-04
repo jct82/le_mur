@@ -1,14 +1,20 @@
 import './walls.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Plus from 'src/assets/icons/plus-neg.png';
 import WallsCards from './WallsCards';
 import WallForm from './WallForm';
+import { getAllUsers } from '../../actions/users';
 
 const Walls = () => {
+  const dispatch = useDispatch();
   const [isFormOpen, setFormOpen] = useState(false);
   const handleOpenForm = () => {
     setFormOpen(!isFormOpen);
   };
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, []);
   return (
     <div className="projects">
       <div className="projects__title">

@@ -9,7 +9,7 @@ import './style.scss';
 
 const addDocForm = () => {
   const dispatch = useDispatch();
-  const { name, description, type, currentLink, link, urlSrc } = useSelector((state) => state.elements);
+  const { name, description, type, currentLink, link, src } = useSelector((state) => state.elements);
 
   const inputChange = (e) => {
     dispatch(updateDocName(e.target.value, e.target.name));
@@ -50,8 +50,8 @@ const addDocForm = () => {
         <Input type="text" label="Nom" name="name" value={name} changeInput={inputChange}/>
         <Textarea name="description" label="Description" value={description} changeInput={inputChange}/>
         <Select  name="type" label="Type de document" value={type} changeInput={selectChange} options={['image', 'texte']} />
-        {type == 'image' && <FileInput label="charger une image" value={urlSrc}  name="urlSrc" changeInput={fileChange}/>}
-        {type == 'texte' && <Textarea name="urlSrc" label="Rédiger un texte" value={urlSrc} changeInput={inputChange}/>}
+        {type == 'image' && <FileInput label="charger une image" value={src}  name="src" changeInput={fileChange}/>}
+        {type == 'texte' && <Textarea name="src" label="Rédiger un texte" value={src} changeInput={inputChange}/>}
         <div className="input-list">
           <div>
             <div className="field">

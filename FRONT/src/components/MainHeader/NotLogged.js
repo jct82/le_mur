@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import submitBtn from 'src/assets/icons/submit-neg.png';
 import { storeUSerInputValue, submitUserLogin } from '../../actions/users';
 import Input from '../inputForm/inputs';
 
-const NotLogged = () => {
+const NotLogged = ({ onToggleMenu }) => {
   const dispatch = useDispatch();
   const passwordInputValue = useSelector((state) => state.user.credentials.password);
   const emailInputValue = useSelector((state) => state.user.credentials.email);
@@ -15,6 +16,7 @@ const NotLogged = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    onToggleMenu();
     dispatch(submitUserLogin());
   };
 
@@ -29,4 +31,7 @@ const NotLogged = () => {
   );
 };
 
+NotLogged.propTypes = {
+  onToggleMenu: PropTypes.func.isRequired,
+};
 export default NotLogged;

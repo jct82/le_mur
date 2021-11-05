@@ -65,7 +65,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         wallsList: [
           ...state.wallsList,
-          action.newWall,
+          {...action.newWall, id: action.id},
         ],
       };
     case 'GET_WALLS':
@@ -92,6 +92,13 @@ const reducer = (state = initialState, action = {}) => {
             : action.value,
         },
       };
+    case 'DELETE_WALL_FROM_STORE':
+      return {
+        ...state,
+        wallsList: [
+          state.wallsList.filter((wall) => wall.id !== action.wallId)
+        ]
+      }
     default:
       return state;
   }

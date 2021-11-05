@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 
 const userController = {
-    listUsers: async function (req, res, next){
+    listUsers: async function (req, res){
 
         try {
             const users = await User.findAll();
@@ -19,7 +19,7 @@ const userController = {
         }
     },
 
-    addUser: async function (req, res, next){
+    addUser: async function (req, res){
 
         try {
             console.log(req.body);
@@ -38,7 +38,7 @@ const userController = {
         }
     },
 
-    connectUser: async function (req, res, next){
+    connectUser: async function (req, res){
 
         // console.log ('headers : ' + JSON.stringify(req.headers.authorization));
         console.log('req.userId : ' + req.userId);

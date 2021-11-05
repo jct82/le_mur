@@ -1,7 +1,7 @@
 const Wall = require('../models/wall');
 
 const wallController = {
-    listWalls: async function (req, res, next){
+    listWalls: async function (req, res){
 
         try {
             const walls = await Wall.findAll();
@@ -14,29 +14,44 @@ const wallController = {
         }
     },
 
-    addWall: async function (req, res, next){
-
-        console.log('req.body : '+ JSON.stringify(req.body));
-        console.log('req.file: '+ JSON.stringify(req.file));
+    addWall: async function (req, res){
 
         const userId = req.userId;
-        
+        console.log('userId : '+ userId)
 
-        // try {
+        try {
             
-        //     console.log('req.body : '+ req.body);
-        //     const newWall = new Wall(req.body);
-        //     await newWall.saveInWall(userId);
+            console.log('req.body : '+ JSON.stringify(req.body));
+            console.log('req.file: '+ JSON.stringify(req.file));
+            // we get the path of the photo and insert it in req.body
+            req.body.photo = req.file.path;
+            // We create a new instance of Wall and save it in database
+            const newWall = new Wall(req.body);
+            console.log(newWall);
+            await newWall.saveInWall(userId);
+            // We get the new wall id in database
+            const wall = await Wall.findByTitle(req.body.title);
+            const wallId = wall.id;
+            // We transform req.body.users into an array of integers         
+            const collabIdsInit = (req.body.users).split(',');
+            const collabIds = collabIdsInit.map(id => parseInt(id));
+            
+            // We save wallId and collabId in "participate" table 
+            for (const collab of collabIds){
+                collabId = parseInt(collab);
+                await newWall.saveWallInParticipate(wallId,collabId);
+            }
 
-        //     res.status(200).json(newWall)
+            
+            res.status(200).json({result: {wall_id:wallId, collabs_is:collabIds},newWall})
 
 
-        // } catch (error) {
-        //     console.error(error)
-        //     if (error instanceof User.NoDataError) {
-        //         return res.status(404).json(error.message)
-        //     }
-        // }
+        } catch (error) {
+            console.error(error)
+            if (error instanceof Wall.NoDataError) {
+                return res.status(404).json(error.message)
+            }
+        }
     },
 
 }

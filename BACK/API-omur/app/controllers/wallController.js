@@ -1,11 +1,14 @@
+const User = require('../models/user');
 const Wall = require('../models/wall');
 
 const wallController = {
+    // Get walls with user informations
     listWalls: async function (req, res){
 
         try {
-            const walls = await Wall.findAll();
+            const walls = await Wall.findWallsWithUserInfo();
             res.json(walls);
+         
         } catch (error) {
             console.error(error);
             if (error instanceof User.NoDataError) {
@@ -13,7 +16,7 @@ const wallController = {
             }
         }
     },
-
+    // Add new wal
     addWall: async function (req, res){
 
         const userId = req.userId;
@@ -23,8 +26,8 @@ const wallController = {
             
             console.log('req.body : '+ JSON.stringify(req.body));
             console.log('req.file: '+ JSON.stringify(req.file));
-            // we get the path of the photo and insert it in req.body
-            req.body.photo = req.file.path;
+            // we get the path of the photo (and we remove "public/" in the path) and insert it in req.body
+            req.body.photo = req.file.filename;
             // We create a new instance of Wall and save it in database
             const newWall = new Wall(req.body);
             console.log(newWall);
@@ -40,10 +43,31 @@ const wallController = {
             for (const collab of collabIds){
                 collabId = parseInt(collab);
                 await newWall.saveWallInParticipate(wallId,collabId);
-            }
+            };
+
+            // const collabsData = await User.findByIds(req.body.users);
+            // console.log('collabsData: ' + collabsData);
 
             
             res.status(200).json({result: {wall_id:wallId, collabs_is:collabIds},newWall})
+
+
+        } catch (error) {
+            console.error(error)
+            if (error instanceof Wall.NoDataError) {
+                return res.status(404).json(error.message)
+            }
+        }
+    },
+
+    deleteWall: async function (req, res){
+
+        wallId = req.params.id;
+        console.log('id du mur supprimé : '+ wallId);
+                
+        try {
+            await Wall.deleteWallById(wallId);                        
+            res.status(200)
 
 
         } catch (error) {

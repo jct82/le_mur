@@ -96,7 +96,7 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         wallsList: [
-          state.wallsList.filter((wall) => wall.id !== action.wallId)
+          ...state.wallsList.filter((wall) => wall.id !== action.wallId)
         ]
       }
     default:

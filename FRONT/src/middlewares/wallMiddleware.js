@@ -48,7 +48,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           console.log('mur effacé');
-          store.dispatch(deleteWallFromStore(wallId));
+          store.dispatch(deleteWallFromStore(action.wallId));
         })
         .catch((error) => {
           console.log(error);

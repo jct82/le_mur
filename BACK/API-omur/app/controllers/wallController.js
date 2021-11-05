@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Wall = require('../models/wall');
 
+
 const wallController = {
     // Get walls with user informations
     listWalls: async function (req, res){
@@ -27,7 +28,11 @@ const wallController = {
             console.log('req.body : '+ JSON.stringify(req.body));
             console.log('req.file: '+ JSON.stringify(req.file));
             // we get the path of the photo (and we remove "public/" in the path) and insert it in req.body
-            req.body.photo = req.file.filename;
+            if(req.file){
+                req.body.photo = req.file.filename;
+            }else{
+                req.body.photo = ""
+            };
             // We create a new instance of Wall and save it in database
             const newWall = new Wall(req.body);
             console.log(newWall);
@@ -67,7 +72,7 @@ const wallController = {
                 
         try {
             await Wall.deleteWallById(wallId);                        
-            res.status(200)
+            return res.status(200).json({message:'mur bien supprimé'});
 
 
         } catch (error) {

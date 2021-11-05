@@ -3,8 +3,6 @@ const dotenv = require("dotenv").config({ path: '../.env' });
 console.log(dotenv)
 //express initialization
 const express = require("express");
-//express-session initialization
-//const session = require('express-session');
 
 const app = express();
 
@@ -24,18 +22,6 @@ app.use(cors({
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
 }));
 
-/*
-//express-session options 
-app.use(session({
-  resave: true,
-  saveUninitialized: true,
-  secret: process.env.APP_SECRET,
-  cookie: {
-    secure: false,
-    maxAge: (24*30*1000*60*60) // one month
-  }
-}));
-*/
 
 // router initialization
 const router = require("./app/router");

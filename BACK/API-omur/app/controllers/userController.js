@@ -25,9 +25,10 @@ const userController = {
             console.log(req.body);
             const newUser = new User(req.body);
             
-            await newUser.save();
+            const recordedUser = await newUser.save();
+            console.log('recorderUserId:' + recordedUser.id);
             // token generation
-            const token = jwt.sign({id:newUser.id, email:newUser.email, name:newUser.name, lastname:newUser.lastname}, process.env.APP_SECRET, {expiresIn : '24h'});
+            const token = jwt.sign({id:recordedUser.id, email:newUser.email, name:newUser.name, lastname:newUser.lastname}, process.env.APP_SECRET, {expiresIn : '24h'});
             res.status(200).json({result:{id:newUser.id, name:newUser.name, lastname: newUser.lastname}, token})
 
         } catch (error) {

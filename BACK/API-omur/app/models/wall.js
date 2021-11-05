@@ -1,4 +1,5 @@
 const Core = require('./core');
+const db = require('../database');
 
 module.exports = class Wall extends Core {
 
@@ -39,10 +40,11 @@ module.exports = class Wall extends Core {
     // method to delete a wall from bdd
     static async deleteWallById(id) {
         
-        await Core.fetchOne(`DELETE FROM wall where id = $1;`,
-        [id]);
+        const query = {text:`DELETE FROM wall where id = $1;`,
+        values:[id]}
+        return await db.query(query)
 
-           
+                  
     }
 }
 

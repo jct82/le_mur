@@ -19,8 +19,8 @@ const UserMenu = () => {
           <img className="userMenu__userIcon__img" src={userIcon} alt="user icon" />
         </div>
         { isLogged
-          ? <Logged />
-          : <NotLogged />}
+          ? <Logged onToggleMenu={setMenuOpen}/>
+          : <NotLogged onToggleMenu={setMenuOpen}/>}
       </div>
     </>
   );

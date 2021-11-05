@@ -29,3 +29,11 @@ export const updateDocName = (name, prop) => ({
   name: name,
   prop: prop,
 });
+
+export const storeNewWall = (wallData) => (
+  { type: 'STORE_NEW_WALL', newWall: wallData.newWall }
+);
+
+export const deleteWallAction = (wallId) => (
+  { type: 'DELETE_WALL_ACTION', wallId }
+);

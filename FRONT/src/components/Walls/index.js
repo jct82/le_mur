@@ -5,6 +5,7 @@ import Plus from 'src/assets/icons/plus-neg.png';
 import WallsCards from './WallsCards';
 import WallForm from './WallForm';
 import { getAllUsers } from '../../actions/users';
+import { getWalls } from '../../actions/walls';
 
 const Walls = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,9 @@ const Walls = () => {
   };
   useEffect(() => {
     dispatch(getAllUsers());
+  }, []);
+  useEffect(() => {
+    dispatch(getWalls());
   }, []);
   return (
     <div className="projects">

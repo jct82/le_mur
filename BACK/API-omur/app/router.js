@@ -8,6 +8,7 @@ const multerModule = require('./middlewares/multer');
 // import controllers
 const userController = require('./controllers/userController');
 const wallController = require('./controllers/wallController');
+const elementController = require('./controllers/elementController');
 
 
 // user roads details 
@@ -18,6 +19,8 @@ router.post('/user/login', userController.connectUser);
 router.get('/user/walls',auth.auth, wallController.listWalls);
 router.post('/user/walls',auth.auth,multerModule.single("photo"), wallController.addWall)
 router.delete('/user/walls/:id', auth.auth, wallController.deleteWall)
+// elements roads details
+router.post('/user/walls/:id/elements', auth.auth, elementController.addElement)
 
 
 

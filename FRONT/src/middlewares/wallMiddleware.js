@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import { storeNewWall } from '../actions/wall';
+import { deleteWallFromStore, storeNewWall } from '../actions/wall';
 import { storeAllWalls } from '../actions/walls';
 import API from './api';
 
@@ -48,7 +48,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           console.log('mur effacé');
-          // store.dispatch(storeAllWalls(response.data));
+          store.dispatch(deleteWallFromStore(wallId));
         })
         .catch((error) => {
           console.log(error);

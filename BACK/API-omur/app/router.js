@@ -22,6 +22,7 @@ router.delete('/user/walls/:id', auth.auth, wallController.deleteWall)
 // elements roads details
 router.get('/user/walls/:id/elements', auth.auth, elementController.listElements)
 router.post('/user/walls/:id/elements', auth.auth, elementController.addElement)
+router.delete('/user/walls/:id/elements/:id_element', auth.auth, elementController.deleteElement)
 
 
 

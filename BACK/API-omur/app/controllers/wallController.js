@@ -77,9 +77,7 @@ const wallController = {
 
         } catch (error) {
             console.error(error)
-            if (error instanceof Wall.NoDataError) {
-                return res.status(404).json(error.message)
-            }
+           
         }
     },
 

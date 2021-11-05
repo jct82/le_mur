@@ -13,3 +13,11 @@ export const createWallAction = (picture) => (
 export const deleteWall = (id) => (
   { type: 'DELETE_WALL', id }
 );
+
+export const getWalls = () => (
+  { type: 'GET_WALLS' }
+);
+
+export const storeAllWalls = (walls) => (
+  { type: 'STORE_WALLS', walls }
+);

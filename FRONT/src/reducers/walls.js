@@ -16,7 +16,8 @@ const initialState = {
       id: 1,
       title: 'rap',
       titleColor: 'DarkSlateGrey',
-      photo: '/tyler.png',
+      // photo: '/tyler.png',
+      photo: 'http://localhost:3000/API-omur/public/photo-1636027813317-102630879.jpg',
       users: ['antoine', 'julien', 'ari'],
       description: 'description du thème Rap: Le rap est un mouvement culturel et musical qui tire ses origines du hip-hop',
     },
@@ -54,6 +55,19 @@ const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case 'STORE_WALLS':
+      return {
+        ...state,
+        wallsList: action.walls,
+      };
+    case 'STORE_NEW_WALL':
+      return {
+        ...state,
+        wallsList: [
+          ...state.wallsList,
+          action.newWall,
+        ],
+      };
     case 'GET_WALLS':
       return {
         ...state,

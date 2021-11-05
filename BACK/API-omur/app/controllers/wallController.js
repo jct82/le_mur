@@ -24,7 +24,8 @@ const wallController = {
             console.log('req.body : '+ JSON.stringify(req.body));
             console.log('req.file: '+ JSON.stringify(req.file));
             // we get the path of the photo and insert it in req.body
-            req.body.photo = req.file.path;
+            req.body.photo = req.file.filename;
+            console.log('ma string',req.file.path)
             // We create a new instance of Wall and save it in database
             const newWall = new Wall(req.body);
             console.log(newWall);

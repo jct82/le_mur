@@ -12,6 +12,7 @@ const app = express();
 // using cors to allow connecting from anywhere
 const cors = require('cors');
 
+app.use(express.static('public'));
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());

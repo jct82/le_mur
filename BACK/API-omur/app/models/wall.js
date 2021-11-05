@@ -10,6 +10,14 @@ module.exports = class Wall extends Core {
         return data;
     }
 
+    //static method to get walls with user informations
+    static async findWallsWithUserInfo() {
+        const data = await Core.fetch(`SELECT wall.id, title, title_color, description, photo, pdf, owner_id, wall.created_at, wall.updated_at, name, lastname, email
+        FROM wall
+        JOIN "user" on "user".id = wall.owner_id`);
+        return data;
+    }
+
    
     // method to save a new wall in database
     async saveInWall(userId) {
@@ -27,6 +35,16 @@ module.exports = class Wall extends Core {
 
            
     }
+
+    // method to delete a wall from bdd
+    static async deleteWallById(id) {
+        
+        await Core.fetchOne(`DELETE FROM wall where id = $1;`,
+        [id]);
+
+           
+    }
 }
+
 
    

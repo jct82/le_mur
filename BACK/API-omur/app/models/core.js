@@ -52,4 +52,9 @@ module.exports = class Core {
         const data = await Core.fetch(`SELECT * FROM "${this.tableName}";`);
         return data.map(d => new this(d));
     }
+
+    // static method to delete one registration. available for all models
+    static async deleteOne(id){
+        return await db.query(`DELETE FROM "${this.tableName}" WHERE "id" = $1`, [id]);
+    }
 }

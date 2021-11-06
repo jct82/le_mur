@@ -3,21 +3,23 @@ const Wall = require('../models/wall');
 const Element = require('../models/element');
 
 const elementController = {
-    // // Get walls with user informations
-    // listWalls: async function (req, res){
+    // Get walls with user informations
+    listElements: async function (req, res){
 
-    //     try {
-    //         const walls = await Wall.findWallsWithUserInfo();
-    //         res.json(walls);
+        const wallId = req.params.id
+
+        try {
+            const element = await Element.findByWallId(wallId);
+            res.status(200).json(element);
          
-    //     } catch (error) {
-    //         console.error(error);
-    //         if (error instanceof User.NoDataError) {
-    //             return res.status(404).json(error.message);
-    //         }
-    //     }
-    // },
-    // Add new wal
+        } catch (error) {
+            console.error(error);
+            if (error instanceof User.NoDataError) {
+                return res.status(404).json(error.message);
+            }
+        }
+    },
+    // Add new element in a wall
     addElement: async function (req, res){
 
         const wallId = req.params.id;
@@ -26,7 +28,6 @@ const elementController = {
         console.log ('userId : ' + userId);
 
         try {
-            
             console.log('req.body : '+ JSON.stringify(req.body));
             console.log('req.file: '+ JSON.stringify(req.file));
             // we get the path of the photo (and we remove "public/" in the path) and insert it in req.body
@@ -35,12 +36,12 @@ const elementController = {
             }else{
                 req.body.photo = ""
             };
-            // We create a new instance of Wall and save it in database
+            // We create a new instance of element and save it in database
             const newElement = new Element(req.body);
-            console.log(newElement);
-            await newElement.save(wallId,userId);
+            const recordedElement = await newElement.save(wallId,userId);
+            console.log('recordedElement.id : ' + recordedElement.id);
                      
-            res.status(200).json({result: {wall_id:wallId, user_id:userId},newElement})
+            res.status(200).json(recordedElement)
 
 
         } catch (error) {
@@ -51,23 +52,23 @@ const elementController = {
         }
     },
 
-    // deleteWall: async function (req, res){
-
-    //     wallId = req.params.id;
-    //     console.log('id du mur supprimé : '+ wallId);
+    // We delete an element from a wall
+    deleteElement: async function (req, res){
+        //we get differents parameters
+        wallId = req.params.id;
+        elementId = req.params.id_element;
+        console.log('id du mur concerné : '+ wallId);
+        console.log('id element supprimé : ' + elementId);
                 
-    //     try {
-    //         await Wall.deleteWallById(wallId);                        
-    //         res.status(200)
+        try {
+            await Element.deleteOne(elementId);                        
+            res.status(200).json({message:'element supprimé'})
 
 
-    //     } catch (error) {
-    //         console.error(error)
-    //         if (error instanceof Wall.NoDataError) {
-    //             return res.status(404).json(error.message)
-    //         }
-    //     }
-    // },
+        } catch (error) {
+            console.error(error)
+            }
+    },
 
 }
 

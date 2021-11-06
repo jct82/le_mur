@@ -9,7 +9,7 @@ import UserTag from './UserTag';
 import { deleteWallAction } from '../../actions/wall';
 
 const WallCard = ({
-  titleColor, title, photo, users, description, id,
+  title_color, title, photo, users, description, id,
 }) => {
   const [deleteWall, setDeleteWall] = useState(false);
   const [deleteWallId, setDeleteWallId] = useState();
@@ -57,7 +57,7 @@ const WallCard = ({
 
       </div>
       <div className="wallcard__description">
-        <div className="wallcard__description__title" style={{ backgroundColor: `${titleColor}` }}>{title}</div>
+        <div className="wallcard__description__title" style={{ backgroundColor: `${title_color}` }}>{title}</div>
         <p>{description}</p>
       </div>
       {/* <div className="wallcard__coworkers">

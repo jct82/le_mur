@@ -13,13 +13,16 @@ module.exports = class Wall extends Core {
 
     //static method to get walls with user informations
     static async findWallsWithUserInfo(userId) {
-        const data = await Core.fetch(`SELECT wall.id, title, title_color, description, photo, pdf, owner_id, wall.created_at, wall.updated_at, name, lastname, email
+        const data = await Core.fetch(`SELECT  wall.id, title, title_color, description, photo, pdf, owner_id, wall.created_at, wall.updated_at, name, lastname, email
         FROM wall
         JOIN "user" on "user".id = wall.owner_id
         WHERE wall.owner_id = $1`,
         [userId]);
         return data;
     }
+
+    
+
     // static async findWallsWithUserInfo(userId) {
     //     const data = await Core.fetch(`SELECT wall.id, title, title_color, description, photo, pdf, owner_id, wall.created_at, wall.updated_at, name, lastname, email
     //     FROM wall
@@ -31,8 +34,8 @@ module.exports = class Wall extends Core {
     // method to save a new wall in database
     async saveInWall(userId) {
         
-        await Core.fetchOne(`INSERT INTO "wall" (title, description, photo, owner_id) VALUES ($1, $2, $3, $4) RETURNING *;`,
-        [this.title, this.description, this.photo,userId]);
+        await Core.fetchOne(`INSERT INTO "wall" (title, description, photo, owner_id, title_color) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+        [this.title, this.description, this.photo,userId, this.title_color]);
 
            
     }

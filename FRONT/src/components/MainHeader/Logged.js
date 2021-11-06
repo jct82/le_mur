@@ -1,10 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { disconnectUser } from '../../actions/users';
+import { emptyWallsList } from '../../actions/walls';
 
-const Logged = () => {
+const Logged = ({ onToggleMenu }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const handleDisconnectUser = () => {
     dispatch(disconnectUser());
+    dispatch(emptyWallsList());
+    onToggleMenu();
+    history.push('/');
   };
   const user = useSelector((state) => state.user.loggedUserName);
   return (
@@ -16,6 +23,10 @@ const Logged = () => {
       </ul>
     </div>
   );
+};
+
+Logged.propTypes = {
+  onToggleMenu: PropTypes.func.isRequired,
 };
 
 export default Logged;

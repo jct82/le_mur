@@ -6,9 +6,10 @@ import deleteIcon from 'src/assets/icons/file-erase.png';
 import crossIcon from 'src/assets/icons/cross-neg-white.png';
 import { Link } from 'react-router-dom';
 import UserTag from './UserTag';
+import { deleteWallAction } from '../../actions/wall';
 
 const WallCard = ({
-  titleColor, title, photo, users, description, id,
+  title_color, title, photo, users, description, id,
 }) => {
   const [deleteWall, setDeleteWall] = useState(false);
   const [deleteWallId, setDeleteWallId] = useState();
@@ -23,7 +24,7 @@ const WallCard = ({
     setDeleteWallId(null);
   };
   const handleConfirmDeleteWall = (wallId) => {
-    // dispatch(deleteWall(wallId));
+    dispatch(deleteWallAction(wallId));
   };
   return (
     <div className="wallcard">
@@ -48,23 +49,24 @@ const WallCard = ({
           )
           : (
             <Link to={{ pathname: '/wall', state: { wallId: id, wallTitle: title } }}>
-              <div className="wallcard__imgContainer__img" style={{ backgroundImage: `url('${photo}')` }} />
+              <div className="wallcard__imgContainer__img" style={{ backgroundImage: `url('http://localhost:3000/${photo}')` }} />
+              {/* <div className="wallcard__imgContainer__img" style={{ backgroundImage: `url('http://localhost:3000/photo-1636056563596-949361088.jpg')` }} /> */}
             </Link>
           )
       }
 
       </div>
       <div className="wallcard__description">
-        <div className="wallcard__description__title" style={{ backgroundColor: `${titleColor}` }}>{title}</div>
+        <div className="wallcard__description__title" style={{ backgroundColor: `${title_color}` }}>{title}</div>
         <p>{description}</p>
       </div>
-      <div className="wallcard__coworkers">
+      {/* <div className="wallcard__coworkers">
         {
           users && users.map((user) => (
             <UserTag pseudo={user} key={user} />
           ))
         }
-      </div>
+      </div> */}
     </div>
   );
 };

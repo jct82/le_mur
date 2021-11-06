@@ -1,8 +1,9 @@
 // import axios from 'axios';
+import { deleteWallFromStore, storeNewWall } from '../actions/wall';
+import { storeAllWalls } from '../actions/walls';
 import API from './api';
 
 const wallMiddleware = (store) => (next) => (action) => {
-  console.log(action);
   const state = store.getState();
   switch (action.type) {
     case 'CREATE_WALL': {
@@ -22,6 +23,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       wallData.append('title', state.walls.wallCreation.title);
       wallData.append('description', state.walls.wallCreation.description);
       wallData.append('users', wallUserIds);
+      wallData.append('title_color', action.title_color)
       const config = {
         method: 'post',
         url: '/user/walls',
@@ -30,7 +32,8 @@ const wallMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log(response, 'ok mur crée');
+          console.log(response.data, 'ok mur crée');
+          store.dispatch(storeNewWall(response.data));
         })
         .catch((error) => {
           console.error(error);
@@ -38,7 +41,38 @@ const wallMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     }
-
+    case 'DELETE_WALL_ACTION': {
+      const config = {
+        method: 'delete',
+        url: `/user/walls/${action.wallId}`,
+      };
+      API(config)
+        .then((response) => {
+          console.log('mur effacé');
+          store.dispatch(deleteWallFromStore(action.wallId));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      next(action);
+      break;
+    }
+    case 'GET_WALLS': {
+      const config = {
+        method: 'get',
+        url: '/user/walls',
+      };
+      API(config)
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch(storeAllWalls(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      next(action);
+      break;
+    }
     default:
       next(action);
   }

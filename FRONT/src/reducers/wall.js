@@ -1,4 +1,4 @@
-import { CHANGE_PANEL, TOGGLE_EYE, POST_USER, DELETE_USER, UPDATE_DOC_PROPS } from "src/actions/wall";
+import { CHANGE_PANEL, TOGGLE_EYE, POST_USER, DELETE_USER, UPDATE_DOC_PROPS, DISPLAY_MODE, REDIRECT_PDF } from "src/actions/wall";
 
 const initialState = {
   id: 1,
@@ -12,6 +12,8 @@ const initialState = {
   currentAdded: '',
   panel: '',
   detailed: -1,
+  displaysquare: false,
+  toPDF:false,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -55,6 +57,16 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         [action.prop]: action.name,
       }
+    case DISPLAY_MODE :
+      return{
+        ...state,
+        displaysquare: !state.displaysquare,
+      }
+    case REDIRECT_PDF :
+        return{
+          ...state,
+          toPDF: !state.toPDF,
+        }
     default:
       return state;
   }

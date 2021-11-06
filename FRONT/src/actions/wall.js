@@ -3,6 +3,8 @@ export const TOGGLE_EYE = 'TOGGLE_EYE';
 export const POST_USER = 'POST_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const UPDATE_DOC_PROPS = 'UPDATE_DOC_PROPS';
+export const DISPLAY_MODE = 'DISPLAY_MODE';
+export const REDIRECT_PDF = 'REDIRECT_PDF';
 
 export const changePanel = (panel) => ({
   type: CHANGE_PANEL,
@@ -28,4 +30,13 @@ export const updateDocName = (name, prop) => ({
   type: UPDATE_DOC_PROPS,
   name: name,
   prop: prop,
+});
+
+export const displayMode = (displaysquare) => ({
+  type: DISPLAY_MODE,
+  displaysquare: displaysquare,
+});
+
+export const redirectPDF = () => ({
+  type: REDIRECT_PDF,
 });

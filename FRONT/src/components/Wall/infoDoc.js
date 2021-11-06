@@ -37,7 +37,7 @@ const infoDocForm = () => {
       <div className="info-block">
         <label>Liens :</label>
         <ul className="link-list">
-          {link.map((item) => (<li key={item}><a href={item} target="_blank" className="block">{item}</a></li>))}
+          {link.map((item) => (<li key={item}>-&nbsp;<a href={item} target="_blank" className="block">{item}</a></li>))}
         </ul>
       </div>
       {ownerid == user && 

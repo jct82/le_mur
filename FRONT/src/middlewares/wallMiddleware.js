@@ -23,7 +23,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       wallData.append('title', state.walls.wallCreation.title);
       wallData.append('description', state.walls.wallCreation.description);
       wallData.append('users', wallUserIds);
-      wallData.append('title_color', 'IndianRed')
+      wallData.append('title_color', action.title_color)
       const config = {
         method: 'post',
         url: '/user/walls',

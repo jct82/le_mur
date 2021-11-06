@@ -13,6 +13,7 @@ import AddedUser from './AddedUser';
 import FileInput from '../inputForm/file';
 import { getAllUsers } from '../../actions/users';
 import SelectUser from '../inputForm/SelectUser';
+import randomColor from '../../utils/randomColor';
 
 // Liste en dur des collaboratueurs au projet. il faudra les récuprer du back
 // const coworkers = ['julien politi', 'ariana bredon', 'michel wagner', 'antoine sauvé', 'jean-Charles Trinquet', 'etienn Pinon'];
@@ -36,7 +37,9 @@ const WallForm = ({ setFormOpen }) => {
   };
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    dispatch(createWallAction(picture));
+    const title_color = randomColor();
+    console.log(title_color);
+    dispatch(createWallAction(picture, title_color));
   };
   const handleChangePicture = (e) => {
     setPicture(e.target.files[0]);

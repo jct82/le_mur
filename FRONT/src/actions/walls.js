@@ -21,3 +21,7 @@ export const getWalls = () => (
 export const storeAllWalls = (walls) => (
   { type: 'STORE_WALLS', walls }
 );
+
+export const emptyWallsList = () => (
+  { type: 'EMPTY_WALLS_LIST' }
+)

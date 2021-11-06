@@ -5,9 +5,9 @@ const Wall = require('../models/wall');
 const wallController = {
     // Get walls with user informations
     listWalls: async function (req, res){
-
+      const userId = req.userId;
         try {
-            const walls = await Wall.findWallsWithUserInfo();
+            const walls = await Wall.findWallsWithUserInfo(userId);
             res.json(walls);
          
         } catch (error) {

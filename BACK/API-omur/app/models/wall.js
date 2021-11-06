@@ -12,12 +12,20 @@ module.exports = class Wall extends Core {
     }
 
     //static method to get walls with user informations
-    static async findWallsWithUserInfo() {
+    static async findWallsWithUserInfo(userId) {
         const data = await Core.fetch(`SELECT wall.id, title, title_color, description, photo, pdf, owner_id, wall.created_at, wall.updated_at, name, lastname, email
         FROM wall
-        JOIN "user" on "user".id = wall.owner_id`);
+        JOIN "user" on "user".id = wall.owner_id
+        WHERE wall.owner_id = $1`,
+        [userId]);
         return data;
     }
+    // static async findWallsWithUserInfo(userId) {
+    //     const data = await Core.fetch(`SELECT wall.id, title, title_color, description, photo, pdf, owner_id, wall.created_at, wall.updated_at, name, lastname, email
+    //     FROM wall
+    //     JOIN "user" on "user".id = wall.owner_id`);
+    //     return data;
+    // }
 
    
     // method to save a new wall in database

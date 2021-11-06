@@ -6,8 +6,8 @@ export const deleteCoworker = (user) => (
   { type: 'DELETE_COWORKER', user: user }
 );
 
-export const createWallAction = (picture) => (
-  { type: 'CREATE_WALL', picture }
+export const createWallAction = (picture, title_color) => (
+  { type: 'CREATE_WALL', picture, title_color }
 );
 
 export const deleteWall = (id) => (
@@ -21,3 +21,7 @@ export const getWalls = () => (
 export const storeAllWalls = (walls) => (
   { type: 'STORE_WALLS', walls }
 );
+
+export const emptyWallsList = () => (
+  { type: 'EMPTY_WALLS_LIST' }
+)

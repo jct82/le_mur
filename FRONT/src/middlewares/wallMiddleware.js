@@ -23,6 +23,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       wallData.append('title', state.walls.wallCreation.title);
       wallData.append('description', state.walls.wallCreation.description);
       wallData.append('users', wallUserIds);
+      wallData.append('title_color', action.title_color)
       const config = {
         method: 'post',
         url: '/user/walls',
@@ -48,7 +49,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           console.log('mur effacé');
-          store.dispatch(deleteWallFromStore(wallId));
+          store.dispatch(deleteWallFromStore(action.wallId));
         })
         .catch((error) => {
           console.log(error);

@@ -10,11 +10,18 @@ module.exports = class User extends Core {
         return data;
     }
 
+    //static method to find a user by ids
+    static async findByIds(ids) {
+        const data = await Core.fetch(`SELECT * FROM "user" WHERE id= ANY(ARRAY$1)`, [ids]);
+        return data;
+    }
+
     // method to save a new user in database
     async save() {
         
-        await Core.fetchOne(`INSERT INTO "user" (name, lastname, email, password) VALUES ($1, $2, $3, $4) RETURNING *;`,
+        const data =  await Core.fetchOne(`INSERT INTO "user" (name, lastname, email, password) VALUES ($1, $2, $3, $4) RETURNING id;`,
         [this.name, this.lastname, this.email, this.password]);
+        return data;
 
            
     }

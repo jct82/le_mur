@@ -50,8 +50,9 @@ CREATE TABLE element (
     type TEXT NOT NULL,
     position pint,
     link TEXT,
-    url_src TEXT,
-    column_id INTEGER NOT NULL REFERENCES "column" ("id") ON DELETE CASCADE,
+    src TEXT,
+    wall_id INTEGER NOT NULL REFERENCES wall(id) ON DELETE CASCADE,
+    column_id INTEGER REFERENCES "column" ("id") ON DELETE CASCADE,
     owner_id INTEGER NOT NULL REFERENCES "user" ("id") ON DELETE CASCADE,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()  

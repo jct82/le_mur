@@ -115,3 +115,17 @@ $user-menu-width:400px;
   position: absolute;
   top:-100px;
 }
+
+@media screen and (max-width:600px){
+  // $user-menu-width : 300px;
+  .userMenu {
+    &__login {
+      width:320px;
+    }
+  }
+  .--open{
+    transform: translate(-320px,0px);
+    transition: 0.3s transform ease-in;
+  }
+  }
+

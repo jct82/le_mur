@@ -192,3 +192,12 @@
 .--deleteDialog{
   background-color: black;
 }
+
+@media screen and (max-width:800px) {
+  .projects{
+    padding: 3rem 2rem;
+  }
+  .wallcard{
+    width:100%;
+  }
+}

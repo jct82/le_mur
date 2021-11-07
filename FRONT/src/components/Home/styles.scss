@@ -22,7 +22,7 @@
   .inner_container {
     background-color: white;
     height: 100vh;
-    padding: 50px 30px;
+    padding: 2rem 2rem;
   }
 
   .right_container {
@@ -59,25 +59,32 @@
 }
 */
   .app_title {
-    font-size: 11vw;
+    margin-top:3rem;
+    font-size: 10rem;
     text-align: left;
+    font-weight: 700;
+    margin-bottom: 2rem;
   }
 
   .page_title {
-    font-family: 'Lucida';
-    font-size: 1.4vw;
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 700;
     color: #ed9c4b;
     padding-bottom: 3%;
-    padding-left: 6%;
+    padding-left: 0.5rem;
     text-align: left;
   }
 
   .triangle {
-    height: 0;
-    width: 0;
-    border-top: 20px solid transparent;
-    border-bottom: 20px solid transparent;
-    border-left: 34px solid black;
+    display: inline-block;
+    position: relative;
+    top:0rem;
+    // height: 0;
+    // width: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 20px solid black;
   }
 
   /*.white-triangle {
@@ -92,25 +99,27 @@
   */
 
   .app_resume {
-    font-size: 0.9vw;
+    padding-left:2rem;
+    font-size: 1rem;
     color: #6b6b6b;
-    font-family: 'Lucida Console';
     text-align: left;
     line-height: 140%;
   }
 
   .citationTexte {
+    line-height: 1.7rem;
+    padding-left:2rem;
     padding-top: 5%;
-    font-size: 1vw;
+    font-size: 1.5rem;
     color: #414040;
-    font-family: 'Lucida';
   }
 
   .citation_author {
+    line-height: 1.2rem;
+    padding-left:2rem;
     padding-top: 1.5%;
     color: #6b6b6b;
-    font-size: 0.9vw;
-    font-family: 'Lucida Console';
+    font-size: 1rem;
   }
 }
 
@@ -121,4 +130,98 @@
   width: 200px;
   background-color: black;
   font: white;
+  border: none;
+  transform: scale(1);
+  transition: 0.2s ease-out
+}
+
+.openFormBtn:hover {
+  transform: scale(0.8);
+  transition: 0.2s ease-in;
+  background-color: white ;
+  color:black;
+  font-size: 1.4rem;
+}
+@media screen and (max-width:1000px){
+  .home .app_title {
+    font-size: 8rem;
+    text-align: left;
+  }
+  .home .page_title {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width:800px){
+.home{
+  flex-direction: column;
+}
+.home .triangle {
+  display: none;
+}
+.home .app_resume {
+  display: none;
+  color: white;
+  background-color: black;
+  padding:1rem 1rem;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+  transform: rotate(-3deg);
+}
+
+.home .presentation {
+  display: none;
+}
+
+.home .citationTexte {
+  display: none;
+}
+
+.home .left_container, .home .right_container {
+  position:relative;
+  padding-left:0px;
+  width: 100%;
+  display: block;
+  height: 50vh;
+}
+.home .right_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.home .app_title {
+  // display: none;
+  font-size: 7rem;
+  margin-top: 4rem;
+}
+.home .inner_container {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  padding: 1rem 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.home .openFormBtn {
+  font-size:0.8rem;
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  background-color: black;
+  font: white;
+  border: none;
+  transform: scale(1);
+  transition: 0.2s ease-out
+}
+.form-button {
+  // position: relative;
+  // top:0;
+  // bottom:0;
+  padding:0;
+}
+
+
 }

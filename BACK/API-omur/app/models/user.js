@@ -12,7 +12,7 @@ module.exports = class User extends Core {
 
     //static method to find a user by ids
     static async findByIds(ids) {
-        const data = await Core.fetch(`SELECT * FROM "user" WHERE id= ANY(ARRAY$1)`, [ids]);
+        const data = await Core.fetch(`SELECT id, "name", "lastname" FROM "user" WHERE id in (${ids});`);
         return data;
     }
 

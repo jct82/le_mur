@@ -18,6 +18,7 @@ const userController = {
             }
         }
     },
+    
 
     addUser: async function (req, res){
 

@@ -18,23 +18,13 @@ module.exports = class Wall extends Core {
         FROM "wall"  
         JOIN "user" on "user".id = wall.owner_id 
         JOIN "participate" on wall.id = participate.wall_id 
-        WHERE user_id=$1 or owner_id=$1 
+        WHERE user_id=$1
         GROUP BY wall.id, title, photo, description, title_color, pdf, owner_id, name, lastname, email, wall.created_at, wall.updated_at;`,
         [userId]);
         return data;
     }
 
-    // REQUETE SUR PGADMI : SELECT * FROM "wall"  JOIN "user" on "user".id = wall.owner_id JOIN "participate" on wall.id = participate.wall_id WHERE user_id=1 or owner_id=1;
     
-
-    // static async findWallsWithUserInfo(userId) {
-    //     const data = await Core.fetch(`SELECT wall.id, title, title_color, description, photo, pdf, owner_id, wall.created_at, wall.updated_at, name, lastname, email
-    //     FROM wall
-    //     JOIN "user" on "user".id = wall.owner_id`);
-    //     return data;
-    // }
-
-   
     // method to save a new wall in database
     async saveInWall(userId) {
         

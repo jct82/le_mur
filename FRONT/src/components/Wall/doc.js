@@ -33,14 +33,17 @@ const Doc = ({ photo, margin, direction, top, left }) => {
     
   // });
   const handleClick = event => {
+    console.timeLog('yyyyy');
     // onClick(event, { photo, index });
   };
 
   return (
     <div className={photo.ownerid == photo.user ? "doc owned" : "doc"} onClick={handleClick}>
       {photo.id == detailed && <div className="see-btn" panel={photo.getAction} onClick={seeDoc}></div>}
-      {photo.type== 'image' && <img src={photo.src} alt={photo.name} onClick={posterEye}/>}
-      {photo.type== 'texte' && <div className="doc-txt" onClick={posterEye}>{photo.src}</div>}
+      <div className="doc-content">
+        {photo.type== 'image' && <img src={photo.src} alt={photo.name} onClick={posterEye}/>}
+        {photo.type== 'texte' && <div className="doc-txt" onClick={posterEye}>{photo.src}</div>}
+      </div>
     </div>
   );
 };

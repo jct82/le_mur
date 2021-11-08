@@ -77,6 +77,28 @@
           justify-content: space-around;
         }
       }
+      &.square{
+        .board .react-photo-gallery--gallery > div {
+          align-items: inherit;
+          justify-content: inherit;
+        }
+        .doc-content{
+          display: flex;
+          justify-content: center;
+          height: 100%;
+          overflow: hidden;
+        }
+        .doc{
+          img{
+            height: 100%;
+            width: auto;
+            max-width: none;
+          }
+          .doc-txt{
+            height: 100%;
+          }
+        }
+      }
     }
     .dashboard{
       position: absolute;
@@ -224,18 +246,13 @@
           padding-top: 10px;
         }
         a{
-          display: block;
           color:#000000;
           font-size: 12px;
           line-height: 1.4;
+          overflow-wrap:break-word ;
           &:hover{
             color:#000000;
             text-decoration: underline;
-          }
-          &:before{
-            content:'-';
-            display: inline-block;
-            margin-right:5px;
           }
         }
       }

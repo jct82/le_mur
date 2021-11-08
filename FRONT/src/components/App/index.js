@@ -2,6 +2,7 @@
 import Home from 'src/components/Home';
 import Walls from 'src/components/Walls';
 import Wall from 'src/components/Wall';
+import WallFileEdit from 'src/components/Wall/wallFileEdit';
 import UserProfile from 'src/components/UserProfile';
 import './styles.css';
 import { Route, Switch } from 'react-router-dom';
@@ -24,6 +25,9 @@ const App = () => (
       </Route>
       <Route exact path="/userprofile">
         <UserProfile />
+      </Route>
+      <Route exact path="/PDF">
+        <WallFileEdit />
       </Route>
     </Switch>
   </div>

@@ -17,12 +17,14 @@ router.post('/user/register', userController.addUser);
 router.post('/user/login', userController.connectUser);
 // wall roads details
 router.get('/user/walls',auth.auth, wallController.listWalls);
-router.post('/user/walls',auth.auth,multerModule.single("photo"), wallController.addWall)
-router.delete('/user/walls/:id', auth.auth, wallController.deleteWall)
+router.post('/user/walls',auth.auth,multerModule.single("photo"), wallController.addWall);
+router.delete('/user/walls/:id', auth.auth, wallController.deleteWall);
+router.patch('/user/walls/:id', auth.auth,multerModule.single("photo"), wallController.updateWall);
 // elements roads details
-router.get('/user/walls/:id/elements', auth.auth, elementController.listElements)
-router.post('/user/walls/:id/elements', auth.auth, multerModule.single("photo"), elementController.addElement)
-router.delete('/user/walls/:id/elements/:id_element', auth.auth, elementController.deleteElement)
+router.get('/user/walls/:id/elements', auth.auth, elementController.listElements);
+router.post('/user/walls/:id/elements', auth.auth, multerModule.single("photo"), elementController.addElement);
+router.delete('/user/walls/:id/elements/:id_element', auth.auth, elementController.deleteElement);
+router.patch('/user/walls/:id/elements/:id_element', auth.auth, multerModule.single("photo"), elementController.updateElement)
 
 
 

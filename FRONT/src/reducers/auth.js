@@ -36,6 +36,8 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         loggedUserName: `${action.userData.result.name} ${action.userData.result.lastname}`,
+        name: action.userData.result.name,
+        lastname: action.userData.result.lastname,
         loggedUserInfos: {
           name: action.userData.result.name,
           lastname: action.userData.result.lastname,

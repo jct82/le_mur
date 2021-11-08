@@ -8,7 +8,21 @@ const wallController = {
       const userId = req.userId;
         try {
             const walls = await Wall.findWallsWithUserInfo(userId);
-            res.json(walls);
+           
+            console.log('walls : ' + JSON.stringify(walls));
+            // Initialization of an Array to push all the walls ids in
+            const ArrayOfWallIds = [];
+            // We put the id of each wall in ArrayOfWallIds
+            for (const wall of walls){
+                const wallId = wall.id;
+                ArrayOfWallIds.push(wallId)
+            }console.log(ArrayOfWallIds)
+                        
+            // We get in database all informations about collaborators of one wall
+            const collabsData = await Wall.findCollabsInfoByWallId(ArrayOfWallIds)
+           
+            res.status(200).json({result : walls,collabsData});
+
          
         } catch (error) {
             console.error(error);

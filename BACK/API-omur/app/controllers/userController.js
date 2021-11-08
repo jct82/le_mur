@@ -51,12 +51,11 @@ const userController = {
         
         console.log('req.userId : ' + req.userId);
 
-        try {
             // we get login and password from login form
             const email = req.body.email;
             const wp = req.body.password;
-           
-                    
+
+        try {                             
             // we check if the email is registred in bdd
             const user = await User.findByEmail(email);
             console.log(user);

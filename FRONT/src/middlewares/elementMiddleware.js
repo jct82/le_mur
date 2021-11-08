@@ -13,7 +13,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       const { id } = state.wall;
 
 
-      console.log('ttttttt',id, name, description, type, src, link, position);
+      console.log(description);
       const docData = new FormData();
       docData.append('name', name.toString());
       docData.append('description', description.toString());

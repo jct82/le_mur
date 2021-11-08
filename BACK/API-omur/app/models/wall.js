@@ -11,30 +11,41 @@ module.exports = class Wall extends Core {
         return data;
     }
 
+    
+    // static async findWallsWithUserInfo(userId) {
+    //     const data = await Core.fetch(`
+    //     SELECT wall.id, title, title_color, photo, description, name, lastname, email, pdf, owner_id, wall.created_at, wall.updated_at 
+    //     FROM "wall"  
+    //     JOIN "user" on "user".id = wall.owner_id 
+    //     JOIN "participate" on wall.id = participate.wall_id 
+    //     WHERE user_id=$1
+    //     GROUP BY wall.id, title, photo, description, title_color, pdf, owner_id, name, lastname, email, wall.created_at, wall.updated_at;`,
+    //     [userId]);
+    //     return data;
+    // }
     //static method to get walls with user informations
     static async findWallsWithUserInfo(userId) {
         const data = await Core.fetch(`
-        SELECT wall.id, title, title_color, photo, description, name, lastname, email, pdf, owner_id, wall.created_at, wall.updated_at 
+        SELECT wall.id, title, title_color, photo, description, pdf, owner_id, wall.created_at, wall.updated_at 
         FROM "wall"  
         JOIN "user" on "user".id = wall.owner_id 
         JOIN "participate" on wall.id = participate.wall_id 
-        WHERE user_id=$1 or owner_id=$1 
+        WHERE user_id=$1
         GROUP BY wall.id, title, photo, description, title_color, pdf, owner_id, name, lastname, email, wall.created_at, wall.updated_at;`,
         [userId]);
         return data;
     }
+    //static method to get walls with all collabs informations
+    static async findCollabsInfoByWallId(wallIds) {
+        const data = await Core.fetch(`
+        SELECT "user".id, wall.id as "wallId", "name", "lastname" FROM "user"
+        JOIN participate ON participate.user_id="user".id
+        JOIN wall ON wall.id = "participate".wall_id
+        WHERE wall.id in (${wallIds});`);
+        return data;
+    }
 
-    // REQUETE SUR PGADMI : SELECT * FROM "wall"  JOIN "user" on "user".id = wall.owner_id JOIN "participate" on wall.id = participate.wall_id WHERE user_id=1 or owner_id=1;
     
-
-    // static async findWallsWithUserInfo(userId) {
-    //     const data = await Core.fetch(`SELECT wall.id, title, title_color, description, photo, pdf, owner_id, wall.created_at, wall.updated_at, name, lastname, email
-    //     FROM wall
-    //     JOIN "user" on "user".id = wall.owner_id`);
-    //     return data;
-    // }
-
-   
     // method to save a new wall in database
     async saveInWall(userId) {
         
@@ -61,6 +72,27 @@ module.exports = class Wall extends Core {
 
                   
     }
+
+     // method to modify an existing wall in database
+    async update(wallId) {
+        
+        const data = await Core.fetchOne(`UPDATE "wall" SET title=$1, description=$2, photo=$3, title_color=$4 WHERE id =$5 RETURNING *;`,
+        [this.title, this.description, this.photo, this.title_color, wallId]);
+        return data
+
+           
+    }
+
+    // method to delete collaborators of a wall in database
+    async deleteCollabs(wallId) {
+        
+        const data = await Core.fetch(`DELETE FROM "participate" WHERE wall_id = $1 RETURNING *;`,
+        [wallId]);
+        return data
+
+           
+    }
+
 }
 
 

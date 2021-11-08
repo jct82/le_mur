@@ -14,11 +14,11 @@ const Home = () => {
       <div className="white-triangle"></div>
       <div className="left_container">
         <div className="inner_container">
-          <h1 className="app_title">LE MUR.</h1>
+          <h1 className="app_title">LE <br></br> MUR.</h1>
           <div className="presentation">
           <div className="triangle"></div>
             <h2 className="page_title">Un espace de travail collaboratif</h2>
-            <p className="app_resume">C'est un espace de mise en commum d'idées visuelles qui vise à reproduire à distance l'expérience physique de la rencontre entre plusieurs créatifs, qui épingleraient sur un mur des images d'inspiration.</p>
+            <p className="app_resume">Le Mur est un espace de mise en commum d'idées visuelles qui vise à reproduire à distance l'expérience physique de la rencontre entre plusieurs créatifs, qui épingleraient sur un mur des images d'inspiration.</p>
 
             <blockquote className="citation">
               <p className></p>

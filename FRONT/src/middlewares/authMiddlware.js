@@ -7,6 +7,7 @@ const authMiddleware = (store) => (next) => (action) => {
   const state = store.getState();
   switch (action.type) {
     case 'SUBMIT_USER_LOGIN': {
+      console.log(action);
       const config = {
         method: 'post',
         // baseURL: 'http://54.196.235.242/user/',

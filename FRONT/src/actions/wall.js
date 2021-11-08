@@ -51,7 +51,7 @@ export const addDoc = (doc) => ({
 });
 
 export const storeNewWall = (wallData) => (
-  { type: 'STORE_NEW_WALL', newWall: wallData.newWall, id:wallData.result.wall_id }
+  { type: 'STORE_NEW_WALL', newWall: wallData.newWall, id:wallData.result.wall_id, collabsData: wallData.collabsData }
 );
 
 export const deleteWallAction = (wallId) => (

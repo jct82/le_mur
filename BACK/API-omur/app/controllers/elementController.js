@@ -70,6 +70,41 @@ const elementController = {
             }
     },
 
+     // Modify existing element in a wall
+    updateElement: async function (req, res){
+
+        const wallId = req.params.id;
+        const elementId = req.params.id_element;
+        console.log('WallId : '+ wallId);
+        console.log ('elementId : ' + elementId);
+
+        try {
+            console.log('req.body : '+ JSON.stringify(req.body));
+            console.log('req.file: '+ JSON.stringify(req.file));
+            // we get the path of the photo (and we remove "public/" in the path) and insert it in req.body
+            if(req.file){
+                req.body.photo = req.file.filename;
+            }else{
+                req.body.photo = ""
+            };
+            // We create a new instance of element and update it in database
+            const newElement = new Element(req.body);
+            const updatedElement = await newElement.update(wallId,elementId);
+            console.log('updatedElement.id : ' + updatedElement.id);
+                     
+            res.status(200).json(updatedElement)
+
+
+        } catch (error) {
+            console.error(error)
+            if (error instanceof Wall.NoDataError) {
+                return res.status(404).json(error.message)
+            }
+        }
+    },
+
+    
+
 }
 
 module.exports = elementController;

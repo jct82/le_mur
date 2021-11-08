@@ -22,6 +22,7 @@ const wallController = {
             const collabsData = await Wall.findCollabsInfoByWallId(ArrayOfWallIds)
            
             res.status(200).json({result : walls,collabsData});
+            // res.status(200).json({result : walls});
 
          
         } catch (error) {

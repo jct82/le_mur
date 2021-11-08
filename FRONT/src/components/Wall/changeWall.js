@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Input from "../inputForm/inputs";
 import Textarea from "../inputForm/textarea";
 import FileInput from "../inputForm/file";
-import { updateDocName, postUser, deleteUser } from "src/actions/wall";
+import { updateWallInput, postUser, deleteUser } from "src/actions/wall";
 
 import './style.scss';
 
@@ -11,7 +11,7 @@ const ChangeWallForm = () => {
   const { title, description, photo, users, currentAdded } = useSelector((state) => state.wall);
 
   const inputChange = (e) => {
-    dispatch(updateDocName(e.target.value, e.target.name));
+    dispatch(updateWallInput(e.target.value, e.target.name));
   }
 
   const addUser = () => {
@@ -23,7 +23,7 @@ const ChangeWallForm = () => {
   }
 
   const fileChange = (e) => {
-    dispatch(updateDocName(e.target.files[0].name, e.target.name));
+    dispatch(updateWallInput(e.target.files[0].name, e.target.name));
   }
 
   const userListJSX = users.map((user) => {

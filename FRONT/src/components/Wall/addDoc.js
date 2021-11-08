@@ -4,12 +4,15 @@ import Textarea from "../inputForm/textarea";
 import Select from "../inputForm/select";
 import FileInput from "../inputForm/file";
 import { updateDocName, postLink, deleteLink } from "src/actions/element";
+import { addDoc } from "src/actions/wall";
 
 import './style.scss';
 
 const addDocForm = () => {
   const dispatch = useDispatch();
-  const { name, description, type, currentLink, link, src } = useSelector((state) => state.elements);
+  const elements = useSelector((state) => state.elements);
+
+  const { name, description, type, currentLink, link, src } = elements;
 
   const inputChange = (e) => {
     dispatch(updateDocName(e.target.value, e.target.name));
@@ -28,8 +31,12 @@ const addDocForm = () => {
   }
 
   const selectChange = (e) => {
-    dispatch(updateDocName('', 'doc'));
     dispatch(updateDocName(e.target.value, e.target.name));
+  }
+
+  const submitDoc = (e) => {
+    e.preventDefault();
+    dispatch(addDoc(elements));
   }
 
   const linksListJSX = link.map((lien) => {
@@ -46,7 +53,7 @@ const addDocForm = () => {
   return (
     <div>
       <h2 className="form-title">Nouveau Document</h2>
-      <form className="add-doc-form">
+      <form className="add-doc-form" onSubmit={submitDoc} encType="multipart/form-data">
         <Input type="text" label="Nom" name="name" value={name} changeInput={inputChange}/>
         <Textarea name="description" label="Description" value={description} changeInput={inputChange}/>
         <Select  name="type" label="Type de document" value={type} changeInput={selectChange} options={['image', 'texte']} />

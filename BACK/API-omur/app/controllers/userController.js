@@ -86,7 +86,7 @@ const userController = {
 
     updateUser: async function (req, res){
 
-        const userId = req.params.id;
+        const userId = req.userId;
         console.log('userId: '+ userId);
 
         try {

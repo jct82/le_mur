@@ -15,7 +15,7 @@ const elementController = require('./controllers/elementController');
 router.get('/user/list', auth.auth, userController.listUsers);
 router.post('/user/register', userController.addUser);
 router.post('/user/login', userController.connectUser);
-router.patch('/user/login/:id', auth.auth, userController.updateUser);
+router.patch('/user/login', auth.auth, userController.updateUser);
 // wall roads details
 router.get('/user/walls',auth.auth, wallController.listWalls);
 router.post('/user/walls',auth.auth,multerModule.single("photo"), wallController.addWall);

@@ -1,11 +1,16 @@
-import Reac from 'react';
+import React from 'react';
 import { useState } from 'react';
 import FormSignup from './FormSignup';
 import './styles.scss';
-import './../../assets/icons/cross.png';
+import closeIcon from 'src/assets/icons/cross-neg-white.png';
 
 
-const Form = ({closeForm}) => {
+const Form = ({ closeForm }) => {
+
+  const handleCloseModal = () => {
+    closeForm((prevState) => !prevState);
+  };
+
   const [isSubmitted, setIsSubmitted] = useState(false)
   function submitForm() {
     setIsSubmitted(true);
@@ -14,16 +19,16 @@ const Form = ({closeForm}) => {
     <>
       <div className="form-container">
         <div className="from-content-left">
-        <button onClick={() => closeForm (false)}></button>
+          <img className="closeIcon" src={closeIcon} alt="fermeture de la modale" onClick={handleCloseModal} />
         </div>
         {!isSubmitted ? (
           <FormSignup submitForm={submitForm} />) : (<FormSuccess />)
         }
       </div>
-      </>
-      )
+    </>
+  )
 }
 
-      export default Form
+export default Form
 
 

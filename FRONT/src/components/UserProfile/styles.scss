@@ -1,0 +1,42 @@
+.user-profile-container {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 500px;
+  padding: auto;
+
+  .form-content{
+    width:400px;
+    max-width:80%;
+  }
+  
+  /*z-index:20;
+  padding:2rem 4rem;
+  margin: 0 auto;
+  width:800px;
+  max-width:80%;
+  top:0;
+  left:0;
+  right:0;
+  border:1px solid white;*/
+
+
+
+  .submitBtn{
+    background-color: black;
+    color: white;
+    border:none;
+    margin-top:1rem;
+    margin-bottom: 2rem;
+    padding:0.8rem;
+    border:1px solid white;
+    display: flex;
+    align-items: center;
+    &__submitIcon{
+      margin-left:0.5rem;
+      width:30px;
+    };
+}
+}

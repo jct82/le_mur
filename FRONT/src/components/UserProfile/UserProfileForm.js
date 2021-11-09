@@ -1,22 +1,17 @@
-// form signup with 
+// form UserProfileForm with 
 import React from 'react';
-import useForm from './useForm';
-import infoValidate from './infoValidate';
 import { useDispatch, useSelector } from 'react-redux';
-import {storeUserRegisterInput, createUser } from '../../actions/users';
+import { storeUserRegisterInput, updateUser } from '../../actions/users';
 import Input from 'src/components/inputForm/inputs';
 import PropTypes from 'prop-types';
+// import Profile from './Profile';
 
-const FormSignup = ({ submitForm }) => {
+const UserProfileForm = () => {
+  
   // send actions to the reducer
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user)
+  const userInput = useSelector ((state) => state.user)
 
-
-  // reasearch the values from useForm
-  /*const { handleChange, values, handleSubmit, errors }
-    = useForm(submitForm, infoValidate);
-*/
 
   const handleChange = (event) => {
     console.log(event.target.value)
@@ -26,25 +21,31 @@ const FormSignup = ({ submitForm }) => {
     dispatch(storeUserRegisterInput(inputName, inputValue))
   }
 
-  const handleSubmit = (event) => {
+
+    const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(createUser())
+    dispatch(updateUser())
   }
 
+
   return (
-    <div className="form-content-right">
+    <div className="form-content">
       <form className="form dark" onSubmit={handleSubmit}>
-        <h1>S'inscrire</h1>
+        <h1>Modifier Votre Profil</h1>
 
         <div className="form-inputs">
-          <Input type="text" name="name" value={user.name} changeInput={handleChange} label="Prénom" />
+          <Input type="text" 
+          name="name" 
+          value={userInput.name} 
+          changeInput={handleChange} 
+          label="Prénom" />
         </div>
 
         <div className="form-inputs">
           <Input
             type="text"
             name="lastname"
-            value={user.lastname}
+            value={userInput.lastname}
             changeInput={handleChange}
             label="Nom"
           />
@@ -52,20 +53,9 @@ const FormSignup = ({ submitForm }) => {
 
         <div className="form-inputs">
           <Input
-            type="email"
-            name="email"
-            value={user.email}
-            changeInput={handleChange}
-            label="Email"
-          />
-
-        </div>
-
-        <div className="form-inputs">
-          <Input
             type="password"
             name="password"
-            value={user.password}
+            value={userInput.password}
             changeInput={handleChange}
             label="Mot de passe"
           />
@@ -88,14 +78,14 @@ const FormSignup = ({ submitForm }) => {
 
         </div>
         */}
-        <button className="btn btn-submit-txt" type="submit">S'inscrire</button>
+        <button className="btn btn-submit-txt" type="submit">Enregistrer</button>
       </form>
     </div>
   )
 }
 
-FormSignup.propTypes = {
-  submitForm: PropTypes.func.isRequired,
+UserProfileForm.propTypes = {
+  userProfileForm: PropTypes.func.isRequired,
 };
-export default FormSignup;
+export default UserProfileForm;
 

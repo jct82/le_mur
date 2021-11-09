@@ -13,6 +13,11 @@ const initialState = {
     password: '',
   },
   users: '',
+  loggedUserInfos: {
+    id: null,
+    name: '',
+    lastname: '',
+  }
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -75,6 +80,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         users: [...action.users],
+      };
+    case 'UPDATE_USERS':
+      return {
+        ...state,
+        [action.name]: action.value,
       };
     default:
       return state;

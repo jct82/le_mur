@@ -30,6 +30,6 @@ export const storeAllUsers = (users) => (
   { type: 'STORE_USERS', users }
 );
 
-// export cont updateUser = () => {
-//  { type: 'UPDATE_USER '}
-// };
+ export const updateUser = () => (
+  { type: 'UPDATE_USER '}
+ );

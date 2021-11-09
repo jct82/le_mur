@@ -1,14 +1,16 @@
-// form signup with 
+// form UserProfileForm with 
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { storeUserRegisterInput, createUser } from '../../actions/users';
+import { storeUserRegisterInput, updateUser } from '../../actions/users';
 import Input from 'src/components/inputForm/inputs';
 import PropTypes from 'prop-types';
+// import Profile from './Profile';
 
-const UserProfileForm = ({ submitProfileForm }) => {
+const UserProfileForm = () => {
+  
   // send actions to the reducer
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user)
+  const userInput = useSelector ((state) => state.user)
 
 
   const handleChange = (event) => {
@@ -18,20 +20,13 @@ const UserProfileForm = ({ submitProfileForm }) => {
     const inputValue = event.target.value
     dispatch(storeUserRegisterInput(inputName, inputValue))
   }
-  /* const updateProfile = (event) => {
+
+
+    const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(updateUser())
   }
-  */
- /* met les info utilis
- const user.name = useSelector((state) => state.user.name)
- const {} = user.name;
- */
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(createUser())
-  }
 
   return (
     <div className="form-content-right">
@@ -39,14 +34,18 @@ const UserProfileForm = ({ submitProfileForm }) => {
         <h1>Modifier Votre Profil</h1>
 
         <div className="form-inputs">
-          <Input type="text" name="name" value={user.name} changeInput={handleChange} label="Prénom" />
+          <Input type="text" 
+          name="name" 
+          value={userInput.name} 
+          changeInput={handleChange} 
+          label="Prénom" />
         </div>
 
         <div className="form-inputs">
           <Input
             type="text"
             name="lastname"
-            value={user.lastname}
+            value={userInput.lastname}
             changeInput={handleChange}
             label="Nom"
           />
@@ -54,20 +53,9 @@ const UserProfileForm = ({ submitProfileForm }) => {
 
         <div className="form-inputs">
           <Input
-            type="email"
-            name="email"
-            value={user.email}
-            changeInput={handleChange}
-            label="Email"
-          />
-
-        </div>
-
-        <div className="form-inputs">
-          <Input
             type="password"
             name="password"
-            value={user.password}
+            value={userInput.password}
             changeInput={handleChange}
             label="Mot de passe"
           />

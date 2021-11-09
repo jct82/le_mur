@@ -1,15 +1,18 @@
 import UserProfileForm from "./UserProfileForm";
 import React, { useState } from "react";
 import './styles.scss'
+import { submitUserLogin } from "../../actions/users";
 
 const UserProfile = () => {
-  const [editMode, setEditmode] = useState(false);
-  const changeToFalse = () => {
-    setEditMode(false)
-  } 
+
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  function submitUserProfileForm() {
+    setIsSubmitted(true);
+  }
   return (
     <div className="user-profile-container">
-    <UserProfileForm changeToFalse={changeToFalse} />
+    {!isSubmitted}
+      <UserProfileForm />
     </div>
   )
 };

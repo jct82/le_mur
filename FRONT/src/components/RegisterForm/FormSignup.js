@@ -3,7 +3,7 @@ import React from 'react';
 import useForm from './useForm';
 import infoValidate from './infoValidate';
 import { useDispatch, useSelector } from 'react-redux';
-import { storeUserRegisterInput, createUser } from '../../actions/users';
+import {storeUserRegisterInput, createUser } from '../../actions/users';
 import Input from 'src/components/inputForm/inputs';
 import PropTypes from 'prop-types';
 

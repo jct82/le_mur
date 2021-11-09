@@ -18,12 +18,14 @@ const wallMiddleware = (store) => (next) => (action) => {
       const wallUserIds = usersId.map((user) => user[0].id);
 
       // on crée un formData à envoyer au back
+      console.log(action.picture, state.walls.wallCreation.title, state.walls.wallCreation.description, wallUserIds, action.title_color)
       const wallData = new FormData();
       wallData.append('photo', action.picture);
       wallData.append('title', state.walls.wallCreation.title);
       wallData.append('description', state.walls.wallCreation.description);
       wallData.append('users', wallUserIds);
       wallData.append('title_color', action.title_color)
+      console.log('wallData', wallData.get('title'));
       const config = {
         method: 'post',
         url: '/user/walls',
@@ -33,6 +35,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           console.log(response.data, 'ok mur crée');
+          console.log('reponse', response.data);
           store.dispatch(storeNewWall(response.data));
         })
         .catch((error) => {

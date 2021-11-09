@@ -22,6 +22,7 @@ const wallController = {
             const collabsData = await Wall.findCollabsInfoByWallId(ArrayOfWallIds)
            
             res.status(200).json({result : walls,collabsData});
+            // res.status(200).json({result : walls});
 
          
         } catch (error) {
@@ -101,6 +102,65 @@ const wallController = {
            
         }
     },
+
+    // Modify existing wall
+    updateWall: async function (req, res){
+
+        const wallId = req.params.id;
+        console.log('wallId : '+ wallId)
+
+        try {
+            
+            console.log('req.body : '+ JSON.stringify(req.body));
+            console.log('req.file: '+ JSON.stringify(req.file));
+            // we get the path of the photo (and we remove "public/" in the path) and insert it in req.body
+            if(req.file){
+                req.body.photo = req.file.filename;
+            }else{
+                req.body.photo = ""
+            };
+            // We create a new instance of Wall and save it in database
+            const newWall = new Wall(req.body);
+            console.log(newWall);
+            const updatedWall = await newWall.update(wallId);
+
+            // We delete all colaborators of a wall to resave them in case there were modified
+            await Wall.deleteCollabs(wallId);                        
+            return res.status(200).json({message:'collaborateurs bien supprimé'});
+
+            // We transform req.body.users into an array of integers         
+            const collabIdsInit = (req.body.users).split(',');
+            const collabIds = collabIdsInit.map(id => parseInt(id));
+            // We add the owner_id of the wall in collabIds to save collaboratos and owner in "participate" table
+            collabIds.push(userId);
+            console.log('collabsIDs: ' + collabIds);
+            // Inisialization of an array to stock all ids
+            collabIdsArray = [];
+            // We save wallId and collabId in "participate" table 
+            for (const collab of collabIds){
+                collabId = parseInt(collab);
+                // we push every id in collabIdsArray
+                collabIdsArray.push(collabId);
+                await newWall.saveWallInParticipate(wallId,collabId);
+            };
+            console.log(collabIdsArray);
+
+            const collabsData = await User.findByIds(collabIdsArray);
+            console.log('collabsData: ' + JSON.stringify(collabsData));
+
+            
+            res.status(200).json({result : updatedWall, collabsData});
+
+
+        } catch (error) {
+            console.error(error)
+            if (error instanceof Wall.NoDataError) {
+                return res.status(404).json(error.message)
+          
+             }
+        }
+    
+    }    
 
 }
 

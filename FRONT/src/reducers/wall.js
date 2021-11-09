@@ -1,4 +1,4 @@
-import { CHANGE_PANEL, TOGGLE_EYE, POST_USER, DELETE_USER, UPDATE_DOC_PROPS, DISPLAY_MODE, REDIRECT_PDF } from "src/actions/wall";
+import { CHANGE_PANEL, TOGGLE_EYE, POST_USER, DELETE_USER, UPDATE_DOC_PROPS, DISPLAY_MODE, REDIRECT_PDF, ADD_DOC } from "src/actions/wall";
 
 const initialState = {
   id: 1,
@@ -14,10 +14,33 @@ const initialState = {
   detailed: -1,
   displaysquare: false,
   toPDF:false,
+  docList:[]
 };
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case ADD_DOC : {
+      const { id, name, description, type, position, link, src, ownerid } = action.doc;
+      const newDoc = {
+        id: id,
+        name: name,
+        description: description,
+        type: type,
+        position: position,
+        link: link,
+        src: src,
+        ownerid: ownerid,
+      };
+      const allDocs = state.docList;
+      const newDocs = [
+        ...allDocs,
+        newDoc,
+      ];
+      return{
+        ...state,
+        docList: newDocs,
+      }
+    }
     case CHANGE_PANEL :
       return{
         ...state,

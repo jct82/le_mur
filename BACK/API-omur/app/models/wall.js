@@ -72,6 +72,27 @@ module.exports = class Wall extends Core {
 
                   
     }
+
+     // method to modify an existing wall in database
+    async update(wallId) {
+        
+        const data = await Core.fetchOne(`UPDATE "wall" SET title=$1, description=$2, photo=$3, title_color=$4 WHERE id =$5 RETURNING *;`,
+        [this.title, this.description, this.photo, this.title_color, wallId]);
+        return data
+
+           
+    }
+
+    // method to delete collaborators of a wall in database
+    async deleteCollabs(wallId) {
+        
+        const data = await Core.fetch(`DELETE FROM "participate" WHERE wall_id = $1 RETURNING *;`,
+        [wallId]);
+        return data
+
+           
+    }
+
 }
 
 

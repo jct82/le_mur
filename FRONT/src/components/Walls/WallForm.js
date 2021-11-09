@@ -15,17 +15,17 @@ import { getAllUsers } from '../../actions/users';
 import SelectUser from '../inputForm/SelectUser';
 import randomColor from '../../utils/randomColor';
 
-// Liste en dur des collaboratueurs au projet. il faudra les récuprer du back
-// const coworkers = ['julien politi', 'ariana bredon', 'michel wagner', 'antoine sauvé', 'jean-Charles Trinquet', 'etienn Pinon'];
-// const coworkers = [{ id: 1, name: 'julien politi' }, { id: 2, name: 'ariana bredon' }];
-
 const WallForm = ({ setFormOpen }) => {
   const dispatch = useDispatch();
   const [picture, setPicture] = useState();
-  const wallCreation = useSelector((state) => state.walls.wallCreation);
-  // const coworkerss = useSelector((state) => state.user.users);
+
+  // récupération de la liste des utilisateurs
+  const userName = useSelector((state)=> state.user.loggedUserInfos.name);
   const coworkers = useSelector((state) => state.user.users.map((user) => user.name));
-  // if (coworkerss)console.log(coworkerss);
+  const coworkersExceptOwner = coworkers.filter((coworker)=> coworker !== userName)
+
+  // récupération du mur en état de création pour afficher les utilisateur au fir et à mesure de leur ajout
+  const wallCreation = useSelector((state) => state.walls.wallCreation);
   const { title, description } = wallCreation;
 
   const handleCloseModal = () => {
@@ -59,7 +59,7 @@ const WallForm = ({ setFormOpen }) => {
             <FileInput type="file" name="photo" changeInput={handleChangePicture} value="" label="upload picture" />
           </div>
           <div className="wallForm__rightContainer">
-            { coworkers && <Select name="users" label="nom du collaborateur" value="" options={coworkers} changeInput={handleChangeInput} /> }
+            { coworkers && <Select name="users" label="nom du collaborateur" value="" options={coworkersExceptOwner} changeInput={handleChangeInput} /> }
             <AddedUser users={wallCreation.users} onDeleteCoworker={handleDeleteCoworker} />
             <button className="btn btn-submit-txt" type="submit">créer le projet</button>
           </div>

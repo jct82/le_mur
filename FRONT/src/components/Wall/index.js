@@ -4,8 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import docs from 'src/data/element';
 import user from 'src/data/user';
-import { emptyForm } from 'src/actions/element.js'
-import { changePanel, toggleEye, displayMode, redirectPDF } from 'src/actions/wall.js'
+import { updateDocName, emptyForm } from 'src/actions/element.js'
+import { updateWallInput, changePanel, toggleEye, displayMode, redirectPDF } from 'src/actions/wall.js'
 import { updateContents } from "src/actions/textEdit";
 import Docs from './docs';
 import AddDocForm from './addDoc';
@@ -16,12 +16,16 @@ import InfoWallForm from './infoWall';
 import './style.scss';
 
 const Wall = () => {
+  const dispatch = useDispatch();
+
   // pour passer les infos du mur depuis la page Walls
   const location = useLocation();
   const { wallTitle, wallId } = location.state;
-
-  const dispatch = useDispatch();
+ 
   const { panel, displaysquare, toPDF } = useSelector((state) => state.wall);
+  const { loggedUserInfos } = useSelector((state) => state.user);
+
+  console.log(loggedUserInfos);
 
   const slidePanel = () => {
     document.querySelector('.main').classList.add('on');
@@ -40,6 +44,9 @@ const Wall = () => {
   }
 
   useEffect(() => {
+    dispatch(updateWallInput('id', wallId));
+    dispatch(updateDocName('ownerid', loggedUserInfos.id));
+
     document.addEventListener('click', (e) => {
       if(!e.target.parentNode.parentNode.classList.contains('doc')) dispatch(toggleEye(-1));
     });

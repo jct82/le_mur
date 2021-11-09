@@ -8,6 +8,7 @@ export const REDIRECT_PDF = 'REDIRECT_PDF';
 export const STORE_NEW_WALL = 'STORE_NEW_WALL';
 export const DELETE_WALL_ACTION = 'DELETE_WALL_ACTION';
 export const DELETE_WALL_FROM_STORE = 'DELETE_WALL_FROM_STORE';
+export const ADD_DOC = 'ADD_DOC';
 
 export const changePanel = (panel) => ({
   type: CHANGE_PANEL,
@@ -29,7 +30,7 @@ export const deleteUser = (user) => ({
   user: user,
 });
 
-export const updateDocName = (name, prop) => ({
+export const updateWallInput = (name, prop) => ({
   type: UPDATE_DOC_PROPS,
   name: name,
   prop: prop,
@@ -44,8 +45,13 @@ export const redirectPDF = () => ({
   type: REDIRECT_PDF,
 });
 
+export const addDoc = (doc) => ({
+  type: ADD_DOC,
+  doc: doc,
+});
+
 export const storeNewWall = (wallData) => (
-  { type: 'STORE_NEW_WALL', newWall: wallData.newWall, id:wallData.result.wall_id }
+  { type: 'STORE_NEW_WALL', newWall: wallData.newWall, id:wallData.result.wall_id, collabsData: wallData.collabsData }
 );
 
 export const deleteWallAction = (wallId) => (

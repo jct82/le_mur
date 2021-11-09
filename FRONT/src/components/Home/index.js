@@ -1,12 +1,21 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Form from '../RegisterForm/Form';
+// import Form from '../RegisterForm/Form';
 import Button from '../RegisterForm/Button';
 import './styles.scss';
+import { populateLoggedInfosIFLogged } from '../../actions/users';
 
 
 const Home = () => {
+  // const dispatch = useDispatch();
+  // if(localStorage.name) {
+  //   const name = localStorage.name;
+  //   const lastname = localStorage.lastname;
+  //   const userId = localStorage.userId;
+  //   dispatch(populateLoggedInfosIFLogged(name, lastname, userId));
+  // }
+  // on bloque si le user n'est pas loggedIn
   const logged = useSelector((state) => state.user.logged);
   return (
     <div className="home">

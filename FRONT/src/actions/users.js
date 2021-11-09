@@ -29,3 +29,7 @@ export const getAllUsers = () => (
 export const storeAllUsers = (users) => (
   { type: 'STORE_USERS', users }
 );
+
+export const populateLoggedInfosIFLogged = (name, lastname, userId ) => (
+  { type: 'POPULATE_LOGGEDINFOS_FROM_LOCALSTORAGE', name, lastname, userId }
+)

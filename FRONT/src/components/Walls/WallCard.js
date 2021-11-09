@@ -50,7 +50,6 @@ const WallCard = ({
           : (
             <Link to={{ pathname: '/wall', state: { wallId: id, wallTitle: title } }}>
               <div className="wallcard__imgContainer__img" style={{ backgroundImage: `url('http://localhost:3000/${photo}')` }} />
-              {/* <div className="wallcard__imgContainer__img" style={{ backgroundImage: `url('http://localhost:3000/photo-1636056563596-949361088.jpg')` }} /> */}
             </Link>
           )
       }
@@ -60,13 +59,13 @@ const WallCard = ({
         <div className="wallcard__description__title" style={{ backgroundColor: `${title_color}` }}>{title}</div>
         <p>{description}</p>
       </div>
-      {/* <div className="wallcard__coworkers">
+      <div className="wallcard__coworkers">
         {
           users && users.map((user) => (
-            <UserTag pseudo={user} key={user} />
+            <UserTag pseudo={user.name} key={user.id} />
           ))
         }
-      </div> */}
+      </div>
     </div>
   );
 };

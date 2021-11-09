@@ -23,8 +23,10 @@ const UserProfileForm = () => {
 
 
     const handleSubmit = (event) => {
+      console.log("j'ai bien appuyé");
     event.preventDefault();
     dispatch(updateUser())
+
   }
 
 

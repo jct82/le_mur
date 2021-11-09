@@ -54,12 +54,12 @@ const authMiddleware = (store) => (next) => (action) => {
     }
     case 'UPDATE_USER' : {
         const config = {
-          method: 'post',
-          url: 'user/register',
+          method: 'patch',
+          url: '/user/login',
           data: {
-            newName: state.user.name,
-            newLastname: state.user.lastname,
-            newPassword: state.user.password,
+            name: state.user.name,
+            lastname: state.user.lastname,
+            password: state.user.password,
           },
         };
         API(config)

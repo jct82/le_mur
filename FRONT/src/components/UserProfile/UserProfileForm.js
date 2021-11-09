@@ -29,7 +29,7 @@ const UserProfileForm = () => {
 
 
   return (
-    <div className="form-content-right">
+    <div className="form-content">
       <form className="form dark" onSubmit={handleSubmit}>
         <h1>Modifier Votre Profil</h1>
 

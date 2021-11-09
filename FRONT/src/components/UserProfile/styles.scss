@@ -4,9 +4,12 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  height: 500px;
+  padding: auto;
 
-  .form-content-right {
-    
+  .form-content{
+    width:400px;
+    max-width:80%;
   }
   
   /*z-index:20;

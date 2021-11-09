@@ -37,16 +37,7 @@ const authMiddleware = (store) => (next) => (action) => {
           password: state.user.password,
         },
       };
-      case 'UPDATE_USER' : {
-        const config = {
-          method: 'post',
-          url: 'user/register',
-          data: {
-            newName: state.user.name,
-            newLastname: state.user.lastname,
-            newPassword: state.user.password,
-          },
-        };
+      
       API(config)
         .then((response) => {
           console.log(response.data);
@@ -61,6 +52,30 @@ const authMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     }
+    case 'UPDATE_USER' : {
+        const config = {
+          method: 'post',
+          url: 'user/register',
+          data: {
+            newName: state.user.name,
+            newLastname: state.user.lastname,
+            newPassword: state.user.password,
+          },
+        };
+        API(config)
+        .then((response) => {
+          console.log(response.data);
+          if (response.status === 200) {
+            console.log(response.data);
+           // store.dispatch(logUser(response.data));
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      next(action);
+      break;
+      };
     default:
       next(action);
   }

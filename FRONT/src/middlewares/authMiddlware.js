@@ -53,6 +53,7 @@ const authMiddleware = (store) => (next) => (action) => {
       break;
     }
     case 'UPDATE_USER' : {
+      console.log(state.user.name)
         const config = {
           method: 'post',
           url: 'user/register',

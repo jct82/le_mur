@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { logUser } from '../actions/users';
 import API from './api';
-// const API = axios.create({ baseURL: 'http://54.196.235.242/user/' });
 
 const authMiddleware = (store) => (next) => (action) => {
   const state = store.getState();
@@ -10,7 +9,6 @@ const authMiddleware = (store) => (next) => (action) => {
       console.log(action);
       const config = {
         method: 'post',
-        // baseURL: 'http://54.196.235.242/user/',
         url: '/user/login',
         data: {
           email: state.user.credentials.email,
@@ -31,7 +29,6 @@ const authMiddleware = (store) => (next) => (action) => {
     case 'CREATE_USER': {
       const config = {
         method: 'post',
-        // baseURL: 'http://54.196.235.242/user/',
         url: '/user/register',
         data: {
           name: state.user.name,

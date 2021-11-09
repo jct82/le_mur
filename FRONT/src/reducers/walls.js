@@ -54,7 +54,6 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action = {}) => {
-  console.log(action)
   switch (action.type) {
     case 'STORE_WALLS':
       return {

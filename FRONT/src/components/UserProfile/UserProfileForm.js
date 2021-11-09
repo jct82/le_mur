@@ -22,7 +22,7 @@ const UserProfileForm = () => {
   }
 
 
-    const handleSubmit = (event) => {
+    const handleUpdateSubmit = (event) => {
     event.preventDefault();
     dispatch(updateUser())
   }
@@ -30,7 +30,7 @@ const UserProfileForm = () => {
 
   return (
     <div className="form-content">
-      <form className="form dark" onSubmit={handleSubmit}>
+      <form className="form dark" onSubmit={handleUpdateSubmit}>
         <h1>Modifier Votre Profil</h1>
 
         <div className="form-inputs">

@@ -25,6 +25,16 @@ module.exports = class User extends Core {
 
            
     }
+
+     // method to save a new user informations in database
+     async update(userId) {
+        
+        const data =  await Core.fetchOne(`UPDATE "user" SET name=$1, lastname=$2, password=$3 WHERE id = $4 RETURNING *;`,
+        [this.name, this.lastname, this.password, userId]);
+        return data;
+
+           
+    }
 }
 
    

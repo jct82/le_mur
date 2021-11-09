@@ -83,6 +83,32 @@ const userController = {
             }
         }
     },
+
+    updateUser: async function (req, res){
+
+        const userId = req.params.id;
+        console.log('userId: '+ userId);
+
+        try {
+            // First we hash the password with bcrypt
+            const hashedPassword = await bcrypt.hash(req.body.password, 12);
+            // Then we set the hashedPassword in req.body
+            req.body.password = hashedPassword;
+            console.log(req.body);
+            const newUser = new User(req.body);
+            // We save the new user in database
+            const updatedUser = await newUser.update(userId);
+            console.log('updatedUserId:' + updatedUser.id);
+
+            res.status(200).json({message : "user mis a jour", updatedUser})
+
+        } catch (error) {
+            console.error(error)
+            if (error instanceof User.NoDataError) {
+                return res.status(404).json(error.message)
+            }
+        }
+    },
 }
 
 module.exports = userController;

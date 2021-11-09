@@ -33,3 +33,6 @@ export const storeAllUsers = (users) => (
 export const populateLoggedInfosIFLogged = (name, lastname, userId ) => (
   { type: 'POPULATE_LOGGEDINFOS_FROM_LOCALSTORAGE', name, lastname, userId }
 )
+ export const updateUser = () => (
+  { type: 'UPDATE_USER '}
+ );

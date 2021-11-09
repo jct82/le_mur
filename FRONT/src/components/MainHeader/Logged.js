@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { disconnectUser } from '../../actions/users';
 import { emptyWallsList } from '../../actions/walls';
@@ -19,7 +19,7 @@ const Logged = ({ onToggleMenu }) => {
       <p className="userMenu__btnContainer__userName">{user}</p>
       <ul className="userMenu__btnContainer__buttons">
         <li className="userMenu__btnContainer__buttons__logoutBtn" onClick={handleDisconnectUser}>Déconnexion</li>
-        <li className="userMenu__btnContainer__buttons__accountBtn">Mon compte</li>
+        <Link to="/userProfile"> <li className="userMenu__btnContainer__buttons__accountBtn">Mon compte</li> </Link>
       </ul>
     </div>
   );

@@ -1,25 +1,53 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Form from '../RegisterForm/Form';
 import Button from '../RegisterForm/Button';
+import subscribe from 'src/assets/icons/subscribe.png';
+import science from 'src/assets/icons/science.png';
+import share from 'src/assets/icons/share.png';
 import './styles.scss';
 
 
 const Home = () => {
+
   const logged = useSelector((state) => state.user.logged);
   return (
     <div className="home">
       {logged && <Redirect to="/walls" />}
-      <div className="white-triangle"></div>
       <div className="left_container">
         <div className="inner_container">
           <h1 className="app_title">LE <br></br> MUR.</h1>
-          <div className="presentation">
+          <div className="white-triangle"></div>
+          <div className="separator">
           <div className="triangle"></div>
-            <h2 className="page_title">Un espace de travail collaboratif</h2>
-            <p className="app_resume">Le Mur est un espace de mise en commum d'idées visuelles qui vise à reproduire à distance l'expérience physique de la rencontre entre plusieurs créatifs, qui épingleraient sur un mur des images d'inspiration.</p>
-
+          <hr></hr>
+          </div>       
+          <div className="presentation">
+          
+            {/* <h2 className="page_title">Un espace de travail collaboratif</h2> */}
+            <p className="app_resume">Le Mur est un espace de mise en commun d'idées visuelles qui vise à reproduire à distance
+             l'expérience physique de la rencontre entre plusieurs créatifs</p>
+            <div className="steps">
+              <div>
+                <div className="steps__step">
+                  <img className="steps__icon" src={subscribe}></img>
+                </div>
+                <p>inscription</p>
+              </div>
+              <div className="gg-shape-triangle"></div>
+              <div>
+                <div className="steps__step">
+                <img className="steps__icon" src={science}></img>
+                </div>
+                <p>CREATION</p>
+              </div>
+              <div className="gg-shape-triangle"></div>
+              <div>
+                <div className="steps__step">
+                <img className="steps__icon" src={share}></img>
+                </div>
+                <p>PARTAGE</p>
+              </div>
+            </div>
             <blockquote className="citation">
               <p className></p>
               <p className="citationTexte">"La vraie collaboration, c'est quand l'idée ne peut plus être attribué à une seule personne."</p></blockquote>

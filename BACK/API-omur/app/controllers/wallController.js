@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const Wall = require('../models/wall');
+// We require fs-extra to remove files in public folder
+const fs = require('fs-extra');
 
 
 const wallController = {
@@ -33,6 +35,27 @@ const wallController = {
             }
         }
     },
+
+  // Get wall by id  with informations
+  listWallById: async function (req, res){
+    const wallId = req.params.id;
+      try {
+          // We get wall with wall id
+          const wall = await Wall.findOne(wallId);
+         
+          console.log('wall : ' + JSON.stringify(wall));
+            
+          res.status(200).json(wall);
+         
+       
+      } catch (error) {
+          console.error(error);
+          if (error instanceof User.NoDataError) {
+              return res.status(404).json(error.message);
+          }
+      }
+  },
+
     // Add new wal
     addWall: async function (req, res){
 
@@ -113,6 +136,14 @@ const wallController = {
         console.log('id du mur supprimé : '+ wallId);
                 
         try {
+            // First we get the name of the photo in database to remove it from 'public' folder
+            const wallData = await Wall.findOne(wallId);
+            const wallDataPhoto = wallData.photo;
+            console.log('wallDataPhoto supprimée : ' + wallDataPhoto);
+            // If there is a photo we remove it from public folder 
+            if (wallDataPhoto !=''){
+                await fs.remove(`public/${wallDataPhoto}`);
+            }
             // We delete a wall with id in database
             await Wall.deleteWallById(wallId);                        
             return res.status(200).json({message:'mur bien supprimé'});

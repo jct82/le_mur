@@ -35,6 +35,27 @@ const wallController = {
             }
         }
     },
+
+  // Get wall by id  with informations
+  listWallById: async function (req, res){
+    const wallId = req.params.id;
+      try {
+          // We get wall with wall id
+          const wall = await Wall.findOne(wallId);
+         
+          console.log('wall : ' + JSON.stringify(wall));
+            
+          res.status(200).json(wall);
+         
+       
+      } catch (error) {
+          console.error(error);
+          if (error instanceof User.NoDataError) {
+              return res.status(404).json(error.message);
+          }
+      }
+  },
+
     // Add new wal
     addWall: async function (req, res){
 

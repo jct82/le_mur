@@ -56,28 +56,47 @@ const wallController = {
             // We get the new wall id in database
             const wall = await Wall.findByTitle(req.body.title);
             const wallId = wall.id;
-            // We transform req.body.users into an array of integers         
-            const collabIdsInit = (req.body.users).split(',');
-            const collabIds = collabIdsInit.map(id => parseInt(id));
-            // We add the owner_id of the wall in collabIds to save collaboratos and owner in "participate" table
-            collabIds.push(userId);
-            console.log('collabsIDs: ' + collabIds);
-            // Inisialization of an array to stock all ids
-            collabIdsArray = [];
-            // We save wallId and collabId in "participate" table 
-            for (const collab of collabIds){
-                collabId = parseInt(collab);
-                // we push every id in collabIdsArray
-                collabIdsArray.push(collabId);
-                await newWall.saveWallInParticipate(wallId,collabId);
-            };
-            console.log(collabIdsArray);
-            // We get all informations about collaborators with collaborators ids
-            const collabsData = await User.findByIds(collabIdsArray);
-            console.log('collabsData: ' + JSON.stringify(collabsData));
 
+            // If there are collaborators then we transform req.body.users into an array of integers         
+            if(req.body.users){
+                const collabIdsInit = (req.body.users).split(',');
+                const collabIds = collabIdsInit.map(id => parseInt(id));
+
+                // We add the owner_id of the wall in collabIds to save collaboratos and owner in "participate" table
+                collabIds.push(userId);
+                console.log('collabsIDs: ' + collabIds);
+                // Inisialization of an array to stock all ids
+                collabIdsArray = [];
+                // We save wallId and collabId in "participate" table 
+                for (const collab of collabIds){
+                    collabId = parseInt(collab);
+                    // we push every id in collabIdsArray
+                    collabIdsArray.push(collabId);
+                    await newWall.saveWallInParticipate(wallId,collabId);
+                };
+                console.log(collabIdsArray);
+                // We get all informations about collaborators with collaborators ids
+                const collabsData = await User.findByIds(collabIdsArray);
+                console.log('collabsData: ' + JSON.stringify(collabsData));
+
+                
+                res.status(200).json({result: {wall_id:wallId},collabsData,newWall})
+
+            // If the owner is the only one collaborator of the wall 
+            }else {const collabId = parseInt(userId);
             
-            res.status(200).json({result: {wall_id:wallId},collabsData,newWall})
+                console.log('collabsIDs: ' + collabId);
+                // we save the wallId and the collabId in "participate" table
+                await newWall.saveWallInParticipate(wallId,collabId);
+              
+                // We get all informations about the collaborator with collaborator id
+                const collabsData = await User.findByIds(collabId);
+                console.log('collabsData: ' + JSON.stringify(collabsData));
+    
+                
+                res.status(200).json({result: {wall_id:wallId},collabsData,newWall})
+                      
+            };
 
 
         } catch (error) {

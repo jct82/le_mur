@@ -17,8 +17,12 @@ const authMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log(response.data);
-          store.dispatch(logUser(response.data)); // renvoyer le new User name et lastName et Id.
+          console.log(response)
+          if( response.status === 200 ){
+            store.dispatch(logUser(response.data))
+          }else if (response.status === 401){
+            console.log(response.message)
+          }; 
         })
         .catch((error) => {
           console.log(error);

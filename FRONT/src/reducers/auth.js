@@ -21,7 +21,6 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action = {}) => {
-  console.log(action);
   switch (action.type) {
     case 'STORE_USER_LOGIN_INPUT':
       return {
@@ -39,13 +38,14 @@ const reducer = (state = initialState, action = {}) => {
     case 'POPULATE_LOGGEDINFOS_FROM_LOCALSTORAGE':
       return {
         ...state,
+        logged: true,
         loggedUserName: `${action.name} ${action.lastname}`,
         name: action.name,
         lastname: action.lastname,
         loggedUserInfos: {
           name: action.name,
           lastname: action.lastname,
-          id: action.id
+          id: action.userId
         },
       };
     case 'LOG_USER':

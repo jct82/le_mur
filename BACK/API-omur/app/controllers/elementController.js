@@ -3,7 +3,7 @@ const Wall = require('../models/wall');
 const Element = require('../models/element');
 
 const elementController = {
-    // Get walls with user informations
+    // Get elements of a wall
     listElements: async function (req, res){
 
         const wallId = req.params.id
@@ -32,10 +32,10 @@ const elementController = {
             console.log('req.file: '+ JSON.stringify(req.file));
             // we get the path of the photo (and we remove "public/" in the path) and insert it in req.body
             if(req.file){
-                req.body.photo = req.file.filename;
-            }else{
-                req.body.photo = ""
-            };
+                req.body.src = req.file.filename;
+            // }else{
+            //     req.body.src = ""
+            // };
             // We create a new instance of element and save it in database
             const newElement = new Element(req.body);
             const recordedElement = await newElement.save(wallId,userId);
@@ -59,7 +59,7 @@ const elementController = {
         elementId = req.params.id_element;
         console.log('id du mur concerné : '+ wallId);
         console.log('id element supprimé : ' + elementId);
-                
+        // We delete the element in database       
         try {
             await Element.deleteOne(elementId);                        
             res.status(200).json({message:'element supprimé'})
@@ -72,7 +72,7 @@ const elementController = {
 
      // Modify existing element in a wall
     updateElement: async function (req, res){
-
+        // We get different parameters
         const wallId = req.params.id;
         const elementId = req.params.id_element;
         console.log('WallId : '+ wallId);

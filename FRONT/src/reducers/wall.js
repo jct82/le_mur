@@ -34,13 +34,13 @@ const reducer = (state = initialState, action = {}) => {
         docList: newDocList,
       }
     case ADD_DOC : {
-      const { name, description, type, position, link, src, owner_id } = action.doc;
+      const { id, name, description, type, position, link, src, owner_id } = action.doc;
       let srcEdit = src;
       if (type == 'image') srcEdit = localPath+src;
+      console.log('srcEdit', srcEdit);
       const idList = state.docList.map((elem) => {
         return elem.id;
       }); 
-      const id = Math.max(...idList) + 1; 
       const newDoc = {
         id: id,
         name: name,
@@ -73,8 +73,16 @@ const reducer = (state = initialState, action = {}) => {
       }
     }
     case UPDATE_DOC : {
+      let newDoc = action.doc;
+      let newDocList = state.docList.map((doc) => {
+        if (doc.id != action.doc.id) return doc;
+      });
+      if (newDoc.type == 'image') newDoc.src = localPath+newDoc.src;
+      newDoc.link = newDoc.link.split('\\');
+      newDocList = [...newDocList, newDoc];
       return{
         ...state,
+        docList: newDocList,
       }
     }
     case CHANGE_PANEL :

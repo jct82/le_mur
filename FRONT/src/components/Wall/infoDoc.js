@@ -6,7 +6,7 @@ import './style.scss';
 
 const infoDocForm = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.id);
+  const user = useSelector((state) => state.user.loggedUserInfos.id);
   const {  id, name, description, type, src, link, owner_id } = useSelector((state) => state.elements);
 
   const changeForm= () => {

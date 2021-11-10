@@ -32,16 +32,17 @@ const elementController = {
             console.log('req.file: '+ JSON.stringify(req.file));
             // we get the path of the photo (and we remove "public/" in the path) and insert it in req.body
             if(req.file){
-                req.body.src = req.file.filename;
-            // }else{
-            //     req.body.src = ""
-            // };
-            // We create a new instance of element and save it in database
-            const newElement = new Element(req.body);
-            const recordedElement = await newElement.save(wallId,userId);
-            console.log('recordedElement.id : ' + recordedElement.id);
-                     
-            res.status(200).json(recordedElement)
+                    req.body.src = req.file.filename;
+                // }else{
+                //     req.body.src = ""
+                // };
+                // We create a new instance of element and save it in database
+                const newElement = new Element(req.body);
+                const recordedElement = await newElement.save(wallId,userId);
+                console.log('recordedElement.id : ' + recordedElement.id);
+                        
+                res.status(200).json(recordedElement)
+            }
 
 
         } catch (error) {

@@ -52,7 +52,7 @@ export const changeDoc = () => ({
   type: CHANGE_DOC,
 });
 
-export const updateDoc = () => ({
+export const updateDoc = (doc) => ({
   type: UPDATE_DOC,
 });
 

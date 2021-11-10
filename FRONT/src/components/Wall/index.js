@@ -23,9 +23,7 @@ const Wall = () => {
   const { wallTitle, wallId } = location.state;
  
   const { docList, panel, displaysquare, toPDF } = useSelector((state) => state.wall);
-  
-  const { loggedUserInfos } = useSelector((state) => state.user);
-  const currentUser = loggedUserInfos.id;
+  const currentUser = useSelector((state) => state.user.loggedUserInfos.id);
 
   const slidePanel = () => {
     document.querySelector('.main').classList.add('on');
@@ -45,7 +43,7 @@ const Wall = () => {
 
   useEffect(() => {
     dispatch(updateWallInput(wallId, 'id'));
-    dispatch(updateDocName(loggedUserInfos.id, 'owner_id'));
+    dispatch(updateDocName(currentUser, 'owner_id'));
     dispatch(getWall());
     dispatch(getWallInfo());
     document.addEventListener('click', (e) => {
@@ -105,7 +103,7 @@ const Wall = () => {
           <div className="icon pdf" onClick={editPdf}></div>
         </div>
         <div className={displaysquare ? "board-wrapper square" : "board-wrapper"}>
-          <Docs docs={docList} user={currentUser} getAction="infoDocPanel" getInfo={displayPanel} />
+          <Docs docs={docList} getAction="infoDocPanel" getInfo={displayPanel} />
         </div>
       </div>
     </div>

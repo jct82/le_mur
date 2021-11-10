@@ -12,6 +12,8 @@ const Doc = ({ photo, margin, direction, top, left }) => {
   const dispatch = useDispatch();
   const detailed = useSelector((state) => state.wall.detailed);
 
+  const currentUser = useSelector((state) => state.user.loggedUserInfos.id);
+
   const imgStyle = { margin: margin };
   if (direction === "column") {
     imgStyle.position = "absolute";
@@ -38,7 +40,7 @@ const Doc = ({ photo, margin, direction, top, left }) => {
   };
 
   return (
-    <div className={photo.owner_id == photo.user ? "doc owned" : "doc"} onClick={handleClick}>
+    <div className={photo.owner_id == currentUser ? "doc owned" : "doc"} onClick={handleClick}>
       {photo.id == detailed && <div className="see-btn" panel={photo.getAction} onClick={seeDoc}></div>}
       <div className="doc-content">
         {photo.type== 'image' && <img src={photo.src} alt={photo.name} onClick={posterEye}/>}

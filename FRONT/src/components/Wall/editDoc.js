@@ -36,6 +36,7 @@ const editDocForm = () => {
 
   const submitDoc = (e) => {
     e.preventDefault();
+    debugger;
     dispatch(changeDoc());
   }
 

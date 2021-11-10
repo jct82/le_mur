@@ -13,7 +13,7 @@ const SortableGallery = SortableContainer(({ items }) => (
   }  } />
 ));
 
-const Docs = ( {docs, user, getAction, getInfo} ) => {
+const Docs = ( {docs, getAction, getInfo} ) => {
 
   const [items, setItems] = useState(docs);
   const onSortEnd = ({ oldIndex, newIndex }) => {
@@ -22,7 +22,7 @@ const Docs = ( {docs, user, getAction, getInfo} ) => {
  
   return (
     <div className="board">
-      <SortableGallery distance={2} items={docs.map((doc) => ({...doc, user: user, getAction: getAction, getInfo: getInfo}))} onSortEnd={onSortEnd} axis={"xy"} />
+      <SortableGallery distance={2} items={docs.map((doc) => ({...doc, getAction: getAction, getInfo: getInfo}))} onSortEnd={onSortEnd} axis={"xy"} />
     </div>
   )
 };

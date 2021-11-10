@@ -14,11 +14,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       // on crée un formData à envoyer au back
       const { name, description, type, src, link, position, owner_id, img } = state.elements;
       
-      let linkToPost =  ''; 
-      link.forEach((elem) => {
-        linkToPost = linkToPost + elem + '\\';
-      });
-      linkToPost = linkToPost.slice(0, -1);
+      let linkToPost = link.join('\\');
       const docData = new FormData();
       docData.append('name', name);
       docData.append('description', description);
@@ -28,7 +24,6 @@ const wallMiddleware = (store) => (next) => (action) => {
       docData.append('link', linkToPost);
       docData.append('position', position);
       docData.append('owner_id', owner_id);
-      console.log('docData1111', docData);
       const config = {
         method: 'post',
         url:  `/user/walls/${id}/elements`,
@@ -38,7 +33,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           console.log(response.data, 'élément crée');
-          store.dispatch(addDoc(state.elements));
+          store.dispatch(addDoc(response.data));
         })
         .catch((error) => {
           console.error(error);
@@ -54,18 +49,26 @@ const wallMiddleware = (store) => (next) => (action) => {
       const docData = new FormData();
       let index = 0;
       let propName = '';
-      for (let prop in doc) {
+      
+      for (let prop in FormerDoc) {
         propName = Object.keys(doc)[index];
-        if (doc[prop] != FormerDoc[prop] && FormerDoc.hasOwnProperty(propName)) {
+        if (doc.hasOwnProperty(propName) && FormerDoc[prop] !== doc[prop]) {
           console.log('propName', propName);
           console.log('doc[prop]', doc[prop]);
-          docData.append(propName, doc[prop]);
+          if (propName == 'link') {
+            let linkString = doc.link.join('\\');
+            docData.set(propName, linkString);
+          } else {
+            docData.set(propName, doc[prop]);
+          }
+        } else {
+          docData.append(propName, FormerDoc[prop]);
         }
         index++;
       }
-      console.log('docData',docData);
+      console.log('docData',docData.get('name'));
       const config = {
-        method: 'dispatch',
+        method: 'patch',
         url: `/user/walls/${state.wall.id}/elements/${doc.id}`,
         data: docData,
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -73,7 +76,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           console.log('doc changé');
-          store.dispatch(updateDoc())
+          store.dispatch(updateDoc(response.data));
         })
         .catch((error) => {
           console.log(error);

@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const Wall = require('../models/wall');
+// We require fs-extra to remove files in public folder
+const fs = require('fs-extra');
 
 
 const wallController = {
@@ -113,6 +115,14 @@ const wallController = {
         console.log('id du mur supprimé : '+ wallId);
                 
         try {
+            // First we get the name of the photo in database to remove it from 'public' folder
+            const wallData = await Wall.findOne(wallId);
+            const wallDataPhoto = wallData.photo;
+            console.log('wallDataPhoto supprimée : ' + wallDataPhoto);
+            // If there is a photo we remove it from public folder 
+            if (wallDataPhoto !=''){
+                await fs.remove(`public/${wallDataPhoto}`);
+            }
             // We delete a wall with id in database
             await Wall.deleteWallById(wallId);                        
             return res.status(200).json({message:'mur bien supprimé'});

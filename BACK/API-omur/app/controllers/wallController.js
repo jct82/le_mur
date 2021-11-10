@@ -7,6 +7,7 @@ const wallController = {
     listWalls: async function (req, res){
       const userId = req.userId;
         try {
+            // We get walls concerned by an user
             const walls = await Wall.findWallsWithUserInfo(userId);
            
             console.log('walls : ' + JSON.stringify(walls));
@@ -71,7 +72,7 @@ const wallController = {
                 await newWall.saveWallInParticipate(wallId,collabId);
             };
             console.log(collabIdsArray);
-
+            // We get all informations about collaborators with collaborators ids
             const collabsData = await User.findByIds(collabIdsArray);
             console.log('collabsData: ' + JSON.stringify(collabsData));
 
@@ -88,11 +89,12 @@ const wallController = {
     },
 
     deleteWall: async function (req, res){
-
+        // We get parameters needed
         wallId = req.params.id;
         console.log('id du mur supprimé : '+ wallId);
                 
         try {
+            // We delete a wall with id in database
             await Wall.deleteWallById(wallId);                        
             return res.status(200).json({message:'mur bien supprimé'});
 
@@ -126,7 +128,7 @@ const wallController = {
 
             // We delete all colaborators of a wall to resave them in case there were modified
             await Wall.deleteCollabs(wallId);                        
-            return res.status(200).json({message:'collaborateurs bien supprimé'});
+            /*return ?*/res.status(200).json({message:'collaborateurs bien supprimé'});
 
             // We transform req.body.users into an array of integers         
             const collabIdsInit = (req.body.users).split(',');

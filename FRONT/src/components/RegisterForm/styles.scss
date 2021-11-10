@@ -4,9 +4,12 @@
   margin: auto;
   position: absolute;
   top: calc(50% - 250px);
+  left: calc(50% - 150px);
   height: auto;
+  width: 300px;
   display: grid;
   background-color: black;
+  padding: 2rem 4rem 4rem 4rem;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -26,11 +29,14 @@
 }
 
 .form h1 {
+  position: absolute;
+  top:4rem;
   font-size: 1.5rem;
   text-align: start;
   width: 80%;
   margin-bottom: 1rem;
   color: white;
+  text-align: center;
 }
 
 .form-inputs {

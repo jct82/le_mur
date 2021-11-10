@@ -32,7 +32,7 @@ const FormSignup = ({ submitForm }) => {
   return (
     <div className="form-content-right">
       <form className="form dark" onSubmit={handleSubmit}>
-        <h1>S'inscrire</h1>
+        <h1 className="register-title">INSCRIPTION</h1>
 
         <div className="form-inputs">
           <Input type="text" name="name" value={user.name} changeInput={handleChange} label="Prénom" />

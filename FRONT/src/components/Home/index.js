@@ -22,8 +22,6 @@ const Home = () => {
           <hr></hr>
           </div>       
           <div className="presentation">
-          
-            {/* <h2 className="page_title">Un espace de travail collaboratif</h2> */}
             <p className="app_resume">Le Mur est un espace de mise en commun d'idées visuelles qui vise à reproduire à distance
              l'expérience physique de la rencontre entre plusieurs créatifs</p>
             <div className="steps">

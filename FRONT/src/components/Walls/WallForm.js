@@ -38,7 +38,6 @@ const WallForm = ({ setFormOpen }) => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     const title_color = randomColor();
-    console.log(title_color);
     dispatch(createWallAction(picture, title_color));
   };
   const handleChangePicture = (e) => {

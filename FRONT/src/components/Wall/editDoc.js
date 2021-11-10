@@ -4,11 +4,11 @@ import Textarea from "../inputForm/textarea";
 import Select from "../inputForm/select";
 import FileInput from "../inputForm/file";
 import { updateDocName, updateFileName, postLink, deleteLink } from "src/actions/element";
-import { postDoc } from "src/actions/element";
+import { changeDoc } from "src/actions/element";
 
 import './style.scss';
 
-const addDocForm = () => {
+const editDocForm = () => {
   const dispatch = useDispatch();
   const elements = useSelector((state) => state.elements);
 
@@ -36,7 +36,7 @@ const addDocForm = () => {
 
   const submitDoc = (e) => {
     e.preventDefault();
-    dispatch(postDoc());
+    dispatch(changeDoc());
   }
 
   const linksListJSX = link.map((lien) => {
@@ -73,4 +73,4 @@ const addDocForm = () => {
     </div>
   )
 };
-export default addDocForm;
+export default editDocForm;

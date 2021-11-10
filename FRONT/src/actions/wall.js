@@ -8,7 +8,10 @@ export const REDIRECT_PDF = 'REDIRECT_PDF';
 export const STORE_NEW_WALL = 'STORE_NEW_WALL';
 export const DELETE_WALL_ACTION = 'DELETE_WALL_ACTION';
 export const DELETE_WALL_FROM_STORE = 'DELETE_WALL_FROM_STORE';
-export const ADD_DOC = 'ADD_DOC';
+export const SET_WALL = 'SET_WALL';
+export const GET_WALL = 'GET_WALL';
+export const GET_WALL_INFO = 'GET_WALL_INFO';
+export const SET_WALL_INFO = 'SET_WALL_INFO';
 
 export const changePanel = (panel) => ({
   type: CHANGE_PANEL,
@@ -45,11 +48,6 @@ export const redirectPDF = () => ({
   type: REDIRECT_PDF,
 });
 
-export const addDoc = (doc) => ({
-  type: ADD_DOC,
-  doc: doc,
-});
-
 export const storeNewWall = (wallData) => (
   { type: 'STORE_NEW_WALL', newWall: wallData.newWall, id:wallData.result.wall_id }
 );
@@ -60,5 +58,25 @@ export const deleteWallAction = (wallId) => (
 
 export const deleteWallFromStore = (wallId) => (
   { type: 'DELETE_WALL_FROM_STORE', wallId }
-)
+);
+
+export const setWall = (docList) => ({ 
+    type: SET_WALL, 
+    docList: docList, 
+});
+
+export const getWall = () => ({ 
+  type: GET_WALL,  
+});
+
+export const getWallInfo = () => ({ 
+  type: GET_WALL_INFO,  
+});
+
+export const setWallInfo = (wall) => ({ 
+  type: SET_WALL_INFO,  
+  wall: wall,
+});
+
+
 

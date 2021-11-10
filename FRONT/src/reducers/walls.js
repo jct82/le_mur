@@ -1,3 +1,4 @@
+import { SET_WALL_INFO } from "src/actions/wall";
 // const initialState = {
 //   id: 1,
 //   title: '',
@@ -104,6 +105,19 @@ const reducer = (state = initialState, action = {}) => {
           ...state.wallsList.filter((wall) => wall.id !== action.wallId)
         ]
       }
+      case SET_WALL_INFO:
+        return {
+          ...state,
+          wallCreation: {
+            ...state.wallCreation,
+            // eslint-disable-next-line no-nested-ternary
+            [action.name]: action.name === 'users'
+              ? !state.wallCreation.users.includes(action.value)
+                ? [...state.wallCreation.users, action.value] : [...state.wallCreation.users]
+              : action.value,
+          },
+        }
+
     default:
       return state;
   }

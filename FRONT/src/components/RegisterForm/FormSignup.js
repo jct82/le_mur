@@ -17,8 +17,6 @@ const FormSignup = ({ submitForm }) => {
 */
 
   const handleChange = (event) => {
-    console.log(event.target.value)
-    console.log(event.target.name)
     const inputName = event.target.name
     const inputValue = event.target.value
     dispatch(storeUserRegisterInput(inputName, inputValue))

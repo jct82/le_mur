@@ -52,6 +52,31 @@
         &.add{
           background-image: url(#{$prodPath}/icons/plus.png);
         }
+        &.display, &.pdf{
+          position: relative;
+          &:before{
+            content:'';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 35px;
+            height: 35px;
+            border-radius: 35px;
+            background-color:#000000;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 23px;
+          }
+        }
+        &.display:before{
+          background-image: url(#{$prodPath}/icons/screen.png);
+        }
+        &.pdf:before{
+          background-image: url(#{$prodPath}/icons/pdf-white.png);
+        }
         &:not(:last-child) {
           border-bottom: 1px solid #000000;
         }

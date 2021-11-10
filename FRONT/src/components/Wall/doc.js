@@ -24,7 +24,7 @@ const Doc = ({ photo, margin, direction, top, left }) => {
   }
 
   const seeDoc = (e) => {
-    dispatch(viewDoc({id:photo.id, name:photo.name, description:photo.description, type:photo.type, link:photo.link, src:photo.src, ownerid:photo.ownerid}));
+    dispatch(viewDoc({id:photo.id, name:photo.name, description:photo.description, type:photo.type, link:photo.link, src:photo.src, owner_id:photo.owner_id}));
     photo.getInfo(e);
   }
 
@@ -38,7 +38,7 @@ const Doc = ({ photo, margin, direction, top, left }) => {
   };
 
   return (
-    <div className={photo.ownerid == photo.user ? "doc owned" : "doc"} onClick={handleClick}>
+    <div className={photo.owner_id == photo.user ? "doc owned" : "doc"} onClick={handleClick}>
       {photo.id == detailed && <div className="see-btn" panel={photo.getAction} onClick={seeDoc}></div>}
       <div className="doc-content">
         {photo.type== 'image' && <img src={photo.src} alt={photo.name} onClick={posterEye}/>}

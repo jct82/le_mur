@@ -12,10 +12,10 @@ module.exports = class Element extends Core {
 
 
     // method to save a new user in database
-    async save(wallId, ownerId) {
+    async save(wallId, owner_id) {
         
         const data = await Core.fetchOne(`INSERT INTO "element" (name, description, type, src, wall_id, owner_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`,
-        [this.name, this.description, this.type, this.src, wallId, ownerId ]);
+        [this.name, this.description, this.type, this.src, wallId, owner_id ]);
         return data
 
     

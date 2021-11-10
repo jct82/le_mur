@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { render } from "react-dom";
 import Gallery from "react-photo-gallery";
 import Doc from './doc';
 import { arrayMove } from 'react-sortable-hoc';
@@ -16,20 +15,14 @@ const SortableGallery = SortableContainer(({ items }) => (
 
 const Docs = ( {docs, user, getAction, getInfo} ) => {
 
-  const tabDoc = []
-  for (const doc of docs) {
-    tabDoc.push({...doc, user: user, getAction: getAction, getInfo: getInfo});
-  }
-
-  const [items, setItems] = useState(tabDoc);
-
+  const [items, setItems] = useState(docs);
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setItems(arrayMove(items, oldIndex, newIndex));
   };
  
   return (
     <div className="board">
-      <SortableGallery  distance={2} items={items} onSortEnd={onSortEnd} axis={"xy"} />
+      <SortableGallery distance={2} items={docs.map((doc) => ({...doc, user: user, getAction: getAction, getInfo: getInfo}))} onSortEnd={onSortEnd} axis={"xy"} />
     </div>
   )
 };

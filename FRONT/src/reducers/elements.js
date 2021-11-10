@@ -1,4 +1,4 @@
-import { UPDATE_DOC_PROPS, POST_LINK, DELETE_LINK, VIEW_DOC, EMPTY_FORM } from "src/actions/element";
+import { UPDATE_DOC_PROPS, UPDATE_FILE_PROPS, POST_LINK, DELETE_LINK, VIEW_DOC, EMPTY_FORM } from "src/actions/element";
 
 const initialState = {
   id: 1,
@@ -9,7 +9,8 @@ const initialState = {
   currentLink: '',
   link: [],
   src: '',
-  ownerid: 1,
+  owner_id: 1,
+  img:{}
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -18,6 +19,12 @@ const reducer = (state = initialState, action = {}) => {
       return{
         ...state,
         [action.prop]: action.name,
+      }
+    case UPDATE_FILE_PROPS :
+      return{
+        ...state,
+        [action.prop]: action.name.name,
+        img: action.name,
       }
     case POST_LINK :{
       const allLinks = state.link;
@@ -44,7 +51,7 @@ const reducer = (state = initialState, action = {}) => {
       }
     }
     case VIEW_DOC :
-      const {id, name, description, type, link, src, ownerid} = action.doc;
+      const {id, name, description, type, link, src, owner_id} = action.doc;
       return{
         ...state,
         id: id,
@@ -53,7 +60,7 @@ const reducer = (state = initialState, action = {}) => {
         type: type,
         link: link,
         src: src,
-        ownerid: ownerid,
+        owner_id: owner_id,
       }
     case EMPTY_FORM :
       const {nameF, descriptionF, typeF, linkF, srcF, currentLinkF} = action.doc;

@@ -1,4 +1,5 @@
-import { CHANGE_PANEL, TOGGLE_EYE, POST_USER, DELETE_USER, UPDATE_DOC_PROPS, DISPLAY_MODE, REDIRECT_PDF, ADD_DOC } from "src/actions/wall";
+import { CHANGE_PANEL, TOGGLE_EYE, POST_USER, DELETE_USER, UPDATE_DOC_PROPS, DISPLAY_MODE, REDIRECT_PDF, SET_WALL } from "src/actions/wall";
+import { ADD_DOC, DELETE_DOC, UPDATE_DOC } from "src/actions/element";
 
 const initialState = {
   id: 1,
@@ -14,13 +15,32 @@ const initialState = {
   detailed: -1,
   displaysquare: false,
   toPDF:false,
-  docList:[]
+  docList:[],
 };
+
+const localPath = 'http://localhost:3000/';
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case SET_WALL :
+      let linkArray;
+      const newDocList = action.docList.map((elem) => {
+        if (elem.type == 'image') elem.src = localPath+elem.src;
+        elem.link == null ? linkArray = [] : linkArray = elem.link.split('\\');
+        return({...elem, src: elem.src, link: linkArray, width:2, height:3});
+      });
+      return{
+        ...state,
+        docList: newDocList,
+      }
     case ADD_DOC : {
-      const { id, name, description, type, position, link, src, ownerid } = action.doc;
+      const { name, description, type, position, link, src, owner_id } = action.doc;
+      let srcEdit = src;
+      if (type == 'image') srcEdit = localPath+src;
+      const idList = state.docList.map((elem) => {
+        return elem.id;
+      }); 
+      const id = Math.max(...idList) + 1; 
       const newDoc = {
         id: id,
         name: name,
@@ -28,8 +48,10 @@ const reducer = (state = initialState, action = {}) => {
         type: type,
         position: position,
         link: link,
-        src: src,
-        ownerid: ownerid,
+        src: srcEdit,
+        owner_id: owner_id,
+        width:2,
+        height:3,
       };
       const allDocs = state.docList;
       const newDocs = [
@@ -39,6 +61,20 @@ const reducer = (state = initialState, action = {}) => {
       return{
         ...state,
         docList: newDocs,
+      }
+    }
+    case DELETE_DOC : {
+      const newList = state.docList.map((doc) => {
+        if (doc.id != action.id) return doc;
+      });
+      return{
+        ...state,
+        docList: newList,
+      }
+    }
+    case UPDATE_DOC : {
+      return{
+        ...state,
       }
     }
     case CHANGE_PANEL :

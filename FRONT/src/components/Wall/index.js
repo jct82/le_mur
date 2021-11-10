@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import docs from 'src/data/element';
-import user from 'src/data/user';
 import { updateDocName, emptyForm } from 'src/actions/element.js'
-import { updateWallInput, changePanel, toggleEye, displayMode, redirectPDF } from 'src/actions/wall.js'
+import { getWall, getWallInfo, updateWallInput, changePanel, toggleEye, displayMode, redirectPDF } from 'src/actions/wall.js'
 import { updateContents } from "src/actions/textEdit";
 import Docs from './docs';
 import AddDocForm from './addDoc';
+import EditDocForm from './editDoc';
 import InfoDocForm from './infoDoc';
 import ChangeWallForm from './changeWall';
 import InfoWallForm from './infoWall';
@@ -22,10 +22,10 @@ const Wall = () => {
   const location = useLocation();
   const { wallTitle, wallId } = location.state;
  
-  const { panel, displaysquare, toPDF } = useSelector((state) => state.wall);
+  const { docList, panel, displaysquare, toPDF } = useSelector((state) => state.wall);
+  
   const { loggedUserInfos } = useSelector((state) => state.user);
-
-  console.log(loggedUserInfos);
+  const currentUser = loggedUserInfos.id;
 
   const slidePanel = () => {
     document.querySelector('.main').classList.add('on');
@@ -44,9 +44,10 @@ const Wall = () => {
   }
 
   useEffect(() => {
-    dispatch(updateWallInput('id', wallId));
-    dispatch(updateDocName('ownerid', loggedUserInfos.id));
-
+    dispatch(updateWallInput(wallId, 'id'));
+    dispatch(updateDocName(loggedUserInfos.id, 'owner_id'));
+    dispatch(getWall());
+    dispatch(getWallInfo());
     document.addEventListener('click', (e) => {
       if(!e.target.parentNode.parentNode.classList.contains('doc')) dispatch(toggleEye(-1));
     });
@@ -80,11 +81,7 @@ const Wall = () => {
     dispatch(updateContents(contents));
     dispatch(redirectPDF());
   }
-  
-
-  const wallDoc = docs;
-  const currentUser = 1;
-
+  //const wallDoc = docs;
   return (
     <div className="wall">
       {toPDF && <Redirect to="/PDF" />}
@@ -97,17 +94,18 @@ const Wall = () => {
           <div className="fade-elem"></div>
           {panel == 'infoWallPanel' && <InfoWallForm />}
           {panel == 'changeWallPanel' && <ChangeWallForm />}
-          {panel == 'infoDocPanel' && <InfoDocForm />}
-          {panel == 'addDocPanel' && <AddDocForm />}
+          {panel == 'infoDocPanel' && <InfoDocForm/>}
+          {panel == 'addDocPanel' && <AddDocForm/>}
+          {panel == 'editDocPanel' && <EditDocForm/>}
         </div>
         <div className="menu-bar">
           <div className="icon info" panel="infoWallPanel" onClick={displayPanel}></div>
           <div className="icon add" panel="addDocPanel" onClick={displayPanel}></div>
-          <div className="icon add" onClick={displaySquare}></div>
-          <div className="icon add" onClick={editPdf}></div>
+          <div className="icon display" onClick={displaySquare}></div>
+          <div className="icon pdf" onClick={editPdf}></div>
         </div>
         <div className={displaysquare ? "board-wrapper square" : "board-wrapper"}>
-          <Docs docs={wallDoc} user={currentUser} getAction="infoDocPanel" getInfo={displayPanel} />
+          <Docs docs={docList} user={currentUser} getAction="infoDocPanel" getInfo={displayPanel} />
         </div>
       </div>
     </div>

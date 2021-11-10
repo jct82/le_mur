@@ -1,22 +1,27 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { changePanel } from 'src/actions/wall.js'
+import { changePanel, changeForm } from 'src/actions/wall.js'
+import { supDoc  } from 'src/actions/element.js'
 
 import './style.scss';
 
 const infoDocForm = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.id);
-  const {  name, description, type, src, link, ownerid } = useSelector((state) => state.elements);
+  const {  id, name, description, type, src, link, owner_id } = useSelector((state) => state.elements);
 
   const changeForm= () => {
     const fadeElem = document.querySelector('.fade-elem')
     fadeElem.classList.add('on');
     setTimeout(() => {
-      dispatch(changePanel('addDocPanel'));
+      dispatch(changePanel('editDocPanel'));
     }, 500);
     setTimeout(() => {
       fadeElem.classList.remove('on');
     }, 1000);
+  }
+
+  const supElem = () => {
+    dispatch(supDoc());
   }
 
   return (
@@ -37,13 +42,14 @@ const infoDocForm = () => {
       <div className="info-block">
         <label>Liens :</label>
         <ul className="link-list">
-          {link.map((item) => (<li key={item}>-&nbsp;<a href={item} target="_blank" className="block">{item}</a></li>))}
+          {/* {link.map((item) => (<li key={item}>-&nbsp;<a href={item} target="_blank" className="block">{item}</a></li>))} */}
+          <li>-&nbsp;<a href={link} target="_blank" className="block">{link}</a></li>
         </ul>
       </div>
-      {ownerid == user && 
+      {owner_id == user && 
         <div className="user-btn-block">
           <button className="btn btn-change-txt" type="button" onClick={changeForm}>Modifier</button>
-          <button className="btn btn-supp-txt" type="button">Supprimer</button>
+          <button className="btn btn-supp-txt" type="button" onClick={supElem}>Supprimer</button>
         </div>
       }
     </div>

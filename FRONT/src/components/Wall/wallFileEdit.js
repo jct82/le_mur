@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as React from "react";
@@ -17,8 +16,6 @@ const __ISIOS__ = navigator.userAgent.match(/iPad|iPhone|iPod/i) ? true : false;
 const WallFileEdit = () => {
   const dispatch = useDispatch();
   const { contents, delta } = useSelector((state) => state.textEdit);
-
-  //dispatch(redirectPDF());
 
   let quillRef = null; 
   let onKeyEvent = false;
@@ -102,7 +99,6 @@ const WallFileEdit = () => {
   };
 
   const onChangeContents = (content, delta, source, editor) => {
-    console.log(editor.getContents());
     dispatch(updateContents(content, editor.getContents()));
   };
 

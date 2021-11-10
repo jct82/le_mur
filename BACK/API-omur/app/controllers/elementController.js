@@ -33,11 +33,9 @@ const elementController = {
             console.log('req.body : '+ JSON.stringify(req.body));
             console.log('req.file: '+ JSON.stringify(req.file));
             // we get the path of the photo (and we remove "public/" in the path) and insert it in req.body
-            if(req.file){
+            if(req.body.type == "image"){
                 req.body.src = req.file.filename;
-            // }else{
-            //     req.body.src = ""
-            // };
+            };
             // We create a new instance of element and save it in database
             const newElement = new Element(req.body);
             const recordedElement = await newElement.save(wallId,userId);
@@ -47,7 +45,7 @@ const elementController = {
             }
 
 
-        } catch (error) {
+        catch (error) {
             console.error(error)
             if (error instanceof Wall.NoDataError) {
                 return res.status(404).json(error.message)

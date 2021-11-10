@@ -48,8 +48,6 @@ const userController = {
 
     connectUser: async function (req, res){
 
-        
-        console.log('req.userId : ' + req.userId);
 
             // we get login and password from login form
             const email = req.body.email;
@@ -61,13 +59,15 @@ const userController = {
             console.log(user);
             // If not there is an error
             if (!user){
-                res.status(401).json({message:"non-existent email"})
+                console.log("email inexistant");
+                res.status(401).json({message:"email inexistant"})
                 // If email exist we compare hashed passwords
             }else{
                 const validPassword = await bcrypt.compare(wp,user.password);
                 // if password is not valid there is an error
                 if (!validPassword) {
-                 res.status(401).json({message:"password error"})  
+                 console.log("mot de passe incorrect");
+                 res.status(401).json({message:"mot de passe incorrect"})  
                  return; 
                 }else{
                      // token generation

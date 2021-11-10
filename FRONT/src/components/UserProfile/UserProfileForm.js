@@ -12,27 +12,22 @@ const UserProfileForm = () => {
   const dispatch = useDispatch();
   const userInput = useSelector ((state) => state.user)
 
-
   const handleChange = (event) => {
-    console.log(event.target.value)
-    console.log(event.target.name)
     const inputName = event.target.name
     const inputValue = event.target.value
     dispatch(storeUserRegisterInput(inputName, inputValue))
   }
 
-
-    const handleUpdateSubmit = (event) => {
+  const handleUpdateSubmit = (event) => {
     event.preventDefault();
     dispatch(updateUser())
-
   }
 
 
   return (
     <div className="form-content">
-      <form className="form dark" onSubmit={handleUpdateSubmit}>
-        <h1>Modifier Votre Profil</h1>
+      <form className="form profileForm dark" onSubmit={handleUpdateSubmit}>
+        <h1 className="form__title">Modifier Votre Profil</h1>
 
         <div className="form-inputs">
           <Input type="text" 

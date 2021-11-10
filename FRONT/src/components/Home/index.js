@@ -28,21 +28,21 @@ const Home = () => {
              l'expérience physique de la rencontre entre plusieurs créatifs</p>
             <div className="steps">
               <div>
-                <div className="steps__step">
+                <div className="steps__step  subscribe">
                   <img className="steps__icon" src={subscribe}></img>
                 </div>
-                <p>inscription</p>
+                <p>INSCRIPTION</p>
               </div>
               <div className="gg-shape-triangle"></div>
               <div>
-                <div className="steps__step">
+                <div className="steps__step create">
                 <img className="steps__icon" src={science}></img>
                 </div>
                 <p>CREATION</p>
               </div>
               <div className="gg-shape-triangle"></div>
               <div>
-                <div className="steps__step">
+                <div className="steps__step share">
                 <img className="steps__icon" src={share}></img>
                 </div>
                 <p>PARTAGE</p>

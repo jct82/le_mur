@@ -19,3 +19,13 @@
     top:-10px;
   }
 }
+
+@keyframes moveDown {
+  from {
+    top: -13rem;
+  }
+
+  to {
+    top: -11rem;
+  }
+}

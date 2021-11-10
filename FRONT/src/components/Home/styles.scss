@@ -178,6 +178,46 @@ animation-name: moveUp;
   font-size: 1.1rem;
 }
 
+.subscribe:hover{
+  background-color: rgb(230, 233, 40);
+}
+.create:hover{
+  background-color: rgb(10, 170, 10);
+}
+.share:hover{
+  background-color: rgb(218, 54, 204);
+}
+.subscribe:hover:before, .create:hover:before, .share:hover:before {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  padding:0.5rem;
+  width: 15rem;
+  height: 10rem;
+  font-size:1.3rem;
+  top:-11rem;
+  line-height: 1.5rem;
+  border: 3px solid black;
+  border-right:5px solid black;
+  border-bottom: 5px solid black;
+  animation-duration: 0.5s;
+  animation-name: moveDown;
+}
+.subscribe:hover:before{
+  background-color: rgb(228, 230, 122);
+  content:'Inscrivez vous pour participer à la création d\'un moodboard';
+}
+.create:hover:before{
+  background-color: rgb(102, 223, 102);
+  content:'Créez un Mur sur un thème donné, puis inviter vos collaborateurs';
+}
+.share:hover:before{
+  background-color: rgb(250, 158, 242);
+  content:'Partagez le résultat de votre travail collaboratif avec le monde';
+}
+
 /* ---------------outlined triangle ------------------------*/
 .gg-shape-triangle {
   position: relative;

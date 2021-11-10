@@ -52,7 +52,7 @@ const WallCard = ({
             <Link to={{ pathname: '/wall', state: { wallId: id, wallTitle: title } }}>
               {
                 photo ?
-                <div className="wallcard__imgContainer__img" style={{ backgroundImage: `url('http://localhost:3000/${photo}')` }} />
+                <div className="wallcard__imgContainer__img" style={{ backgroundImage: `url('http://localhost:3000/${photo}')`, backgroundPosition: 'center'  }} />
                 :
                 <div className="wallcard__imgContainer__img" style={{ backgroundImage: `url('/images/icons/camera.jpg')`, backgroundPosition: 'center' }} />
               }

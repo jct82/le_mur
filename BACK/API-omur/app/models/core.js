@@ -5,7 +5,6 @@ class NoDataError extends Error {
     constructor(entity = 'data', filter = 'filter') {
         super();
         this.message = `no ${entity} found with this ${filter}`;
-        this.messageLogin = 'email et/ou mot de passe incorrect(s)';
     }
 }
 
@@ -45,8 +44,8 @@ module.exports = class Core {
 
     //static method to find one registration. available for all models
     static async findOne(id) {
-        const data = this.fetchOne(`SELECT * FROM "${this.tableName}" WHERE "id" = $1`, [id]);
-        return await new this(data);
+        const data = await this.fetchOne(`SELECT * FROM "${this.tableName}" WHERE "id" = $1`, [id]);
+        return  new this(data);
     }
     //static method to find all registrations. available for all models
     static async findAll() {

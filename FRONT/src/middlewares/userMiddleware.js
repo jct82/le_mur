@@ -11,7 +11,6 @@ const userMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log(response.data);
           store.dispatch(storeAllUsers(response.data));
         })
         .catch((error) => {

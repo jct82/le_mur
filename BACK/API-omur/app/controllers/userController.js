@@ -48,8 +48,6 @@ const userController = {
 
     connectUser: async function (req, res){
 
-        
-        console.log('req.userId : ' + req.userId);
 
             // we get login and password from login form
             const email = req.body.email;

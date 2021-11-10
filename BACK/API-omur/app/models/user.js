@@ -1,4 +1,5 @@
 const Core = require('./core');
+const db = require('../database');
 
 module.exports = class User extends Core {
 
@@ -6,8 +7,9 @@ module.exports = class User extends Core {
 
    //static method to find a user by email
     static async findByEmail(mail) {
-        const data = await Core.fetchOne(`SELECT * FROM "user" WHERE email = $1`, [mail]);
-        return data;
+        // Here we use db.query and not Core.fecthone to avoid the Core Error : "No Data found with this filter" 
+        const data = await db.query(`SELECT * FROM "user" WHERE email = $1`, [mail]);
+        return data.rows[0];
     }
 
     //static method to find a user by ids

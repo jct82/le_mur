@@ -65,7 +65,7 @@ module.exports = class Wall extends Core {
 
     // method to delete a wall from bdd
     static async deleteWallById(id) {
-        
+        // Here we use db.query and note Core.fecthOne to avoid the CoreError   if (rows.length === 0) {throw new NoDataError(this.tableName); }
         const query = {text:`DELETE FROM wall where id = $1;`,
         values:[id]}
         return await db.query(query)

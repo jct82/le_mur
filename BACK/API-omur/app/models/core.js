@@ -5,6 +5,7 @@ class NoDataError extends Error {
     constructor(entity = 'data', filter = 'filter') {
         super();
         this.message = `no ${entity} found with this ${filter}`;
+        this.messageLogin = 'email et/ou mot de passe incorrect(s)';
     }
 }
 

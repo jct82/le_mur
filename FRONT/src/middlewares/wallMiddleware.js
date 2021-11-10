@@ -33,6 +33,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           console.log(response.data, 'ok mur crée');
+          console.log('reponse', response.data);
           store.dispatch(storeNewWall(response.data));
         })
         .catch((error) => {

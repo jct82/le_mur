@@ -13,6 +13,11 @@ const initialState = {
     password: '',
   },
   users: '',
+  loggedUserInfos: {
+    id: null,
+    name: '',
+    lastname: '',
+  }
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -30,15 +35,32 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         [action.name]: action.value,
       };
+    case 'POPULATE_LOGGEDINFOS_FROM_LOCALSTORAGE':
+      return {
+        ...state,
+        loggedUserName: `${action.name} ${action.lastname}`,
+        name: action.name,
+        lastname: action.lastname,
+        loggedUserInfos: {
+          name: action.name,
+          lastname: action.lastname,
+          id: action.id
+        },
+      };
     case 'LOG_USER':
       localStorage.setItem('profile', JSON.stringify(action.userData.token));
+      localStorage.setItem('name', action.userData.result.name );
+      localStorage.setItem('lastname', action.userData.result.lastname );
+      localStorage.setItem('userId', action.userData.result.id );
       return {
         ...state,
         loggedUserName: `${action.userData.result.name} ${action.userData.result.lastname}`,
+        name: action.userData.result.name,
+        lastname: action.userData.result.lastname,
         loggedUserInfos: {
           name: action.userData.result.name,
           lastname: action.userData.result.lastname,
-          id: action.userData.result.id,
+          id: action.userData.result.id
         },
         credentials: {
           email: '',
@@ -57,6 +79,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         users: [...action.users],
+      };
+    case 'UPDATE_USERS':
+      return {
+        ...state,
+        [action.name]: action.value,
       };
     default:
       return state;

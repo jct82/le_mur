@@ -40,6 +40,11 @@
     width :90%;
     margin:1rem;
   }
+  &__leftContainer{
+    &__img{
+      width:30%;
+    }
+  }
   
   &__submitBtn{
     background-color: black;

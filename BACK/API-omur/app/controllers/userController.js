@@ -2,6 +2,8 @@ const datamapper = require('../datamapper');
 const User = require('../models/user');
 // jwt token initialization
 const jwt = require('jsonwebtoken');
+// bcrypt initialization to hash password
+const bcrypt = require('bcrypt');
 
 
 
@@ -23,9 +25,13 @@ const userController = {
     addUser: async function (req, res){
 
         try {
+            // First we hash the password with bcrypt
+            const hashedPassword = await bcrypt.hash(req.body.password, 12);
+            // Then we set the hashedPassword in req.body
+            req.body.password = hashedPassword;
             console.log(req.body);
             const newUser = new User(req.body);
-            
+            // We save the new user in database
             const recordedUser = await newUser.save();
             console.log('recorderUserId:' + recordedUser.id);
             // token generation
@@ -42,23 +48,25 @@ const userController = {
 
     connectUser: async function (req, res){
 
-        // console.log ('headers : ' + JSON.stringify(req.headers.authorization));
+        
         console.log('req.userId : ' + req.userId);
 
-        try {
             // we get login and password from login form
             const email = req.body.email;
             const wp = req.body.password;
-           
-                    
-            // we get all the users registred in bdd
+
+        try {                             
+            // we check if the email is registred in bdd
             const user = await User.findByEmail(email);
             console.log(user);
-
+            // If not there is an error
             if (!user){
                 res.status(401).json({message:"non-existent email"})
+                // If email exist we compare hashed passwords
             }else{
-                if (wp!=user.password){
+                const validPassword = await bcrypt.compare(wp,user.password);
+                // if password is not valid there is an error
+                if (!validPassword) {
                  res.status(401).json({message:"password error"})  
                  return; 
                 }else{
@@ -68,13 +76,36 @@ const userController = {
                 }
             } ;                       
 
-            
-           
-
         } catch (error) {
             console.error(error);
             if (error instanceof User.NoDataError) {
                 return res.status(404).json(error.message);
+            }
+        }
+    },
+
+    updateUser: async function (req, res){
+
+        const userId = req.userId;
+        console.log('userId: '+ userId);
+
+        try {
+            // First we hash the password with bcrypt
+            const hashedPassword = await bcrypt.hash(req.body.password, 12);
+            // Then we set the hashedPassword in req.body
+            req.body.password = hashedPassword;
+            console.log(req.body);
+            const newUser = new User(req.body);
+            // We save the new user in database
+            const updatedUser = await newUser.update(userId);
+            console.log('updatedUserId:' + updatedUser.id);
+
+            res.status(200).json({message : "user mis a jour", updatedUser})
+
+        } catch (error) {
+            console.error(error)
+            if (error instanceof User.NoDataError) {
+                return res.status(404).json(error.message)
             }
         }
     },

@@ -59,14 +59,20 @@ const reducer = (state = initialState, action = {}) => {
     case 'STORE_WALLS':
       return {
         ...state,
-        wallsList: action.walls,
+        wallsList: action.data.result.map(wall => ({
+          ...wall,
+          users: action.data.collabsData.filter((collabData) => collabData.wallId === wall.id)
+        })),
       };
     case 'STORE_NEW_WALL':
       return {
         ...state,
         wallsList: [
           ...state.wallsList,
-          {...action.newWall, id: action.id},
+          {...action.newWall,
+            id: action.id,
+            users: action.collabsData,
+          },
         ],
       };
     case 'GET_WALLS':

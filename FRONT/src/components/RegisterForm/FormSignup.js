@@ -3,7 +3,9 @@ import React from 'react';
 import useForm from './useForm';
 import infoValidate from './infoValidate';
 import { useDispatch, useSelector } from 'react-redux';
-import { storeUserRegisterInput, createUser } from '../../actions/users';
+import {storeUserRegisterInput, createUser } from '../../actions/users';
+import Input from 'src/components/inputForm/inputs';
+import PropTypes from 'prop-types';
 
 const FormSignup = ({ submitForm }) => {
   // send actions to the reducer
@@ -29,77 +31,45 @@ const FormSignup = ({ submitForm }) => {
 
   return (
     <div className="form-content-right">
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form dark" onSubmit={handleSubmit}>
         <h1>S'inscrire</h1>
 
         <div className="form-inputs">
-          <label htmlFor="Prénom"
-            className="form-label">
-            Prénom
-          </label>
-          <input
-            id="prénom"
-            type="text"
-            name="name"
-            className="form-input"
-            placeholder="Entrez votre Prénom"
-            value={user.name}
-            onChange={handleChange}
-          />
-
+          <Input type="text" name="name" value={user.name} changeInput={handleChange} label="Prénom" />
         </div>
 
-
         <div className="form-inputs">
-          <label htmlFor="nom"
-            className="form-label">
-            Nom
-          </label>
-          <input
-            id="nom"
+          <Input
             type="text"
             name="lastname"
-            className="form-input"
-            placeholder="Entrez votre Nom"
             value={user.lastname}
-            onChange={handleChange}
+            changeInput={handleChange}
+            label="Nom"
           />
-
         </div>
+
         <div className="form-inputs">
-          <label htmlFor="Email"
-            className="form-label">
-            Email
-          </label>
-          <input
-            id="email"
+          <Input
             type="email"
             name="email"
-            className="form-input"
-            placeholder="Entrez votre email"
             value={user.email}
-            onChange={handleChange}
+            changeInput={handleChange}
+            label="Email"
           />
 
         </div>
 
         <div className="form-inputs">
-          <label htmlFor="Password"
-            className="form-label">
-            Mot de passe
-          </label>
-          <input
-            id="password"
+          <Input
             type="password"
             name="password"
-            className="form-input"
-            placeholder="Entrez votre mot de passe"
             value={user.password}
-            onChange={handleChange}
+            changeInput={handleChange}
+            label="Mot de passe"
           />
 
         </div>
-
+        {/*
         <div className="form-inputs">
           <label htmlFor="Password2"
             className="form-label">
@@ -110,19 +80,20 @@ const FormSignup = ({ submitForm }) => {
             type="password2"
             name="password2"
             className="form-input"
-            placeholder="Entrez votre mot de passe"
             value={user.password2}
             onChange={handleChange}
           />
 
         </div>
-        <button className="from-input-btn" type="submit">
-          <span className="submit.png"></span>Enregistrer
-        </button>
+        */}
+        <button className="btn btn-submit-txt" type="submit">S'inscrire</button>
       </form>
     </div>
   )
 }
 
-export default FormSignup
+FormSignup.propTypes = {
+  submitForm: PropTypes.func.isRequired,
+};
+export default FormSignup;
 

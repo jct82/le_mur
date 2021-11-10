@@ -1,5 +1,5 @@
 import './wallForm.scss';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import closeIcon from 'src/assets/icons/cross-neg-white.png';
 // import submit from 'src/assets/icons/submit-neg.png';
@@ -11,7 +11,6 @@ import Select from '../inputForm/select';
 import { createWallAction, deleteCoworker, storeWallInputValue } from '../../actions/walls';
 import AddedUser from './AddedUser';
 import FileInput from '../inputForm/file';
-import { getAllUsers } from '../../actions/users';
 import SelectUser from '../inputForm/SelectUser';
 import randomColor from '../../utils/randomColor';
 
@@ -38,8 +37,8 @@ const WallForm = ({ setFormOpen }) => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     const title_color = randomColor();
-    console.log(title_color);
     dispatch(createWallAction(picture, title_color));
+    handleCloseModal();
   };
   const handleChangePicture = (e) => {
     setPicture(e.target.files[0]);
@@ -56,6 +55,8 @@ const WallForm = ({ setFormOpen }) => {
             <img className="wallForm__closeIcon" src={closeIcon} alt="fermeture de la modale" onClick={handleCloseModal} />
             <Input type="text" label="nom du projet" name="title" changeInput={handleChangeInput} value={title} />
             <Textarea label="description" name="description" changeInput={handleChangeInput} value={description} />
+            {/* <div></div> */}
+            { picture && <img className="wallForm__leftContainer__img" src={URL.createObjectURL(picture)}/>}
             <FileInput type="file" name="photo" changeInput={handleChangePicture} value="" label="upload picture" />
           </div>
           <div className="wallForm__rightContainer">

@@ -42,6 +42,7 @@ const elementController = {
             console.log('recordedElement.id : ' + recordedElement.id);
                      
             res.status(200).json(recordedElement)
+            }
 
 
         } catch (error) {

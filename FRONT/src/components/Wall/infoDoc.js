@@ -7,7 +7,8 @@ import './style.scss';
 const infoDocForm = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.loggedUserInfos.id);
-  const {  id, name, description, type, src, link, owner_id } = useSelector((state) => state.elements);
+  const { name, description, type, src, link, owner_id } = useSelector((state) => state.elements);
+  const imgName = src.substring(src.indexOf('/') + 1);
 
   const changeForm= () => {
     const fadeElem = document.querySelector('.fade-elem')
@@ -37,7 +38,7 @@ const infoDocForm = () => {
       </div>
       <div className="info-block">
         <label>Document :</label><span>{type}</span>
-        {type == 'image' ? <img src={src} /> : <p>{src}</p>}
+        {type == 'image' ? <img src={src} /> : <p>{imgName}</p>}
       </div>
       <div className="info-block">
         <label>Liens :</label>

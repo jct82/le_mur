@@ -74,11 +74,14 @@ const reducer = (state = initialState, action = {}) => {
     }
     case UPDATE_DOC : {
       let newDoc = action.doc;
+      console.log('state.docList', state.docList);
+      console.log('newDoc',newDoc);
       let newDocList = state.docList.map((doc) => {
         if (doc.id != action.doc.id) return doc;
       });
       if (newDoc.type == 'image') newDoc.src = localPath+newDoc.src;
       newDoc.link = newDoc.link.split('\\');
+      console.log(newDoc);
       newDocList = [...newDocList, newDoc];
       return{
         ...state,

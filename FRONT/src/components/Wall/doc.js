@@ -56,7 +56,6 @@ Doc.propTypes = {
     src: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    user: PropTypes.number.isRequired,
     getInfo: PropTypes.func.isRequired,
     getAction: PropTypes.string.isRequired,
   }).isRequired,

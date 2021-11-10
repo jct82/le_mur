@@ -7,7 +7,7 @@ export const EMPTY_FORM = 'EMPTY_FORM';
 export const ADD_DOC = 'ADD_DOC';
 export const POST_DOC = 'POST_DOC';
 export const CHANGE_DOC = 'CHANGE_DOC';
-export const UPDATE_DOC = 'CHANGE_DOC';
+export const UPDATE_DOC = 'UPDATE_DOC';
 export const SUP_DOC = 'SUP_DOC';
 export const DELETE_DOC = 'DELETE_DOC';
 
@@ -54,6 +54,7 @@ export const changeDoc = () => ({
 
 export const updateDoc = (doc) => ({
   type: UPDATE_DOC,
+  doc:doc,
 });
 
 export const postDoc = () => ({

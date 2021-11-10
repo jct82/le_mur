@@ -24,6 +24,13 @@ const wallMiddleware = (store) => (next) => (action) => {
       docData.append('link', linkToPost);
       docData.append('position', position);
       docData.append('owner_id', owner_id);
+      console.log(docData.get('name'));
+      console.log(docData.get('description'));
+      console.log(docData.get('type'));
+      console.log(docData.get('src'));
+      console.log(docData.get('link'));
+      console.log(docData.get('position'));
+      console.log(docData.get('owner_id'));
       const config = {
         method: 'post',
         url:  `/user/walls/${id}/elements`,
@@ -53,8 +60,6 @@ const wallMiddleware = (store) => (next) => (action) => {
       for (let prop in FormerDoc) {
         propName = Object.keys(doc)[index];
         if (doc.hasOwnProperty(propName) && FormerDoc[prop] !== doc[prop]) {
-          console.log('propName', propName);
-          console.log('doc[prop]', doc[prop]);
           if (propName == 'link') {
             let linkString = doc.link.join('\\');
             docData.set(propName, linkString);
@@ -66,7 +71,6 @@ const wallMiddleware = (store) => (next) => (action) => {
         }
         index++;
       }
-      console.log('docData',docData.get('name'));
       const config = {
         method: 'patch',
         url: `/user/walls/${state.wall.id}/elements/${doc.id}`,
@@ -127,6 +131,7 @@ const wallMiddleware = (store) => (next) => (action) => {
           store.dispatch(setWallInfo(response.data));
         })
         .catch((error) => {
+          console.log('récupère pas les infos du mur',response.data);
           console.log(error);
         });
       next(action);

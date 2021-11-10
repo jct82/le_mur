@@ -14,9 +14,10 @@ import { populateLoggedInfosIfLogged } from '../../actions/users';
 const App = () => {
   const dispatch = useDispatch();
   useEffect(()=>{
-    const loggedUser = {name: localStorage.getItem('name'), lastname: localStorage.getItem('lastname'), userId: localStorage.getItem('userId')}
-    if(loggedUser)dispatch (populateLoggedInfosIfLogged(loggedUser.name, loggedUser.lastname, loggedUser.userId))
-    console.log(loggedUser);
+    if(localStorage.getItem('name')){
+      const loggedUser = {name: localStorage.getItem('name'), lastname: localStorage.getItem('lastname'), userId: localStorage.getItem('userId')}
+      dispatch (populateLoggedInfosIfLogged(loggedUser.name, loggedUser.lastname, loggedUser.userId))
+    }
   },[]);
 
   return(

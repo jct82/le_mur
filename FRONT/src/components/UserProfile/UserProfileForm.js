@@ -1,5 +1,6 @@
 // form UserProfileForm with 
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { storeUserRegisterInput, updateUser } from '../../actions/users';
 import Input from 'src/components/inputForm/inputs';
@@ -7,6 +8,7 @@ import PropTypes from 'prop-types';
 // import Profile from './Profile';
 
 const UserProfileForm = () => {
+  const history = useHistory();
   
   // send actions to the reducer
   const dispatch = useDispatch();
@@ -20,9 +22,9 @@ const UserProfileForm = () => {
 
   const handleUpdateSubmit = (event) => {
     event.preventDefault();
-    dispatch(updateUser())
+    dispatch(updateUser());
+    history.push('/');
   }
-
 
   return (
     <div className="form-content">

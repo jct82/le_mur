@@ -5,7 +5,6 @@ import subscribe from 'src/assets/icons/subscribe.png';
 import science from 'src/assets/icons/science.png';
 import share from 'src/assets/icons/share.png';
 import './styles.scss';
-import { populateLoggedInfosIFLogged } from '../../actions/users';
 
 
 const Home = () => {

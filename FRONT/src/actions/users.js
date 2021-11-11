@@ -36,3 +36,7 @@ export const populateLoggedInfosIfLogged = (name, lastname, userId ) => (
  export const updateUser = () => (
   { type: 'UPDATE_USER'}
  );
+
+ export const updatedUser = (newProfile) => (
+  { type: 'UPDATED_PROFILE', newProfile}
+ );

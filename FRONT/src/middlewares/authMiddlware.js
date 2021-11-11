@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { logUser } from '../actions/users';
+import { logUser, updatedUser } from '../actions/users';
 import API from './api';
 
 const authMiddleware = (store) => (next) => (action) => {
@@ -72,7 +72,7 @@ const authMiddleware = (store) => (next) => (action) => {
           console.log(response.data);
           if (response.status === 200) {
             console.log(response.data);
-           // store.dispatch(logUser(response.data));
+           store.dispatch(updatedUser(response.data.updatedUser));
           }
         })
         .catch((error) => {

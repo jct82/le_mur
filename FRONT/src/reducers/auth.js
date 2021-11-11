@@ -95,6 +95,8 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         loggedUserName: '',
+        name:'',
+        lastname:'',
         logged: false,
       };
     case 'STORE_USERS':

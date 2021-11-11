@@ -29,7 +29,7 @@ const UserProfileForm = () => {
   return (
     <div className="form-content">
       <form className="form profileForm dark" onSubmit={handleUpdateSubmit}>
-        <h1 className="form__title">Modifier Votre Profil</h1>
+        <div className="form__profileTitle">Modifier  Votre  Profil</div>
 
         <div className="form-inputs">
           <Input type="text" 

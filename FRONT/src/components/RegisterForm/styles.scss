@@ -11,6 +11,18 @@
   background-color: black;
   padding: 2rem 4rem 4rem 4rem;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
+  animation-duration: 0.5s;
+  animation-name: moveRegisterUp;
+}
+
+@keyframes moveRegisterUp {
+  from {
+    top: calc(70% - 250px);
+  }
+
+  to {
+    top: calc(50% - 250px);
+  }
 }
 
 .form-content-left {

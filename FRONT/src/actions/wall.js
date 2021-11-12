@@ -12,10 +12,17 @@ export const SET_WALL = 'SET_WALL';
 export const GET_WALL = 'GET_WALL';
 export const GET_WALL_INFO = 'GET_WALL_INFO';
 export const SET_WALL_INFO = 'SET_WALL_INFO';
+export const CHANGE_POS = 'CHANGE_POS';
 
 export const changePanel = (panel) => ({
   type: CHANGE_PANEL,
   panel: panel,
+});
+
+export const changePos = (oldPos, newPos) => ({
+  type: CHANGE_POS,
+  oldPos: oldPos,
+  newPos: newPos,
 });
 
 export const toggleEye = (detailed) => ({

@@ -38,9 +38,8 @@ export const viewDoc = (doc) => ({
   doc: doc,
 });
 
-export const emptyForm = (doc) => ({
+export const emptyForm = () => ({
   type: EMPTY_FORM,
-  doc: doc,  
 });
 
 export const addDoc = (doc) => ({

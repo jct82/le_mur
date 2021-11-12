@@ -8,7 +8,7 @@ import { postDoc } from "src/actions/element";
 
 import './style.scss';
 
-const addDocForm = () => {
+const addDocForm = ( {closePanel} ) => {
   const dispatch = useDispatch();
   const elements = useSelector((state) => state.elements);
 
@@ -37,6 +37,7 @@ const addDocForm = () => {
   const submitDoc = (e) => {
     e.preventDefault();
     dispatch(postDoc());
+    closePanel();
   }
 
   const linksListJSX = link.map((lien) => {
@@ -68,7 +69,7 @@ const addDocForm = () => {
           </div>
           {linksListJSX}
         </div>
-        <input className="btn btn-submit-txt" type="submit"  value="Valider"/>
+        <input className="btn btn-submit-txt" type="submit" value="Valider" />
       </form>
     </div>
   )

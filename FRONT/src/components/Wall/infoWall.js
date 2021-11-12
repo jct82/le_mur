@@ -7,9 +7,8 @@ import './style.scss';
 const InfoWallForm = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.id);
-  const { dateStart, dateChange, title, description, photo, users, admin } = useSelector((state) => state.wall);
-
-  const adminName = usersData.find((user) => admin == user.id);
+  console.log(user);
+  const { created_at, updated_at, title, description, photo, users, owner_id } = useSelector((state) => state.wall);
 
   const changeForm= () => {
     const fadeElem = document.querySelector('.fade-elem')
@@ -28,11 +27,11 @@ const InfoWallForm = () => {
       <div className="info-block date flex">
         <div className="left">
           <label>Créé le :</label>
-          <p>{dateStart}</p>
+          <p>{created_at}</p>
         </div>
         <div className="right">
           <label>Modifié le :</label>
-          <p>{dateChange}</p>
+          <p>{updated_at}</p>
         </div>
       </div>
       <div className="info-block">
@@ -46,7 +45,7 @@ const InfoWallForm = () => {
       </div>
       <div className="info-block">
         <label>Admin :</label>
-        <p>{adminName.name}</p>
+        <p>{owner_id}</p>
       </div>
       <div className="info-block">
         <label>Participants :</label>
@@ -54,7 +53,7 @@ const InfoWallForm = () => {
           {users.map((item) => (<li key={item}>{item}</li>))}
         </ul>
       </div>
-      {user == admin && 
+      {user == owner_id && 
         <div className="user-btn-block">
           <button className="btn btn-change-txt" type="button" onClick={changeForm}>Modifier</button>
         </div>

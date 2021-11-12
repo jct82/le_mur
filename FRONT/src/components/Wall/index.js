@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import docs from 'src/data/element';
-import { updateDocName, emptyForm } from 'src/actions/element.js'
+import { updateDocName } from 'src/actions/element.js'
 import { getWall, getWallInfo, updateWallInput, changePanel, toggleEye, displayMode, redirectPDF } from 'src/actions/wall.js'
 import { updateContents } from "src/actions/textEdit";
 import Docs from './docs';
@@ -31,9 +31,6 @@ const Wall = () => {
 
   const closePanel = () => {
     document.querySelector('.main').classList.remove('on');
-    setTimeout(() => {
-      dispatch(emptyForm({nameF: '', descriptionF: '', typeF : '', linkF: [], srcF: '', currentLinkF: ''}));
-    },500);
   }
 
   const displayPanel = (e) => {
@@ -82,7 +79,7 @@ const Wall = () => {
   //const wallDoc = docs;
   return (
     <div className="wall">
-      {toPDF && <Redirect to="/PDF" />}
+      {/* {toPDF && <Redirect to="/PDF" />} */}
       <div className="sub-header">
         <h1>{ wallTitle }</h1>
       </div>
@@ -92,9 +89,9 @@ const Wall = () => {
           <div className="fade-elem"></div>
           {panel == 'infoWallPanel' && <InfoWallForm />}
           {panel == 'changeWallPanel' && <ChangeWallForm />}
-          {panel == 'infoDocPanel' && <InfoDocForm/>}
-          {panel == 'addDocPanel' && <AddDocForm/>}
-          {panel == 'editDocPanel' && <EditDocForm/>}
+          {panel == 'infoDocPanel' && <InfoDocForm closePanel={closePanel}/>}
+          {panel == 'addDocPanel' && <AddDocForm closePanel={closePanel}/>}
+          {panel == 'editDocPanel' && <EditDocForm closePanel={closePanel}/>}
         </div>
         <div className="menu-bar">
           <div className="icon info" panel="infoWallPanel" onClick={displayPanel}></div>
@@ -103,7 +100,7 @@ const Wall = () => {
           <div className="icon pdf" onClick={editPdf}></div>
         </div>
         <div className={displaysquare ? "board-wrapper square" : "board-wrapper"}>
-          <Docs docs={docList} getAction="infoDocPanel" getInfo={displayPanel} />
+          {docList.length && <Docs docs={docList} getAction="infoDocPanel" getInfo={displayPanel} />}
         </div>
       </div>
     </div>

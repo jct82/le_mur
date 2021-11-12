@@ -1,8 +1,11 @@
 import { useState } from "react";
-import Gallery from "react-photo-gallery";
+import { useDispatch } from 'react-redux';
 import Doc from './doc';
+import Gallery from "react-photo-gallery";
 import { arrayMove } from 'react-sortable-hoc';
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
+
+import { changePos } from 'src/actions/wall.js'
 
 import './style.scss';
 
@@ -14,9 +17,11 @@ const SortableGallery = SortableContainer(({ items }) => (
 ));
 
 const Docs = ( {docs, getAction, getInfo} ) => {
+  const dispatch = useDispatch();
 
   const [items, setItems] = useState(docs);
   const onSortEnd = ({ oldIndex, newIndex }) => {
+    dispatch(changePos(oldIndex, newIndex));
     setItems(arrayMove(items, oldIndex, newIndex));
   };
  

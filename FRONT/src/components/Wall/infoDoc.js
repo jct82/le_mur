@@ -4,11 +4,10 @@ import { supDoc  } from 'src/actions/element.js'
 
 import './style.scss';
 
-const infoDocForm = () => {
+const infoDocForm = ({ closePanel }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.loggedUserInfos.id);
   const { name, description, type, src, link, owner_id } = useSelector((state) => state.elements);
-  const imgName = src.substring(src.indexOf('/') + 1);
 
   const changeForm= () => {
     const fadeElem = document.querySelector('.fade-elem')
@@ -23,6 +22,7 @@ const infoDocForm = () => {
 
   const supElem = () => {
     dispatch(supDoc());
+    closePanel()
   }
 
   return (
@@ -38,13 +38,12 @@ const infoDocForm = () => {
       </div>
       <div className="info-block">
         <label>Document :</label><span>{type}</span>
-        {type == 'image' ? <img src={src} /> : <p>{imgName}</p>}
+        {type == 'image' ? <img src={src} /> : <p>{src}</p>}
       </div>
       <div className="info-block">
         <label>Liens :</label>
         <ul className="link-list">
-          {/* {link.map((item) => (<li key={item}>-&nbsp;<a href={item} target="_blank" className="block">{item}</a></li>))} */}
-          <li>-&nbsp;<a href={link} target="_blank" className="block">{link}</a></li>
+          {link.map((item) => (<li key={item}>-&nbsp;<a href={item} target="_blank" className="block">{item}</a></li>))}
         </ul>
       </div>
       {owner_id == user && 

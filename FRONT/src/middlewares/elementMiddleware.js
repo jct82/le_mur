@@ -1,7 +1,7 @@
 // import axios from 'axios';
 
 import { GET_WALL, GET_WALL_INFO, setWall, setWallInfo } from "src/actions/wall";
-import { POST_DOC, SUP_DOC, CHANGE_DOC, addDoc, deleteDoc, updateDoc } from "src/actions/element";
+import { POST_DOC, SUP_DOC, CHANGE_DOC, addDoc, deleteDoc, updateDoc, emptyForm } from "src/actions/element";
 
 import API from './api';
 
@@ -24,13 +24,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       docData.append('link', linkToPost);
       docData.append('position', position);
       docData.append('owner_id', owner_id);
-      console.log(docData.get('name'));
-      console.log(docData.get('description'));
-      console.log(docData.get('type'));
-      console.log(docData.get('src'));
-      console.log(docData.get('link'));
-      console.log(docData.get('position'));
-      console.log(docData.get('owner_id'));
+      console.log('position element créé', docData.get('position'));
       const config = {
         method: 'post',
         url:  `/user/walls/${id}/elements`,
@@ -41,6 +35,7 @@ const wallMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data, 'élément crée');
           store.dispatch(addDoc(response.data));
+          setTimeout(store.dispatch(emptyForm()), 500);
         })
         .catch((error) => {
           console.error(error);
@@ -51,25 +46,39 @@ const wallMiddleware = (store) => (next) => (action) => {
     case CHANGE_DOC: {
       const doc = state.elements;
       const docList = state.wall.docList;
-      const FormerDoc = docList.find((elem) => elem.id == doc.id);
-
+      console.log('doc',doc);
+      let FormerDoc = docList.find((elem) => elem.id == doc.id);
       const docData = new FormData();
       let index = 0;
       let propName = '';
-      
       for (let prop in FormerDoc) {
-        propName = Object.keys(doc)[index];
+        propName = Object.keys(FormerDoc)[index];
         if (doc.hasOwnProperty(propName) && FormerDoc[prop] !== doc[prop]) {
           if (propName == 'link') {
             let linkString = doc.link.join('\\');
             docData.set(propName, linkString);
+          } else if (propName == 'src' && FormerDoc.type == 'image'){
+            docData.set('photo', doc.img);
           } else {
             docData.set(propName, doc[prop]);
           }
         } else {
-          docData.append(propName, FormerDoc[prop]);
+          if (propName == 'link') {
+            let linkString = FormerDoc.link.join('\\');
+            docData.set(propName, linkString);
+          } else if (propName == 'src' && FormerDoc.type == 'image'){
+            docData.set('src', doc.img);
+          }else {
+            docData.set(propName, FormerDoc[prop]);
+          }
         }
         index++;
+      }
+      if(docData.get('src')) {
+        console.log('docData.ge src', docData.get('src'));
+      }
+      if(docData.get('photo')) {
+        console.log('docData.ge photo', docData.get('photo'));
       }
       const config = {
         method: 'patch',
@@ -80,7 +89,9 @@ const wallMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           console.log('doc changé');
+          console.log(response.data);
           store.dispatch(updateDoc(response.data));
+          setTimeout(store.dispatch(emptyForm()), 500);
         })
         .catch((error) => {
           console.log(error);
@@ -95,8 +106,9 @@ const wallMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log('doc effacé');
+          console.log('doc effacé', response.data);
           store.dispatch(deleteDoc(state.elements.id));
+          setTimeout(store.dispatch(emptyForm()), 500);
         })
         .catch((error) => {
           console.log(error);
@@ -131,7 +143,6 @@ const wallMiddleware = (store) => (next) => (action) => {
           store.dispatch(setWallInfo(response.data));
         })
         .catch((error) => {
-          console.log('récupère pas les infos du mur',response.data);
           console.log(error);
         });
       next(action);

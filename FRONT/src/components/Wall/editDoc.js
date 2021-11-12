@@ -8,11 +8,12 @@ import { changeDoc } from "src/actions/element";
 
 import './style.scss';
 
-const editDocForm = () => {
+const editDocForm = ({  closePanel }) => {
   const dispatch = useDispatch();
   const elements = useSelector((state) => state.elements);
 
-  const { id, name, description, type, currentLink, link, src } = elements;
+  const { name, description, type, currentLink, link, src } = elements;
+  const imgName = src.substring(src.lastIndexOf('/') + 1);
 
   const inputChange = (e) => {
     dispatch(updateDocName(e.target.value, e.target.name));
@@ -36,8 +37,8 @@ const editDocForm = () => {
 
   const submitDoc = (e) => {
     e.preventDefault();
-    debugger;
     dispatch(changeDoc());
+    closePanel();
   }
   
   const linksListJSX = link.map((lien) => {
@@ -58,7 +59,7 @@ const editDocForm = () => {
         <Input type="text" label="Nom" name="name" value={name} changeInput={inputChange}/>
         <Textarea name="description" label="Description" value={description} changeInput={inputChange}/>
         <Select  name="type" label="Type de document" value={type} changeInput={selectChange} options={['image', 'texte']} />
-        {type == 'image' && <FileInput label="charger une image" value={src}  name="src" changeInput={fileChange}/>}
+        {type == 'image' && <FileInput label="charger une image" value={imgName}  name="src" changeInput={fileChange}/>}
         {type == 'texte' && <Textarea name="src" label="Rédiger un texte" value={src} changeInput={inputChange}/>}
         <div className="input-list">
           <div>

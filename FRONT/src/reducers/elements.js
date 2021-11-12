@@ -63,15 +63,14 @@ const reducer = (state = initialState, action = {}) => {
         owner_id: owner_id,
       }
     case EMPTY_FORM :
-      const {nameF, descriptionF, typeF, linkF, srcF, currentLinkF} = action.doc;
       return{
         ...state,
-        name: nameF,
-        description: descriptionF,
-        type: typeF,
-        link: linkF,
-        src: srcF,
-        currentLink: currentLinkF,
+        name: '',
+        description: '',
+        type: '',
+        link: [],
+        src: '',
+        currentLink: '',
       }
     default:
       return state;

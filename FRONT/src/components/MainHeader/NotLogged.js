@@ -19,7 +19,8 @@ const NotLogged = ({ onToggleMenu }) => {
     e.preventDefault();
     await dispatch(clearLoginErrors());
     await dispatch(submitUserLogin());
-    if (logErrors) onToggleMenu();
+    // console.log('error length: ', result);
+    // if (logErrors.length === 0) onToggleMenu();
   };
 
   return (

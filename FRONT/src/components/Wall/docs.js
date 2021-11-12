@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { useDispatch } from 'react-redux';
-import Doc from './doc';
+import { useState } from "react";
 import Gallery from "react-photo-gallery";
+import Doc from './doc';
 import { arrayMove } from 'react-sortable-hoc';
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 

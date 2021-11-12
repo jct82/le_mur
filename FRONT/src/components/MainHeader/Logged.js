@@ -19,7 +19,7 @@ const Logged = ({ onToggleMenu }) => {
       <p className="userMenu__btnContainer__userName">{user}</p>
       <ul className="userMenu__btnContainer__buttons">
         <li className="userMenu__btnContainer__buttons__logoutBtn" onClick={handleDisconnectUser}>Déconnexion</li>
-        <Link to="/userProfile"> <li className="userMenu__btnContainer__buttons__accountBtn">Mon compte</li> </Link>
+        <Link to="/userProfile"> <li className="userMenu__btnContainer__buttons__accountBtn" onClick={()=> onToggleMenu()}>Mon compte</li> </Link>
       </ul>
     </div>
   );

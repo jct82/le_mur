@@ -55,7 +55,6 @@ const WallForm = ({ setFormOpen }) => {
             <img className="wallForm__closeIcon" src={closeIcon} alt="fermeture de la modale" onClick={handleCloseModal} />
             <Input type="text" label="nom du projet" name="title" changeInput={handleChangeInput} value={title} />
             <Textarea label="description" name="description" changeInput={handleChangeInput} value={description} />
-            {/* <div></div> */}
             { picture && <img className="wallForm__leftContainer__img" src={URL.createObjectURL(picture)}/>}
             <FileInput type="file" name="photo" changeInput={handleChangePicture} value="" label="upload picture" />
           </div>

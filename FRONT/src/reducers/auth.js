@@ -21,6 +21,7 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action = {}) => {
+  console.log(action)
   switch (action.type) {
     case 'STORE_USER_LOGIN_INPUT':
       return {
@@ -47,6 +48,26 @@ const reducer = (state = initialState, action = {}) => {
           lastname: action.lastname,
           id: action.userId
         },
+      };
+    case 'UPDATED_PROFILE' :
+      localStorage.setItem('name', action.newProfile.name );
+      localStorage.setItem('lastname', action.newProfile.lastname );
+      // localStorage.setItem('userId', action.updateProfile.updatedUser.id );
+      return {
+        ...state,
+        loggedUserName: `${action.newProfile.name} ${action.newProfile.lastname}`,
+        name: action.newProfile.name,
+        lastname: action.newProfile.lastname,
+        loggedUserInfos: {
+          name: action.newProfile.name,
+          lastname: action.newProfile.lastname,
+          // id: action.userData.result.id
+        },
+        credentials: {
+          email: '',
+          password: '',
+        },
+        // logged: true,
       };
     case 'LOG_USER':
       localStorage.setItem('profile', JSON.stringify(action.userData.token));

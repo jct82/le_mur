@@ -2,7 +2,7 @@ const User = require('../models/user');
 const Wall = require('../models/wall');
 // We require fs-extra to remove files in public folder
 const fs = require('fs-extra');
-
+ 
 
 const wallController = {
     // Get walls with user informations

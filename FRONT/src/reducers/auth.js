@@ -17,11 +17,12 @@ const initialState = {
     id: null,
     name: '',
     lastname: '',
-  }
+  },
+  logError: '',
 };
 
 const reducer = (state = initialState, action = {}) => {
-  console.log(action)
+  console.log(action);
   switch (action.type) {
     case 'STORE_USER_LOGIN_INPUT':
       return {
@@ -46,12 +47,12 @@ const reducer = (state = initialState, action = {}) => {
         loggedUserInfos: {
           name: action.name,
           lastname: action.lastname,
-          id: action.userId
+          id: action.userId,
         },
       };
-    case 'UPDATED_PROFILE' :
-      localStorage.setItem('name', action.newProfile.name );
-      localStorage.setItem('lastname', action.newProfile.lastname );
+    case 'UPDATED_PROFILE':
+      localStorage.setItem('name', action.newProfile.name);
+      localStorage.setItem('lastname', action.newProfile.lastname);
       // localStorage.setItem('userId', action.updateProfile.updatedUser.id );
       return {
         ...state,
@@ -71,9 +72,9 @@ const reducer = (state = initialState, action = {}) => {
       };
     case 'LOG_USER':
       localStorage.setItem('profile', JSON.stringify(action.userData.token));
-      localStorage.setItem('name', action.userData.result.name );
-      localStorage.setItem('lastname', action.userData.result.lastname );
-      localStorage.setItem('userId', action.userData.result.id );
+      localStorage.setItem('name', action.userData.result.name);
+      localStorage.setItem('lastname', action.userData.result.lastname);
+      localStorage.setItem('userId', action.userData.result.id);
       return {
         ...state,
         loggedUserName: `${action.userData.result.name} ${action.userData.result.lastname}`,
@@ -82,22 +83,33 @@ const reducer = (state = initialState, action = {}) => {
         loggedUserInfos: {
           name: action.userData.result.name,
           lastname: action.userData.result.lastname,
-          id: action.userData.result.id
+          id: action.userData.result.id,
         },
         credentials: {
           email: '',
           password: '',
         },
         logged: true,
+        logError: '',
       };
     case 'DISCONNECT_USER':
       localStorage.clear();
       return {
         ...state,
         loggedUserName: '',
-        name:'',
-        lastname:'',
+        name: '',
+        lastname: '',
         logged: false,
+      };
+    case 'LOGIN_ERRORS':
+      return {
+        ...state,
+        logError: action.message,
+      };
+    case 'CLEAR_LOGIN_ERRORS':
+      return {
+        ...state,
+        logError: '',
       };
     case 'STORE_USERS':
       return {

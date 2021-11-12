@@ -51,3 +51,7 @@ export const loginErrors = (error) => (
 export const clearLoginErrors = () => (
   { type: 'CLEAR_LOGIN_ERRORS' }
 );
+
+export const toggleUserMenu = () => (
+  { type: 'TOGGLE_USER_MENU' }
+);

@@ -4,7 +4,7 @@ import submitBtn from 'src/assets/icons/submit-neg.png';
 import { clearLoginErrors, storeUSerInputValue, submitUserLogin } from '../../actions/users';
 import Input from '../inputForm/inputs';
 
-const NotLogged = ({ onToggleMenu }) => {
+const NotLogged = () => {
   const dispatch = useDispatch();
   const passwordInputValue = useSelector((state) => state.user.credentials.password);
   const emailInputValue = useSelector((state) => state.user.credentials.email);
@@ -19,10 +19,7 @@ const NotLogged = ({ onToggleMenu }) => {
     e.preventDefault();
     await dispatch(clearLoginErrors());
     await dispatch(submitUserLogin());
-    // console.log('error length: ', result);
-    // if (logErrors.length === 0) onToggleMenu();
   };
-
   return (
     <div className="userMenu__login">
       <form className="dark testInput" onSubmit={handleSubmit}>

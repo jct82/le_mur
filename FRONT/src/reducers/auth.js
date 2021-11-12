@@ -19,10 +19,16 @@ const initialState = {
     lastname: '',
   },
   logError: '',
+  isMenuOpen: false,
 };
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case 'TOGGLE_USER_MENU':
+      return {
+        ...state,
+        isMenuOpen: !state.isMenuOpen,
+      };
     case 'STORE_USER_LOGIN_INPUT':
       return {
         ...state,
@@ -90,6 +96,7 @@ const reducer = (state = initialState, action = {}) => {
         },
         logged: true,
         logError: '',
+        isMenuOpen: !state.isMenuOpen,
       };
     case 'DISCONNECT_USER':
       localStorage.clear();

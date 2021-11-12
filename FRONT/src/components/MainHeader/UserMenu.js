@@ -1,16 +1,19 @@
 import userIcon from 'src/assets/icons/user-neg.png';
 import './header.scss';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Logged from './Logged';
 import NotLogged from './NotLogged';
+import { toggleUserMenu } from '../../actions/users';
 
 const UserMenu = () => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
+  const dispatch = useDispatch();
+  const isMenuOpen = useSelector((state) => state.user.isMenuOpen);
+  // const [isMenuOpen, setMenuOpen] = useState(false);
   const isLogged = useSelector((state) => state.user.logged);
 
   const handleToggleMenu = () => {
-    setMenuOpen(!isMenuOpen);
+    dispatch(toggleUserMenu());
+    // setMenuOpen(!isMenuOpen);
   };
   return (
     <>
@@ -19,8 +22,8 @@ const UserMenu = () => {
           <img className="userMenu__userIcon__img" src={userIcon} alt="user icon" />
         </div>
         { isLogged
-          ? <Logged onToggleMenu={setMenuOpen} />
-          : <NotLogged onToggleMenu={setMenuOpen} />}
+          ? <Logged onToggleMenu={handleToggleMenu} />
+          : <NotLogged />}
       </div>
     </>
   );

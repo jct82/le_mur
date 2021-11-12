@@ -42,10 +42,11 @@ const wallController = {
       try {
           // We get wall with wall id
           const wall = await Wall.findOne(wallId);
-         
           console.log('wall : ' + JSON.stringify(wall));
+          // We get in database all informations about collaborators of the wall
+          const collabsData = await Wall.findCollabsInfoByWallId(wallId);
             
-          res.status(200).json(wall);
+          res.status(200).json({result:wall,collabsData});
          
        
       } catch (error) {

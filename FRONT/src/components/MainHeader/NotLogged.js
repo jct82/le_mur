@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import submitBtn from 'src/assets/icons/submit-neg.png';
 import { clearLoginErrors, storeUSerInputValue, submitUserLogin } from '../../actions/users';
 import Input from '../inputForm/inputs';
@@ -32,7 +31,4 @@ const NotLogged = () => {
   );
 };
 
-NotLogged.propTypes = {
-  onToggleMenu: PropTypes.func.isRequired,
-};
 export default NotLogged;

@@ -100,7 +100,7 @@ const Wall = () => {
           <div className="icon pdf" onClick={editPdf}></div>
         </div>
         <div className={displaysquare ? "board-wrapper square" : "board-wrapper"}>
-          {docList.length && <Docs docs={docList} getAction="infoDocPanel" getInfo={displayPanel} />}
+          <Docs docs={docList} getAction="infoDocPanel" getInfo={displayPanel} />
         </div>
       </div>
     </div>

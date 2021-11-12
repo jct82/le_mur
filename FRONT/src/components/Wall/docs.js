@@ -27,7 +27,7 @@ const Docs = ( {docs, getAction, getInfo} ) => {
  
   return (
     <div className="board">
-      <SortableGallery distance={2} items={docs.map((doc) => ({...doc, getAction: getAction, getInfo: getInfo}))} onSortEnd={onSortEnd} axis={"xy"} />
+      <SortableGallery distance={2} items={docs.map((doc) => ({...doc, width: 2, height:3 ,getAction: getAction, getInfo: getInfo}))} onSortEnd={onSortEnd} axis={"xy"} />
     </div>
   )
 };

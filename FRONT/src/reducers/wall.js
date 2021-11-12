@@ -23,11 +23,20 @@ const localPath = 'http://localhost:3000/';
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case SET_WALL :
-      let linkArray;
       const newDocList = action.docList.map((elem) => {
-        if (elem.type == 'image') elem.src = localPath+elem.src;
+        let linkArray, srcEdit = elem.src;
+        if (elem.type == 'image') srcEdit = localPath+srcEdit;
         elem.link == null ? linkArray = [] : linkArray = elem.link.split('\\');
-        return({...elem, src: elem.src, link: linkArray, width:2, height:3});
+        return({
+          id: elem.id,
+          name: elem.name,
+          description: elem.description,
+          type: elem.type,
+          position: elem.position,
+          link: linkArray,
+          src: srcEdit,
+          owner_id: elem.owner_id,
+        })
       });
       return{
         ...state,
@@ -35,10 +44,10 @@ const reducer = (state = initialState, action = {}) => {
       }
     case ADD_DOC : {
       const { id, name, description, type, link, src, owner_id } = action.doc;
-      let srcEdit = src;
+      const docList = state.docList;
+      let linkArray, srcEdit = src;
       if (type == 'image') srcEdit = localPath+src;
       link == null ? linkArray = [] : linkArray = link.split('\\');
-      console.log('srcEdit', srcEdit);
       const idList = state.docList.map((elem) => {
         return elem.id;
       }); 
@@ -47,12 +56,10 @@ const reducer = (state = initialState, action = {}) => {
         name: name,
         description: description,
         type: type,
-        position: state.docList.length,
+        position: docList.length,
         link: linkArray,
         src: srcEdit,
         owner_id: owner_id,
-        width:2,
-        height:3,
       };
       const allDocs = state.docList;
       console.log('newDoc',newDoc);
@@ -172,7 +179,11 @@ const reducer = (state = initialState, action = {}) => {
       }
     }
     case SET_WALL_INFO :
-      let {created_at, description, id, owner_id, photo, title, updated_at} = action.wall;
+      let {created_at, description, id, owner_id, photo, title, updated_at} = action.wall.result;
+      const usersTab = action.wall.collabsData;
+      const users = usersTab.map((user) => {
+        return user.name;
+      });
 
       const dateToString = (date) => {
         let stringDate = date.substring(0, 10);
@@ -190,6 +201,7 @@ const reducer = (state = initialState, action = {}) => {
         photo: localPath+photo,
         title: title,
         updated_at: dateToString(updated_at),
+        users: users,
       }
     default:
       return state;

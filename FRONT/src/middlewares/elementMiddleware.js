@@ -24,6 +24,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       docData.append('link', linkToPost);
       docData.append('position', position);
       docData.append('owner_id', owner_id);
+      console.log('position element créé', docData.get('position'));
       const config = {
         method: 'post',
         url:  `/user/walls/${id}/elements`,
@@ -45,17 +46,13 @@ const wallMiddleware = (store) => (next) => (action) => {
     case CHANGE_DOC: {
       const doc = state.elements;
       const docList = state.wall.docList;
+      console.log('doc',doc);
       let FormerDoc = docList.find((elem) => elem.id == doc.id);
-      if (FormerDoc.type == 'image') {
-        FormerDoc.src = FormerDoc.src.substring(FormerDoc.src.lastIndexOf('/') + 1); 
-      }
-
       const docData = new FormData();
       let index = 0;
       let propName = '';
-      
       for (let prop in FormerDoc) {
-        propName = Object.keys(doc)[index];
+        propName = Object.keys(FormerDoc)[index];
         if (doc.hasOwnProperty(propName) && FormerDoc[prop] !== doc[prop]) {
           if (propName == 'link') {
             let linkString = doc.link.join('\\');
@@ -69,13 +66,20 @@ const wallMiddleware = (store) => (next) => (action) => {
           if (propName == 'link') {
             let linkString = FormerDoc.link.join('\\');
             docData.set(propName, linkString);
-          } else {
-            docData.append(propName, FormerDoc[prop]);
+          } else if (propName == 'src' && FormerDoc.type == 'image'){
+            docData.set('src', doc.img);
+          }else {
+            docData.set(propName, FormerDoc[prop]);
           }
         }
         index++;
       }
-
+      if(docData.get('src')) {
+        console.log('docData.ge src', docData.get('src'));
+      }
+      if(docData.get('photo')) {
+        console.log('docData.ge photo', docData.get('photo'));
+      }
       const config = {
         method: 'patch',
         url: `/user/walls/${state.wall.id}/elements/${doc.id}`,

@@ -1,12 +1,10 @@
-import axios from 'axios';
-import { logUser, updatedUser } from '../actions/users';
+import { loginErrors, logUser, updatedUser } from '../actions/users';
 import API from './api';
 
 const authMiddleware = (store) => (next) => (action) => {
   const state = store.getState();
   switch (action.type) {
     case 'SUBMIT_USER_LOGIN': {
-      console.log(action);
       const config = {
         method: 'post',
         url: '/user/login',
@@ -17,15 +15,12 @@ const authMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log(response)
-          if( response.status === 200 ){
-            store.dispatch(logUser(response.data))
-          }else if (response.status === 401){
-            console.log(response.message)
-          }; 
+          if (response.status === 200) {
+            store.dispatch(logUser(response.data));
+          }
         })
         .catch((error) => {
-          console.log(error);
+          store.dispatch(loginErrors(error.response.data));
         });
       next(action);
       break;
@@ -41,12 +36,10 @@ const authMiddleware = (store) => (next) => (action) => {
           password: state.user.password,
         },
       };
-      
+
       API(config)
         .then((response) => {
-          console.log(response.data);
           if (response.status === 200) {
-            console.log(response.data);
             store.dispatch(logUser(response.data));
           }
         })
@@ -56,23 +49,20 @@ const authMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     }
-    case 'UPDATE_USER' : {
-      console.log(state.user.name)
-        const config = {
-          method: 'patch',
-          url: '/user/login',
-          data: {
-            name: state.user.name,
-            lastname: state.user.lastname,
-            password: state.user.password,
-          },
-        };
-        API(config)
+    case 'UPDATE_USER': {
+      const config = {
+        method: 'patch',
+        url: '/user/login',
+        data: {
+          name: state.user.name,
+          lastname: state.user.lastname,
+          password: state.user.password,
+        },
+      };
+      API(config)
         .then((response) => {
-          console.log(response.data);
           if (response.status === 200) {
-            console.log(response.data);
-           store.dispatch(updatedUser(response.data.updatedUser));
+            store.dispatch(updatedUser(response.data.updatedUser));
           }
         })
         .catch((error) => {
@@ -80,7 +70,7 @@ const authMiddleware = (store) => (next) => (action) => {
         });
       next(action);
       break;
-      };
+    }
     default:
       next(action);
   }

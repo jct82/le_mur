@@ -51,10 +51,9 @@ const WallCard = ({
           : (
             <Link to={{ pathname: '/wall', state: { wallId: id, wallTitle: title } }}>
               {
-                photo ?
-                <div className="wallcard__imgContainer__img" style={{ backgroundImage: `url('http://localhost:3000/${photo}')`, backgroundPosition: 'center'  }} />
-                :
-                <div className="wallcard__imgContainer__img" style={{ backgroundImage: `url('/images/icons/camera.jpg')`, backgroundPosition: 'center' }} />
+                photo
+                  ? <div className="wallcard__imgContainer__img" style={{ backgroundImage: `url('http://localhost:3000/${photo}')`, backgroundPosition: 'center' }} />
+                  : <div className="wallcard__imgContainer__img" style={{ backgroundImage: 'url(\'/images/icons/camera.jpg\')', backgroundPosition: 'center' }} />
               }
             </Link>
           )
@@ -77,8 +76,18 @@ const WallCard = ({
 };
 
 WallCard.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.string).isRequired,
-  titleColor: PropTypes.string.isRequired,
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      lastname: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+      password: PropTypes.string.isRequired,
+      created_at: PropTypes.string.isRequired,
+      updated_at: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+  title_color: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,

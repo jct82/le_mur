@@ -69,5 +69,10 @@ export const deleteDoc = (id) => ({
   id: id,
 });
 
+export const storeNewDoc = (items) => ({
+  type: 'STORE_NEW_DOC',
+  items,
+})
+
 
 

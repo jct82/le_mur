@@ -5,7 +5,7 @@ const Input = ({
 }) => {
   return (
     <div className={value.trim() ? "input-wrapper on" : "input-wrapper"}>
-      <input type={type} name={name} onChange={changeInput} value={value} required/>
+      <input type={type} name={name} onChange={changeInput} value={value} />
       <label>{label}</label>
       <div className="line" />
     </div>

@@ -123,7 +123,6 @@ const reducer = (state = initialState, action = {}) => {
               : action.value,
           },
         }
-
     default:
       return state;
   }

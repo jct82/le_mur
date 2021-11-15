@@ -6,9 +6,8 @@ import './style.scss';
 
 const InfoWallForm = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.id);
-  console.log(user);
-  const { created_at, updated_at, title, description, photo, users, owner_id } = useSelector((state) => state.wall);
+  const user = useSelector((state) => state.user.loggedUserInfos.id);
+  const { created_at, updated_at, title, description, photo, users, owner_id,  owner_name } = useSelector((state) => state.wall);
 
   const changeForm= () => {
     const fadeElem = document.querySelector('.fade-elem')
@@ -45,12 +44,12 @@ const InfoWallForm = () => {
       </div>
       <div className="info-block">
         <label>Admin :</label>
-        <p>{owner_id}</p>
+        <p>{owner_name}</p>
       </div>
       <div className="info-block">
         <label>Participants :</label>
         <ul className="link-list">
-          {users.map((item) => (<li key={item}>{item}</li>))}
+          {users.map((item) => (<li key={item.id}>{item.name} {item.lastname}</li>))}
         </ul>
       </div>
       {user == owner_id && 

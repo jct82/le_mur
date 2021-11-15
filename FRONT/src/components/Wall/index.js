@@ -88,7 +88,7 @@ const Wall = () => {
           <div className="close-panel" onClick={closePanel}></div>
           <div className="fade-elem"></div>
           {panel == 'infoWallPanel' && <InfoWallForm />}
-          {panel == 'changeWallPanel' && <ChangeWallForm />}
+          {panel == 'changeWallPanel' && <ChangeWallForm closePanel={closePanel}/>}
           {panel == 'infoDocPanel' && <InfoDocForm closePanel={closePanel}/>}
           {panel == 'addDocPanel' && <AddDocForm closePanel={closePanel}/>}
           {panel == 'editDocPanel' && <EditDocForm closePanel={closePanel}/>}

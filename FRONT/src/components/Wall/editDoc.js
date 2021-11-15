@@ -1,9 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Input from "../inputForm/inputs";
+import ListInput from "../inputForm/listInput";
 import Textarea from "../inputForm/textarea";
 import Select from "../inputForm/select";
 import FileInput from "../inputForm/file";
 import { updateDocName, updateFileName, postLink, deleteLink } from "src/actions/element";
+import { validateForm, validateField, checkUrl } from "src/components/inputForm/validate";
 import { changeDoc } from "src/actions/element";
 
 import './style.scss';
@@ -19,8 +21,8 @@ const editDocForm = ({  closePanel }) => {
     dispatch(updateDocName(e.target.value, e.target.name));
   }
 
-  const addLink = () => {
-    if (currentLink.trim().length) dispatch(postLink(currentLink));
+  const addLink = (e) => {
+    if (currentLink.trim().length && checkUrl(e.target.previousElementSibling.firstChild.firstChild)) dispatch(postLink(currentLink));
   }
 
   const suppLink = (e) => {
@@ -37,8 +39,19 @@ const editDocForm = ({  closePanel }) => {
 
   const submitDoc = (e) => {
     e.preventDefault();
-    dispatch(changeDoc());
-    closePanel();
+    if (checkForm(e.target.elements)) {
+      resetForm();
+      dispatch(changeDoc());
+      closePanel();
+    }
+  }
+
+  const checkForm = (formEl) => {
+    if (validateForm(formEl)) return true;
+  }
+
+  const formChange = (e) => {
+    validateField(e.target);
   }
   
   const linksListJSX = link.map((lien) => {
@@ -55,19 +68,14 @@ const editDocForm = ({  closePanel }) => {
   return (
     <div>
       <h2 className="form-title">Nouveau Document</h2>
-      <form className="add-doc-form" onSubmit={submitDoc} encType="multipart/form-data">
-        <Input type="text" label="Nom" name="name" value={name} changeInput={inputChange}/>
-        <Textarea name="description" label="Description" value={description} changeInput={inputChange}/>
-        <Select  name="type" label="Type de document" value={type} changeInput={selectChange} options={['image', 'texte']} />
+      <form className="add-doc-form" onSubmit={submitDoc} onChange={formChange} encType="multipart/form-data">
+        <Input classes="required" type="text" label="Nom" name="name" value={name} changeInput={inputChange}/>
+        <Textarea classes="required" name="description" label="Description" value={description} changeInput={inputChange}/>
+        <Select classes="required"  name="type" label="Type de document" value={type} changeInput={selectChange} options={['image', 'texte']} />
         {type == 'image' && <FileInput label="charger une image" value={imgName}  name="src" changeInput={fileChange}/>}
-        {type == 'texte' && <Textarea name="src" label="Rédiger un texte" value={src} changeInput={inputChange}/>}
+        {type == 'texte' && <Textarea classes="required" name="src" label="Rédiger un texte" value={src} changeInput={inputChange}/>}
         <div className="input-list">
-          <div>
-            <div className="field">
-              <Input type="text" label="Lien" name="currentLink" value={currentLink} changeInput={inputChange}/>
-            </div>
-            <button className="btn add" type="button" onClick={addLink}></button>
-          </div>
+          <ListInput type="url" label="Lien" name="currentLink" value={currentLink} changeInput={inputChange} action={addLink}/>
           {linksListJSX}
         </div>
         <input className="btn btn-submit-txt" type="submit"  value="Valider"/>

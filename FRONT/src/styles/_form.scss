@@ -56,12 +56,31 @@ input, select, textarea, button{
     border:none;
     font-size: 16px;
   }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="url"],
+  textarea,
+  select{
+    background-color: #ffffff;
+  }
+
+  input:-webkit-autofill {
+    -webkit-box-shadow:0 0 0 50px white inset;
+    -webkit-text-fill-color: #000000;
+  }
+
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 50px white inset;
+    -webkit-text-fill-color: #000000;
+  } 
+  
   select{
     width: 100%;
     border: none;
     border-bottom: 1px solid #000000;
     padding: 8px 11px;  
-    background-color: #ffffff;
     font-size: 16px;
     &:focus{
       outline: none;
@@ -170,8 +189,24 @@ form.dark{
   background-color:#000000;
   color:#ffffff;
   .input-wrapper{
+    input[type="text"],
+    input[type="email"],
+    input[type="password"], 
+    input[type="url"], 
+    textarea,
+    select{
+      background-color: #000000;
+    }
+    input:-webkit-autofill {
+      -webkit-box-shadow:0 0 0 50px #000000 inset;
+      -webkit-text-fill-color: #ffffff;
+    }
+  
+    input:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0 50px #000000 inset;
+      -webkit-text-fill-color: #ffffff;
+    } 
     input, textarea,select{
-      background-color:#000000;
       color:white;
     }
     .line{
@@ -233,6 +268,7 @@ input[type="file"]{
 }
 
 .input-file-wrapper{
+  position: relative;
   margin-bottom: 20px;
   .file-name{
     display: inline-block;
@@ -246,6 +282,10 @@ input[type="file"]{
   align-items:center;
   .field{
     flex-grow: 1;
+    max-width: 260px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .btn{
     flex-grow: 0;
@@ -262,5 +302,46 @@ input[type="file"]{
     &.supp{
       background-image: url(#{$prodPath}/icons/cross-neg.png);
     }
+  }
+}
+
+form, form.dark{
+  .input-wrapper{
+    input, textarea,select{
+      &.error{
+        color: #c71010;
+        & ~ .line{
+          background-color:#c71010;
+        }
+        & ~ .line:after{
+          background-color:#c71010;
+        }
+        & ~ label{
+          color:#c71010;
+        }
+      }
+    }
+  }
+  .input-file-wrapper input[type="file"].error{
+    & ~ .fake-file{
+      color:#c71010;
+      border: 1px solid #c71010;
+    }
+    & ~ .file-name{
+      color:#c71010;
+    }
+  }
+  select.error{
+    border-bottom: 1px solid #c71010;
+  }
+  .btn.error{
+    color:#c71010;
+    border: 1px solid #c71010;
+  }
+  .errormsg{
+    position: absolute;
+    bottom: -16px;
+    font-size: 11px;
+    color:#c71010;
   }
 }

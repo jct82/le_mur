@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 
 const FileInput = ({
-  label, value, changeInput, name
+  label, value, changeInput, name, classes
 }) => {
   const activeFileInput = (e) => {
     e.target.previousElementSibling.click();
   }
   return (
     <div className="input-file-wrapper">
-      <input className="btn" type="file" name={name} onChange={changeInput}/>
+      <input  className={`btn ${classes}`}  type="file" name={name} onChange={changeInput}/>
       <div className="btn fake-file" onClick={activeFileInput}>{label}</div>
       <span className="file-name">{value}</span>
     </div>

@@ -1,6 +1,7 @@
 // import axios from 'axios';
 
-import { GET_WALL, GET_WALL_INFO, setWall, setWallInfo } from "src/actions/wall";
+import { GET_WALL, GET_WALL_INFO, CHANGE_POS, setWall, setWallInfo, emptyWall } from "src/actions/wall";
+import { storeAllWalls } from "src/actions/walls";
 import { POST_DOC, SUP_DOC, CHANGE_DOC, addDoc, deleteDoc, updateDoc, emptyForm } from "src/actions/element";
 
 import API from './api';
@@ -10,11 +11,14 @@ const wallMiddleware = (store) => (next) => (action) => {
   const { id } = state.wall;
   switch (action.type) {
     case POST_DOC: {
-
       // on crée un formData à envoyer au back
-      const { name, description, type, src, link, position, owner_id, img } = state.elements;
-      
+      const { name, description, type, src, link, img } = state.elements;
+      const owner_id = state.user.loggedUserInfos.id;
+      console.log('owner_id', state.user.loggedUserInfos.id);
+      console.log('owner_id', owner_id);
+      const position = state.wall.docList.length + 1;
       let linkToPost = link.join('\\');
+
       const docData = new FormData();
       docData.append('name', name);
       docData.append('description', description);
@@ -24,7 +28,6 @@ const wallMiddleware = (store) => (next) => (action) => {
       docData.append('link', linkToPost);
       docData.append('position', position);
       docData.append('owner_id', owner_id);
-      console.log('position element créé', docData.get('position'));
       const config = {
         method: 'post',
         url:  `/user/walls/${id}/elements`,
@@ -46,7 +49,6 @@ const wallMiddleware = (store) => (next) => (action) => {
     case CHANGE_DOC: {
       const doc = state.elements;
       const docList = state.wall.docList;
-      console.log('doc',doc);
       let FormerDoc = docList.find((elem) => elem.id == doc.id);
       const docData = new FormData();
       let index = 0;
@@ -67,18 +69,13 @@ const wallMiddleware = (store) => (next) => (action) => {
             let linkString = FormerDoc.link.join('\\');
             docData.set(propName, linkString);
           } else if (propName == 'src' && FormerDoc.type == 'image'){
-            docData.set('src', doc.img);
+            let imgName = doc.src.substring(doc.src.lastIndexOf('/') + 1);
+            docData.set('src', imgName);
           }else {
             docData.set(propName, FormerDoc[prop]);
           }
         }
         index++;
-      }
-      if(docData.get('src')) {
-        console.log('docData.ge src', docData.get('src'));
-      }
-      if(docData.get('photo')) {
-        console.log('docData.ge photo', docData.get('photo'));
       }
       const config = {
         method: 'patch',
@@ -127,6 +124,43 @@ const wallMiddleware = (store) => (next) => (action) => {
           store.dispatch(setWall(response.data));
         })
         .catch((error) => {
+          if (error.response.status === 404) store.dispatch(emptyWall());
+        });
+      next(action);
+      break;
+    }
+    case CHANGE_POS :{
+      let newDocList = state.wall.docList;
+      const { newPos, oldPos } = action;
+      if (oldPos > newPos) {
+        newDocList.forEach((doc) => {
+          if (doc.position == oldPos) {
+            doc.position = newPos;
+          } else if (doc.position < oldPos && doc.position >= newPos) {
+            doc.position += 1;
+          }
+        });
+      } else {
+        newDocList.forEach((doc) => {
+          if (doc.position == oldPos) {
+            doc.position = newPos;
+          } else if (doc.position > oldPos && doc.position <= newPos) {
+            doc.position -= 1;
+          }
+        });
+      }
+      newDocList = {newDocList};
+      const config = {
+        method: 'patch',
+        url: `/user/walls/${id}/elements`,
+        data: newDocList,
+      };
+      API(config)
+        .then((response) => {
+          console.log('change les elem de position',response.data);
+          //store.dispatch(setWall(response.data));
+        })
+        .catch((error) => {
           console.log(error);
         });
       next(action);
@@ -141,6 +175,9 @@ const wallMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log('récupère les infos du mur',response.data);
           store.dispatch(setWallInfo(response.data));
+          if (!state.walls.wallsList.length) {
+            store.dispatch(storeAllWalls({result:[response.data.result],collabsData: response.data.collabsData}));
+          }
         })
         .catch((error) => {
           console.log(error);

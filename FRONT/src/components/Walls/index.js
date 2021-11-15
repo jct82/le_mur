@@ -1,5 +1,6 @@
 import './walls.scss';
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import Plus from 'src/assets/icons/plus-neg.png';
 import WallsCards from './WallsCards';
@@ -19,6 +20,7 @@ const Walls = () => {
   useEffect(() => {
     dispatch(getWalls());
   }, []);
+
   return (
     <div className="projects">
       <div className="projects__title">

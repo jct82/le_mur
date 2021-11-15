@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { useState } from "react";
 import Gallery from "react-photo-gallery";
 import Doc from './doc';
@@ -20,14 +21,20 @@ const Docs = ( {docs, getAction, getInfo} ) => {
   const dispatch = useDispatch();
 
   const [items, setItems] = useState(docs);
+
+  useEffect(() => {
+      setItems(docs)
+  }, [docs]);
+
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    dispatch(changePos(oldIndex, newIndex));
+    console.log('items items items', items);
+    dispatch(changePos(oldIndex + 1, newIndex + 1));
     setItems(arrayMove(items, oldIndex, newIndex));
   };
  
   return (
     <div className="board">
-      <SortableGallery distance={2} items={docs.map((doc) => ({...doc, width: 2, height:3 ,getAction: getAction, getInfo: getInfo}))} onSortEnd={onSortEnd} axis={"xy"} />
+      <SortableGallery distance={2} items={items.map((doc) => ({...doc,getAction: getAction, getInfo: getInfo}))} onSortEnd={onSortEnd} axis={"xy"} />
     </div>
   )
 };

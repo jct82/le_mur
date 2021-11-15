@@ -32,7 +32,7 @@ const Walls = () => {
       {
         isFormOpen && <WallForm setFormOpen={setFormOpen} />
       }
-      <WallsCards />
+      <WallsCards openForm={handleOpenForm} />
     </div>
   );
 };

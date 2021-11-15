@@ -94,6 +94,11 @@ const Wall = () => {
           {panel == 'editDocPanel' && <EditDocForm closePanel={closePanel}/>}
         </div>
         <div className="menu-bar">
+          <div className="icon menu-mob">
+            <div className="bar"></div>
+            <div className="bar"></div>
+            <div className="bar"></div>
+          </div>
           <div className="icon info" panel="infoWallPanel" onClick={displayPanel}></div>
           <div className="icon add" panel="addDocPanel" onClick={displayPanel}></div>
           <div className="icon display" onClick={displaySquare}></div>

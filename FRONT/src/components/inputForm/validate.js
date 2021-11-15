@@ -8,8 +8,8 @@ function validateEmail (string){
 
 function checkImgFile(e){
   let typeDoc = e.type.split('/');
-  if (e.size > 3072) {
-    return 'le fichier doit faire moins de 3 M';
+  if (e.size > 1024000) {
+    return 'le fichier doit faire moins de 1 M';
   } else if (typeDoc[0] != 'image') {
     return 'le fichier doit être une image';
   } else if (!(typeDoc[1] == 'jpeg' || typeDoc[1] == 'jpg' || typeDoc[1] == 'png')) {

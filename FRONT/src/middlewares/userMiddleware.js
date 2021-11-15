@@ -1,4 +1,5 @@
 import { storeAllUsers } from '../actions/users';
+import { postUser, TRY_USER } from '../actions/wall';
 import API from './api';
 
 const userMiddleware = (store) => (next) => (action) => {
@@ -12,6 +13,22 @@ const userMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           store.dispatch(storeAllUsers(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      next(action);
+      break;
+    }
+    case TRY_USER: {
+      const config = {
+        method: 'get',
+        url: '/user/list',
+      };
+      API(config)
+        .then((response) => {
+          const user = response.data.find((user) => user.email == action.user);
+          user == undefined ? store.dispatch(postUser('none')) : store.dispatch(postUser(user));
         })
         .catch((error) => {
           console.log(error);

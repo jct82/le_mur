@@ -1,4 +1,4 @@
-import { CHANGE_POS, CHANGE_PANEL, TOGGLE_EYE, POST_USER, DELETE_USER, UPDATE_DOC_PROPS, DISPLAY_MODE, REDIRECT_PDF, SET_WALL , SET_WALL_INFO, UPDATE_WALL, EMPTY_WALL } from "src/actions/wall";
+import { CHANGE_POS, CHANGE_PANEL, TOGGLE_EYE, POST_USER, DELETE_USER, UPDATE_DOC_PROPS, DISPLAY_MODE, REDIRECT_PDF, SET_WALL , SET_WALL_INFO, UPDATE_WALL, EMPTY_WALL, UPDATE_WALL_FILE } from "src/actions/wall";
 import { ADD_DOC, DELETE_DOC, UPDATE_DOC } from "src/actions/element";
 
 const initialState = {
@@ -12,6 +12,7 @@ const initialState = {
   created_at: '20/10/2021',
   updated_at: '28/10/2021',
   currentAdded: '',
+  img:{},
   panel: '',
   detailed: -1,
   displaysquare: false,
@@ -126,16 +127,34 @@ const reducer = (state = initialState, action = {}) => {
         detailed: action.detailed,
       }
     case POST_USER:{
-      // const allUsers = state.users;
-      // const newUsers = [
-      //   ...allUsers,
-      //   action.user,
-      // ];
-      // return{
-      //   ...state,
-      //   users: newUsers,
-      //   currentAdded: '',
-      // }
+      const registered = state.users;
+
+      let isThere
+      if (typeof action.user == 'object') isThere = registered.find((user) => user.id == action.user.id);
+
+      if (typeof action.user == 'object' && isThere == undefined) {
+        const newUsers = [
+          ...registered,
+          {
+            id: action.user.id, 
+            wallId: state.id, 
+            name: action.user.name, 
+            lastname: action.user.lastname,
+          },
+        ];
+        return{
+          ...state,
+          users: newUsers,
+          currentAdded: '',
+        }
+      } else {
+        let error = "";
+        typeof action.user == 'object' ? error = 'msg:Cet utilisateur est déjà membre' : error = 'msg:Cet utilisateur n\'existe pas';
+        return{
+          ...state,
+          currentAdded: error,
+        }
+      }
     }
     case DELETE_USER :{
       const allUsers = state.users;
@@ -153,6 +172,13 @@ const reducer = (state = initialState, action = {}) => {
       return{
         ...state,
         [action.prop]: action.name,
+      }
+
+    case UPDATE_WALL_FILE :
+      return{
+        ...state,
+        [action.prop]: action.name.name,
+        img: action.name,
       }
     case DISPLAY_MODE :
       return{
@@ -219,6 +245,7 @@ const reducer = (state = initialState, action = {}) => {
       }
     case UPDATE_WALL :
       console.log('new wall', action.wall);
+      
       return{
         ...state,
       }

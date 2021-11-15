@@ -149,6 +149,7 @@ const wallMiddleware = (store) => (next) => (action) => {
           }
         });
       }
+      newDocList = newDocList.map((doc) => ({id: doc.id, position: doc.position})),
       newDocList = {newDocList};
       const config = {
         method: 'patch',

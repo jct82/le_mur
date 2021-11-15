@@ -80,6 +80,17 @@
         &:not(:last-child) {
           border-bottom: 1px solid #000000;
         }
+        &.menu-mob{
+          .bar{
+            width: 35px;
+            height: 4px;
+            border-radius: 15px;
+            background: #000000;
+            &:not(:last-child) {
+              margin-bottom: 6px;
+            }
+          }
+        }
       }
     }
     .board-wrapper{
@@ -148,6 +159,11 @@
         background-position: center;
       }
       .user-btn-block{
+        &:after{
+          content:'';
+          clear: both;
+          display: block;
+        }
         button{
           width: 107px;
           float: right;
@@ -252,8 +268,23 @@
       font-size: 12px;
     }
   }
+  .panel-form{
+    height: 100%;
+    padding-bottom: 25px;
+    & .change-wall{
+      height: calc(100% - 78px);
+    }
+    form{
+      height: calc(100% - 53px);
+      overflow: auto;
+    }
+  }
   
   .form-info{
+    .inner-form{
+      height: calc(100% - 53px);
+      overflow: auto;
+    }
     .info-block{
       margin-bottom: 20px;
       font-size: 14px;

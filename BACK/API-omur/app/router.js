@@ -25,6 +25,7 @@ router.delete('/user/walls/:id', auth.auth, wallController.deleteWall);
 router.patch('/user/walls/:id', auth.auth,multerModule.single("photo"), wallController.updateWall);
 // elements roads details
 router.get('/user/walls/:id/elements', auth.auth, elementController.listElements);
+router.patch('/user/walls/:id/elements', auth.auth,elementController.updateElementsPosition);
 router.post('/user/walls/:id/elements', auth.auth, multerModule.single("photo"), elementController.addElement);
 router.delete('/user/walls/:id/elements/:id_element', auth.auth, elementController.deleteElement);
 router.patch('/user/walls/:id/elements/:id_element', auth.auth, multerModule.single("photo"), elementController.updateElement);

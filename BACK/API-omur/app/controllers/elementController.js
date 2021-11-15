@@ -97,7 +97,7 @@ const elementController = {
             // we get the path of the photo (and we remove "public/" in the path) and insert it in req.body
             if(req.file){
                 req.body.src = req.file.filename;
-                
+                console.log('req.body.src ' + req.body.src);
             }else{
                 req.body.src = ""
             };
@@ -105,9 +105,9 @@ const elementController = {
             // We create a new instance of element and update it in database
             const newElement = new Element(req.body);
             const updatedElement = await newElement.update(wallId,elementId);
-            console.log('updatedElement.id : ' + updatedElement.id);
-                     
-            console.log('updated element : ' + JSON.stringify(updatedElement));
+          
+
+            console.log('updatedElement ' + JSON.stringify(updatedElement));
             res.status(200).json(updatedElement)
 
 

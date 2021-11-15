@@ -37,7 +37,7 @@ ALTER TABLE "wall"
 CREATE TABLE "column" (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name TEXT NOT NULL,
-    position pint,
+    position INTEGER,
     wall_id INTEGER NOT NULL REFERENCES wall(id) ON DELETE CASCADE,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()  
@@ -48,7 +48,7 @@ CREATE TABLE element (
     name TEXT NOT NULL,
     description TEXT,
     type TEXT NOT NULL,
-    position pint,
+    position INTEGER,
     link TEXT,
     src TEXT,
     wall_id INTEGER NOT NULL REFERENCES wall(id) ON DELETE CASCADE,

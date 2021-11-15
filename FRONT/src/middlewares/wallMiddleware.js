@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import { deleteWallFromStore, storeNewWall } from '../actions/wall';
+import { CHANGE_WALL, deleteWallFromStore, storeNewWall, updateWall } from '../actions/wall';
 import { storeAllWalls } from '../actions/walls';
 import API from './api';
 
@@ -32,8 +32,6 @@ const wallMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log(response.data, 'ok mur crée');
-          console.log('reponse', response.data);
           store.dispatch(storeNewWall(response.data));
         })
         .catch((error) => {
@@ -49,7 +47,6 @@ const wallMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log('mur effacé');
           store.dispatch(deleteWallFromStore(action.wallId));
         })
         .catch((error) => {
@@ -65,8 +62,37 @@ const wallMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log(response.data);
           store.dispatch(storeAllWalls(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      next(action);
+      break;
+    }
+    case CHANGE_WALL: {
+      const formerWall = state.walls.wallsList.find((wall) => wall.id == state.wall.id);
+      const picture = state.wall.photo.substring(state.wall.photo.lastIndexOf('/') + 1);
+      const usersId = state.wall.users.map((user) => user.id);
+
+      const wallData = new FormData();
+      wallData.append('photo', picture);
+      wallData.append('title', state.wall.title);
+      wallData.append('description', state.wall.description);
+      wallData.append('users', usersId);
+      wallData.append('title_color', formerWall.title_color);
+
+      const config = {
+        method: 'patch',
+        url: `/user/walls/${state.wall.id}`,
+        data: wallData,
+        headers: { 'Content-Type': 'multipart/form-data' },
+      };
+      API(config)
+        .then((response) => {
+          console.log(response.data);
+          console.log('infos mur changées');
+          store.dispatch(updateWall(response.data));
         })
         .catch((error) => {
           console.log(error);

@@ -88,7 +88,7 @@ const Wall = () => {
           <div className="close-panel" onClick={closePanel}></div>
           <div className="fade-elem"></div>
           {panel == 'infoWallPanel' && <InfoWallForm />}
-          {panel == 'changeWallPanel' && <ChangeWallForm />}
+          {panel == 'changeWallPanel' && <ChangeWallForm closePanel={closePanel}/>}
           {panel == 'infoDocPanel' && <InfoDocForm closePanel={closePanel}/>}
           {panel == 'addDocPanel' && <AddDocForm closePanel={closePanel}/>}
           {panel == 'editDocPanel' && <EditDocForm closePanel={closePanel}/>}
@@ -100,7 +100,7 @@ const Wall = () => {
           <div className="icon pdf" onClick={editPdf}></div>
         </div>
         <div className={displaysquare ? "board-wrapper square" : "board-wrapper"}>
-          {docList.length && <Docs docs={docList} getAction="infoDocPanel" getInfo={displayPanel} />}
+          <Docs docs={docList} getAction="infoDocPanel" getInfo={displayPanel} />
         </div>
       </div>
     </div>

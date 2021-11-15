@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 const Select = ({
-  label, changeInput, name, value, options
+  label, changeInput, name, value, options, classes
 }) => {
   const optionsJSX = options.map((option) => {
     return(
@@ -10,7 +10,7 @@ const Select = ({
   });
   return (
     <div className={value.trim() ? "input-wrapper on" : "input-wrapper"}>
-      <select name={name} onChange={changeInput} value={value}>
+      <select className={classes} name={name} onChange={changeInput} value={value}>
         <option value=""></option>
         {optionsJSX}
       </select>

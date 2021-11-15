@@ -66,19 +66,21 @@ const editDocForm = ({  closePanel }) => {
   });
 
   return (
-    <div>
+    <div className="panel-form">
       <h2 className="form-title">Nouveau Document</h2>
       <form className="add-doc-form" onSubmit={submitDoc} onChange={formChange} encType="multipart/form-data">
-        <Input classes="required" type="text" label="Nom" name="name" value={name} changeInput={inputChange}/>
-        <Textarea classes="required" name="description" label="Description" value={description} changeInput={inputChange}/>
-        <Select classes="required"  name="type" label="Type de document" value={type} changeInput={selectChange} options={['image', 'texte']} />
-        {type == 'image' && <FileInput label="charger une image" value={imgName}  name="src" changeInput={fileChange}/>}
-        {type == 'texte' && <Textarea classes="required" name="src" label="Rédiger un texte" value={src} changeInput={inputChange}/>}
-        <div className="input-list">
-          <ListInput type="url" label="Lien" name="currentLink" value={currentLink} changeInput={inputChange} action={addLink}/>
-          {linksListJSX}
+        <div className="inner-form">
+          <Input classes="required" type="text" label="Nom" name="name" value={name} changeInput={inputChange}/>
+          <Textarea classes="required" name="description" label="Description" value={description} changeInput={inputChange}/>
+          <Select classes="required"  name="type" label="Type de document" value={type} changeInput={selectChange} options={['image', 'texte']} />
+          {type == 'image' && <FileInput label="charger une image" value={imgName}  name="src" changeInput={fileChange}/>}
+          {type == 'texte' && <Textarea classes="required" name="src" label="Rédiger un texte" value={src} changeInput={inputChange}/>}
+          <div className="input-list">
+            <ListInput type="url" label="Lien" name="currentLink" value={currentLink} changeInput={inputChange} action={addLink}/>
+            {linksListJSX}
+          </div>
+          <input className="btn btn-submit-txt" type="submit"  value="Valider"/>
         </div>
-        <input className="btn btn-submit-txt" type="submit"  value="Valider"/>
       </form>
     </div>
   )

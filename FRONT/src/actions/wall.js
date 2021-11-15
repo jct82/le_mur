@@ -1,8 +1,10 @@
 export const CHANGE_PANEL = 'CHANGE_PANEL';
 export const TOGGLE_EYE = 'TOGGLE_EYE';
+export const TRY_USER = 'TRY_USER';
 export const POST_USER = 'POST_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const UPDATE_DOC_PROPS = 'UPDATE_DOC_PROPS';
+export const UPDATE_WALL_FILE = 'UPDATE_WALL_FILE';
 export const DISPLAY_MODE = 'DISPLAY_MODE';
 export const REDIRECT_PDF = 'REDIRECT_PDF';
 export const STORE_NEW_WALL = 'STORE_NEW_WALL';
@@ -33,9 +35,14 @@ export const toggleEye = (detailed) => ({
   detailed: detailed
 });
 
+export const tryUser = (user) => ({
+  type: TRY_USER,
+  user: user,
+});
+
 export const postUser = (user) => ({
   type: POST_USER,
-  users: user,
+  user: user,
 });
 
 export const deleteUser = (user) => ({
@@ -45,6 +52,12 @@ export const deleteUser = (user) => ({
 
 export const updateWallInput = (name, prop) => ({
   type: UPDATE_DOC_PROPS,
+  name: name,
+  prop: prop,
+});
+
+export const updateWallFile = (name, prop) => ({
+  type: UPDATE_WALL_FILE,
   name: name,
   prop: prop,
 });

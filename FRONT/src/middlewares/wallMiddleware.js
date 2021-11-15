@@ -72,15 +72,18 @@ const wallMiddleware = (store) => (next) => (action) => {
     }
     case CHANGE_WALL: {
       const formerWall = state.walls.wallsList.find((wall) => wall.id == state.wall.id);
-      const picture = state.wall.photo.substring(state.wall.photo.lastIndexOf('/') + 1);
+
+      let picture;
+      formerWall.photo != state.wall.photo ? picture = state.wall.img : picture = state.wall.photo.substring(state.wall.photo.lastIndexOf('/') + 1);
+
       const usersId = state.wall.users.map((user) => user.id);
 
       const wallData = new FormData();
-      wallData.append('photo', picture);
-      wallData.append('title', state.wall.title);
-      wallData.append('description', state.wall.description);
-      wallData.append('users', usersId);
-      wallData.append('title_color', formerWall.title_color);
+      wallData.set('photo', picture);
+      wallData.set('title', state.wall.title);
+      wallData.set('description', state.wall.description);
+      wallData.set('users', usersId);
+      wallData.set('title_color', formerWall.title_color);
 
       const config = {
         method: 'patch',
@@ -90,8 +93,7 @@ const wallMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log(response.data);
-          console.log('infos mur changées');
+          console.log('infos mur changées',response.data);
           store.dispatch(updateWall(response.data));
         })
         .catch((error) => {

@@ -39,6 +39,7 @@ const addDocForm = ( {closePanel} ) => {
   const submitDoc = (e) => {
     e.preventDefault();
     if (checkForm(e.target.elements)) {
+      //resetForm();
       dispatch(postDoc());
       closePanel();
     }
@@ -64,7 +65,7 @@ const addDocForm = ( {closePanel} ) => {
   });
 
   return (
-    <div>
+    <div className="panel-form">
       <h2 className="form-title">Nouveau Document</h2>
       <form className="add-doc-form" onSubmit={submitDoc} onChange={formChange} encType="multipart/form-data" noValidate>
         <Input classes="required" type="text" label="Nom" name="name" value={name} changeInput={inputChange}/>

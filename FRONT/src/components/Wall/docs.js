@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useState, useEffect } from "react";
 import Gallery from "react-photo-gallery";
 import Doc from './doc';
@@ -20,14 +20,12 @@ const Docs = ( {docs, getAction, getInfo} ) => {
   const [items, setItems] = useState(docs);
 
   useEffect(() => {
-    setItems(docs)
- }, [docs])
-  
-  console.log(items)
+      setItems(docs)
+  }, [docs]);
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    console.log('old index', oldIndex)
-    console.log('new index', newIndex)
+    console.log('items items items', items);
+    dispatch(changePos(oldIndex + 1, newIndex + 1));
     setItems(arrayMove(items, oldIndex, newIndex));
     dispatch(changePos(oldIndex, newIndex));
   };

@@ -13,6 +13,9 @@ export const GET_WALL = 'GET_WALL';
 export const GET_WALL_INFO = 'GET_WALL_INFO';
 export const SET_WALL_INFO = 'SET_WALL_INFO';
 export const CHANGE_POS = 'CHANGE_POS';
+export const CHANGE_WALL = 'CHANGE_WALL';
+export const UPDATE_WALL = 'UPDATE_WALL';
+export const EMPTY_WALL = 'EMPTY_WALL';
 
 export const changePanel = (panel) => ({
   type: CHANGE_PANEL,
@@ -83,6 +86,19 @@ export const getWallInfo = () => ({
 export const setWallInfo = (wall) => ({ 
   type: SET_WALL_INFO,  
   wall: wall,
+});
+
+export const changeWall = () => ({ 
+  type: CHANGE_WALL,  
+});
+
+export const updateWall = (wall) => ({ 
+  type: UPDATE_WALL,  
+  wall: wall,
+});
+
+export const emptyWall = () => ({ 
+  type: EMPTY_WALL,  
 });
 
 

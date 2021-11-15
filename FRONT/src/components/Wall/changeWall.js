@@ -2,13 +2,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import Input from "../inputForm/inputs";
 import Textarea from "../inputForm/textarea";
 import FileInput from "../inputForm/file";
-import { updateWallInput, postUser, deleteUser } from "src/actions/wall";
+import { updateWallInput, postUser, deleteUser, changeWall } from "src/actions/wall";
 
 import './style.scss';
 
-const ChangeWallForm = () => {
+const ChangeWallForm = ({closePanel}) => {
   const dispatch = useDispatch();
   const { title, description, photo, users, currentAdded } = useSelector((state) => state.wall);
+  const imgName = photo.substring(photo.lastIndexOf('/') + 1);
 
   const inputChange = (e) => {
     dispatch(updateWallInput(e.target.value, e.target.name));
@@ -26,11 +27,17 @@ const ChangeWallForm = () => {
     dispatch(updateWallInput(e.target.files[0].name, e.target.name));
   }
 
+  const submitDoc = (e) => {
+    e.preventDefault();
+    dispatch(changeWall());
+    closePanel();
+  }
+
   const userListJSX = users.map((user) => {
     return(
-      <div key={user}>
+      <div key={user.id}>
         <div className="field">
-          {user}
+          {user.name} {user.lastname}
         </div>
         <button className="btn supp" type="button" onClick={suppUser}></button>
       </div>
@@ -39,11 +46,11 @@ const ChangeWallForm = () => {
 
   return (
     <div>
-      <h2 className="form-title">Nouveau Document</h2>
-      <form className="add-doc-form">
-        <Input type="text" label="Nom" name="name" value={title} changeInput={inputChange}/>
+      <h2 className="form-title">Modifier le mur</h2>
+      <form className="add-doc-form" onSubmit={submitDoc} encType="multipart/form-data">
+        <Input type="text" label="Nom" name="title" value={title} changeInput={inputChange}/>
         <Textarea name="description" label="Description" value={description} changeInput={inputChange}/>
-        <FileInput label="charger une image" value={photo}  name="photo" changeInput={fileChange}/>
+        <FileInput label="charger une image" value={imgName} name="photo" changeInput={fileChange}/>
         <div className="input-list">
           <div>
             <div className="field">

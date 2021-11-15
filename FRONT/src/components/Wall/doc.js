@@ -9,6 +9,7 @@ import './style.scss';
 const imgWithClick = { cursor: "pointer" };
 
 const Doc = ({ photo, margin, direction, top, left }) => {
+  
   const dispatch = useDispatch();
   const detailed = useSelector((state) => state.wall.detailed);
 
@@ -26,7 +27,16 @@ const Doc = ({ photo, margin, direction, top, left }) => {
   }
 
   const seeDoc = (e) => {
-    dispatch(viewDoc({id:photo.id, name:photo.name, description:photo.description, type:photo.type, link:photo.link, src:photo.src, owner_id:photo.owner_id}));
+    dispatch(viewDoc({
+      id:photo.id, 
+      name:photo.name, 
+      description:photo.description, 
+      type:photo.type, 
+      link:photo.link, 
+      src:photo.src, 
+      owner_id:photo.owner_id,
+      position: photo.position,
+    }));
     photo.getInfo(e);
   }
 

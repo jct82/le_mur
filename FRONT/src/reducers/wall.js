@@ -1,12 +1,13 @@
-import { CHANGE_POS, CHANGE_PANEL, TOGGLE_EYE, POST_USER, DELETE_USER, UPDATE_DOC_PROPS, DISPLAY_MODE, REDIRECT_PDF, SET_WALL , SET_WALL_INFO} from "src/actions/wall";
+import { CHANGE_POS, CHANGE_PANEL, TOGGLE_EYE, POST_USER, DELETE_USER, UPDATE_DOC_PROPS, DISPLAY_MODE, REDIRECT_PDF, SET_WALL , SET_WALL_INFO, UPDATE_WALL, EMPTY_WALL } from "src/actions/wall";
 import { ADD_DOC, DELETE_DOC, UPDATE_DOC } from "src/actions/element";
 
 const initialState = {
   id: 1,
   owner_id: 1,
+  owner_name: '',
   title: 'Rap',
   photo: '/tyler.png',
-  users: ['jeancharles', 'ariana', 'julien'],
+  users: [],
   description: 'description du thème Rap: Le rap est un mouvement culturel et musical qui tire ses origines du hip-hop',
   created_at: '20/10/2021',
   updated_at: '28/10/2021',
@@ -45,7 +46,7 @@ const reducer = (state = initialState, action = {}) => {
         docList: newDocList,
       }
     case ADD_DOC : {
-      const { id, name, description, type, link, src, owner_id } = action.doc;
+      const { id, name, description, type, link, src, owner_id, position } = action.doc;
       const docList = state.docList;
       console.log('doclist.length', docList.length)
       let linkArray, srcEdit = src;
@@ -59,10 +60,12 @@ const reducer = (state = initialState, action = {}) => {
         name: name,
         description: description,
         type: type,
-        position: docList.length,
+        position: position,
         link: linkArray,
         src: srcEdit,
         owner_id: owner_id,
+        width:2,
+        height:3,
       };
       const allDocs = state.docList;
       console.log('newDoc',newDoc);
@@ -123,16 +126,16 @@ const reducer = (state = initialState, action = {}) => {
         detailed: action.detailed,
       }
     case POST_USER:{
-      const allUsers = state.users;
-      const newUsers = [
-        ...allUsers,
-        action.user,
-      ];
-      return{
-        ...state,
-        users: newUsers,
-        currentAdded: '',
-      }
+      // const allUsers = state.users;
+      // const newUsers = [
+      //   ...allUsers,
+      //   action.user,
+      // ];
+      // return{
+      //   ...state,
+      //   users: newUsers,
+      //   currentAdded: '',
+      // }
     }
     case DELETE_USER :{
       const allUsers = state.users;
@@ -189,6 +192,8 @@ const reducer = (state = initialState, action = {}) => {
     case SET_WALL_INFO :
       let {created_at, description, id, owner_id, photo, title, updated_at} = action.wall.result;
       const usersTab = action.wall.collabsData;
+      const owner = usersTab.find((user) => user.id == owner_id);
+      
       const users = usersTab.map((user) => {
         return user.name;
       });
@@ -205,12 +210,24 @@ const reducer = (state = initialState, action = {}) => {
         created_at: dateToString(created_at),
         description: description,
         id: id,
+        owner_name: owner.name + ' ' + owner.lastname,
         owner_id: owner_id,
         photo: localPath+photo,
         title: title,
         updated_at: dateToString(updated_at),
-        users: users,
+        users: usersTab,
       }
+    case UPDATE_WALL :
+      console.log('new wall', action.wall);
+      return{
+        ...state,
+      }
+    case EMPTY_WALL :
+        
+        return{
+          ...state,
+          docList: [],
+        }
     default:
       return state;
   }

@@ -84,7 +84,7 @@ module.exports = class Wall extends Core {
     }
 
     // method to delete collaborators of a wall in database
-    async deleteCollabs(wallId) {
+    static async deleteCollabs(wallId) {
         
         const data = await Core.fetch(`DELETE FROM "participate" WHERE wall_id = $1 RETURNING *;`,
         [wallId]);

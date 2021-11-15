@@ -160,7 +160,8 @@ const wallController = {
     updateWall: async function (req, res){
 
         const wallId = req.params.id;
-        console.log('wallId : '+ wallId)
+        console.log('wallId : '+ wallId);
+        const userId = req.userId;
 
         try {
             
@@ -179,13 +180,11 @@ const wallController = {
 
             // We delete all colaborators of a wall to resave them in case there were modified
             await Wall.deleteCollabs(wallId);                        
-            /*return ?*/res.status(200).json({message:'collaborateurs bien supprimé'});
+            // /*return*/ res.status(200).json({message:'collaborateurs bien supprimé'});
 
             // We transform req.body.users into an array of integers         
             const collabIdsInit = (req.body.users).split(',');
             const collabIds = collabIdsInit.map(id => parseInt(id));
-            // We add the owner_id of the wall in collabIds to save collaboratos and owner in "participate" table
-            collabIds.push(userId);
             console.log('collabsIDs: ' + collabIds);
             // Inisialization of an array to stock all ids
             collabIdsArray = [];
@@ -201,6 +200,7 @@ const wallController = {
             const collabsData = await User.findByIds(collabIdsArray);
             console.log('collabsData: ' + JSON.stringify(collabsData));
 
+            console.log('updatedWall : ', updatedWall);
             
             res.status(200).json({result : updatedWall, collabsData});
 

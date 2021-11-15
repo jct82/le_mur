@@ -120,6 +120,36 @@ const elementController = {
         }
     },
 
+        // Modify existing element position in a wall
+        updateElementsPosition: async function (req, res){
+            // We get different parameters
+            const wallId = req.params.id;
+            console.log('WallId : '+ wallId);
+            
+                
+            try {
+                console.log('req.body : '+ JSON.stringify(req.body));
+                const elements = req.body.newDocList;
+                // For each element we get the id and its position and update in database
+                for (const element of elements){
+                   
+                    const updatedElement= new Element(element);
+                    await updatedElement.updatePosition(wallId);
+                    console.log('updated element : ',updatedElement)
+                }
+
+                res.status(200).json(updatedElement);
+            
+                  
+    
+            } catch (error) {
+                console.error(error)
+                if (error instanceof Wall.NoDataError) {
+                    return res.status(404).json(error.message)
+                }
+            }
+        },
+
     
 
 }

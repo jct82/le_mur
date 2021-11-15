@@ -42,6 +42,11 @@ $user-menu-width:400px;
       transition: 0.3s transform ease-in;
     }
   }
+  .userMenu__errors{
+    position: absolute;
+    color:red;
+  }
+  
   &__login{
     text-align: center;
     font-weight: 300;  

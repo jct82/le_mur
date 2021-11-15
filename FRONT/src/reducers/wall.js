@@ -29,7 +29,7 @@ const reducer = (state = initialState, action = {}) => {
         if (elem.type == 'image') srcEdit = localPath+srcEdit;
         elem.link == null ? linkArray = [] : linkArray = elem.link.split('\\');
         return({
-          id: elem.id,
+          id: parseInt(elem.id),
           name: elem.name,
           description: elem.description,
           type: elem.type,
@@ -37,8 +37,8 @@ const reducer = (state = initialState, action = {}) => {
           link: linkArray,
           src: srcEdit,
           owner_id: elem.owner_id,
-          width:2,
-          height:3,
+          width: 2,
+          height: 3,
         })
       });
       return{
@@ -48,6 +48,7 @@ const reducer = (state = initialState, action = {}) => {
     case ADD_DOC : {
       const { id, name, description, type, link, src, owner_id, position } = action.doc;
       const docList = state.docList;
+      console.log('doclist.length', docList.length)
       let linkArray, srcEdit = src;
       if (type == 'image') srcEdit = localPath+src;
       link == null ? linkArray = [] : linkArray = link.split('\\');
@@ -77,6 +78,11 @@ const reducer = (state = initialState, action = {}) => {
         docList: newDocs,
       }
     }
+    case 'STORE_NEW_DOC':
+      return {
+        ...state, 
+        docList: action.items
+      }
     case DELETE_DOC : {
       let supIndex, supPos;
       state.docList.forEach((doc, index) => {
@@ -165,15 +171,15 @@ const reducer = (state = initialState, action = {}) => {
         newDocList.forEach((doc) => {
           if (doc.position == oldPos) {
             doc.position = newPos;
-          } else if (doc.position < oldPos && doc.position >= newPos) {
+          } else if (doc.position >= newPos && doc.position <= oldPos) {
             doc.position += 1;
           }
         });
       } else {
         newDocList.forEach((doc) => {
           if (doc.position == oldPos) {
-            doc.position = newPos;
-          } else if (doc.position > oldPos && doc.position <= newPos) {
+            doc.position = newPos;    
+          } else if (doc.position >= oldPos && doc.position <= newPos) {
             doc.position -= 1;
           }
         });

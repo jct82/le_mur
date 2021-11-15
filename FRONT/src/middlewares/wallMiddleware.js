@@ -32,7 +32,6 @@ const wallMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log(response.data, 'ok mur crée');
           store.dispatch(storeNewWall(response.data));
         })
         .catch((error) => {
@@ -48,7 +47,6 @@ const wallMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log('mur effacé');
           store.dispatch(deleteWallFromStore(action.wallId));
         })
         .catch((error) => {
@@ -64,7 +62,6 @@ const wallMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log(response.data);
           store.dispatch(storeAllWalls(response.data));
         })
         .catch((error) => {

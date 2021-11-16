@@ -98,7 +98,7 @@ const elementController = {
             if(req.file){
                 req.body.src = req.file.filename;
             }
-            console.log('req.src : '+ req.body.src);
+            console.log('req.body.src : '+ req.body.src);
             // We create a new instance of element and update it in database
             const newElement = new Element(req.body);
             const updatedElement = await newElement.update(wallId,elementId);

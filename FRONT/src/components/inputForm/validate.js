@@ -8,7 +8,7 @@ function validateEmail (string){
 
 function checkImgFile(e){
   let typeDoc = e.type.split('/');
-  if (e.size > 3072) {
+  if (e.size > 3000000) {
     return 'le fichier doit faire moins de 3 M';
   } else if (typeDoc[0] != 'image') {
     return 'le fichier doit être une image';

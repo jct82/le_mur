@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { changePanel, changeForm } from 'src/actions/wall.js'
-import { supDoc  } from 'src/actions/element.js'
+import { changePanel, changeForm } from 'src/actions/wall.js';
+import { supDoc, emptyForm } from 'src/actions/element.js';
 
 import './style.scss';
 
@@ -22,36 +22,39 @@ const infoDocForm = ({ closePanel }) => {
 
   const supElem = () => {
     dispatch(supDoc());
+    dispatch(emptyForm());
     closePanel()
   }
 
   return (
-    <div className="form-info">
+    <div className="form-info panel-form">
       <h2 className="form-title">Info Document</h2>
-      <div className="info-block">
-        <label>Nom :</label>
-        <p>{name}</p>
-      </div>
-      <div className="info-block">
-        <label>Description :</label>
-        <p>{description}</p>
-      </div>
-      <div className="info-block">
-        <label>Document :</label><span>{type}</span>
-        {type == 'image' ? <img src={src} /> : <p>{src}</p>}
-      </div>
-      <div className="info-block">
-        <label>Liens :</label>
-        <ul className="link-list">
-          {link.map((item) => (<li key={item}>-&nbsp;<a href={item} target="_blank" className="block">{item}</a></li>))}
-        </ul>
-      </div>
-      {owner_id == user && 
-        <div className="user-btn-block">
-          <button className="btn btn-change-txt" type="button" onClick={changeForm}>Modifier</button>
-          <button className="btn btn-supp-txt" type="button" onClick={supElem}>Supprimer</button>
+      <div className="inner-form">
+        <div className="info-block">
+          <label>Nom :</label>
+          <p>{name}</p>
         </div>
-      }
+        <div className="info-block">
+          <label>Description :</label>
+          <p>{description}</p>
+        </div>
+        <div className="info-block">
+          <label>Document :</label><span>{type}</span>
+          {type == 'image' ? <img src={src} /> : <p>{src}</p>}
+        </div>
+        <div className="info-block">
+          <label>Liens :</label>
+          <ul className="link-list">
+            {link.map((item) => (<li key={item}>-&nbsp;<a href={item} target="_blank" className="block">{item}</a></li>))}
+          </ul>
+        </div>
+        {owner_id == user && 
+          <div className="user-btn-block">
+            <button className="btn btn-change-txt" type="button" onClick={changeForm}>Modifier</button>
+            <button className="btn btn-supp-txt" type="button" onClick={supElem}>Supprimer</button>
+          </div>
+        }
+      </div>
     </div>
   )
 };

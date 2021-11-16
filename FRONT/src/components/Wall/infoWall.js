@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { changePanel } from 'src/actions/wall.js';
-import usersData from 'src/data/user.js'
 
 import './style.scss';
 
@@ -21,7 +20,7 @@ const InfoWallForm = () => {
   }
 
   return (
-    <div className="form-info">
+    <div className="form-info panel-form change-wall">
       <h2 className="form-title">Info Document</h2>
       <div className="info-block date flex">
         <div className="left">
@@ -33,30 +32,32 @@ const InfoWallForm = () => {
           <p>{updated_at}</p>
         </div>
       </div>
-      <div className="info-block">
-        <label>Nom :</label>
-        <p>{title}</p>
-        <img src={photo} />
-      </div>
-      <div className="info-block">
-        <label>Description :</label>
-        <p>{description}</p>
-      </div>
-      <div className="info-block">
-        <label>Admin :</label>
-        <p>{owner_name}</p>
-      </div>
-      <div className="info-block">
-        <label>Participants :</label>
-        <ul className="link-list">
-          {users.map((item) => (<li key={item.id}>{item.name} {item.lastname}</li>))}
-        </ul>
-      </div>
-      {user == owner_id && 
-        <div className="user-btn-block">
-          <button className="btn btn-change-txt" type="button" onClick={changeForm}>Modifier</button>
+      <div className="inner-form">
+        <div className="info-block">
+          <label>Nom :</label>
+          <p>{title}</p>
+          <img src={photo} />
         </div>
-      }
+        <div className="info-block">
+          <label>Description :</label>
+          <p>{description}</p>
+        </div>
+        <div className="info-block">
+          <label>Admin :</label>
+          <p>{owner_name}</p>
+        </div>
+        <div className="info-block">
+          <label>Participants :</label>
+          <ul className="link-list">
+            {users.map((item) => (<li key={item.id}>{item.name} {item.lastname}</li>))}
+          </ul>
+        </div>
+        {user == owner_id && 
+          <div className="user-btn-block">
+            <button className="btn btn-change-txt" type="button" onClick={changeForm}>Modifier</button>
+          </div>
+        }
+      </div>
     </div>
   )
 };

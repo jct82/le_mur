@@ -7,6 +7,7 @@ import WallsCards from './WallsCards';
 import WallForm from './WallForm';
 import { getAllUsers } from '../../actions/users';
 import { getWalls } from '../../actions/walls';
+import { emptyWall } from "src/actions/wall";
 
 const Walls = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const Walls = () => {
     setFormOpen(!isFormOpen);
   };
   useEffect(() => {
+    dispatch(emptyWall());
     dispatch(getAllUsers());
   }, []);
   useEffect(() => {

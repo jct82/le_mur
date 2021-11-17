@@ -114,6 +114,7 @@
         border: 3px solid #000000;
         background-color: #c5927a;
         background-image: url(#{$prodPath}/fondLiege.jpg);
+        background-size: 70%;
         .react-photo-gallery--gallery{
           width: 100%;
           & > div {
